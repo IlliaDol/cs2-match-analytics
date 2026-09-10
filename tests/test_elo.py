@@ -49,7 +49,7 @@ def test_expected_score_symmetry():
 def test_expected_score_monotone_in_difference():
     diffs = np.linspace(-600, 600, 200)
     values = [expected_score(1500 + d, 1500) for d in diffs]
-    assert all(a < b for a, b in zip(values, values[1:], strict=True))
+    assert all(a < b for a, b in zip(values, values[1:], strict=False))
 
 
 # --- update_rating ------------------------------------------------------------
