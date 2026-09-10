@@ -35,7 +35,8 @@ def winsorize_round_scores(df, lo=0, hi=25) -> pd.DataFrame
 - `flag_forfeits` marks rows where `games_played >= 1` and both series scores are 0
 - `normalize_team_names` maps `NAVI`/`Natus Vincere` to the same canonical id when a
   mapping `{natus vincere: navi}` is given, leaves unknown names untouched
-- `winsorize_round_round` clips scores but keeps the winner column consistent
+- `winsorize_round_scores` clips series scores into `[lo, hi]` (default 0..25) and leaves
+  the row count and winner column untouched
 
 ## §3 `src/cs2analytics/features/form.py` — rolling features (leakage law)
 
@@ -51,10 +52,25 @@ D1..D6 with known results; assert `rolling_form(team, ref=D5) == exact fraction`
 `days_rest == expected`, `h2h == expected` — plus one leakage trap: calling with
 `ref_ts` between two matches must return the pre-ref value, never the post.
 
-## §4 Feature drafts exported
-`outputs/features_v1.parquet`: one row per match — `[match_id, datetime, tier,
-elo_diff, form_diff_t1_minus_t2, days_rest_t1, days_rest_t2, h2h_t1_win_share]`
-(uses M4's `run_elo_backtest` output for elo columns). The M7 spec consumes exactly this.
+## §4 Feature drafts exported → `outputs/features_v1.parquet`
+
+One row per match, and **these exact column names** (M7's `build_feature_matrix` reads them):
+
+```
+match_id, datetime, tier, is_bo1,
+elo_diff,            # elo_t1_pre − elo_t2_pre (from M4's run_elo_backtest)
+form5_diff,          # rolling_form(team1, 5) − rolling_form(team2, 5), both pre-match
+rest_days_diff,      # days_rest(team1) − days_rest(team2)
+h2h_t1_win_share,    # team1's win share vs team2 before this match (0.5 if never met)
+```
+
+Notes:
+- `is_bo1` is `games_played == 1` — a PRE-match fact only because the format is known
+  before the series; `games_played` itself stays forbidden in the model (post-outcome).
+- `elo_diff` needs M4 §3's backtest output; if that isn't built yet, compute it inline by
+  calling `run_elo_backtest` on `series_clean.csv` — the engine is already shipped.
+- M7's leakage guard will reject `days_rest_t1`/`days_rest_t2` style raw columns only if you
+  add them to the feature list; the parquet may carry extra columns, the matrix is selective.
 
 ## Done when
 - [ ] pytest green (cleaning ~6 + form ~8 new tests)

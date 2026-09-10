@@ -66,7 +66,7 @@ def test_leakage_guard_raises():
     from cs2analytics.features.matrix import LeakageError, build_feature_matrix
 
     with pytest.raises(LeakageError):
-        build_feature_matrix(FEATURES, cutoffs={"extra_features": ["games_played"]})
+        build_feature_matrix(FEATURES, extra_features=["games_played"])
 
 
 # --- calibration module ----------------------------------------------------------

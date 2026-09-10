@@ -1,19 +1,22 @@
 # M4 BUILD SPEC — Elo Engine + Bayesian Ratings  · [HE] flagship · [RA]
 
 **The heart of the project.** You build a rating model FROM SCRATCH: derive the math in a
-notebook, implement it as pure functions, backtest it walk-forward, then rebuild the same
-idea Bayesian in PyMC. Every number below is computed from OUR data (9,922 series,
+notebook, extend the engine into a backtest report, then rebuild the same idea Bayesian in
+PyMC. Every number below is computed from OUR data (9,922 series,
 `outputs/series_clean.csv`), so there is zero room for tutorial-copying.
 
+**Already shipped (read, don't rewrite):**
+- `src/cs2analytics/features/elo.py` — the pure engine ✅
+- `src/cs2analytics/evaluation/metrics.py` — log_loss / brier / accuracy ✅
+
 **Files you create:**
-- `notebooks/elo_derivation.ipynb` — the math (see §1)
-- `src/cs2analytics/features/elo.py` — pure functions (see §2)
-- `src/cs2analytics/models/backtest.py` — walk-forward backtest engine (see §3)
-- `notebooks/m4_backtest_report.ipynb` — runs the backtest, produces the results table
+- `notebooks/elo_derivation.ipynb` — the math (see §1) ← **start here**
+- `src/cs2analytics/models/backtest.py` — the report harness + model variants (see §3)
+- `notebooks/m4_backtest_report.ipynb` — runs it, produces `outputs/m4_backtest_results.csv`
 - `src/cs2analytics/models/bayes.py` + `notebooks/m4_bayesian_ratings.ipynb` — PyMC (see §4)
 
-**Tests:** `tests/test_elo.py` (runs in CI — pure math, no data needed)
-**Contract tests for the backtest are in `tests/test_elo_backtest.py` (local, data-gated)**
+**Tests:** `tests/test_elo.py` (runs in CI — pure math + notebook check, no data needed)
+**Backtest artifact tests are in `tests/test_elo_backtest.py` (local, data-gated)**
 
 ---
 
@@ -44,58 +47,63 @@ Cells must contain, IN THIS ORDER, with real LaTeX (`\(...\)` delimiters):
 required formulas as raw LaTeX strings (grep-level checks on the .ipynb JSON), plus the
 pure-function tests from §2. That's the mechanical proof you did the derivation.
 
-## §2 `src/cs2analytics/features/elo.py` — pure functions (TDD: tests exist FIRST)
+## §2 `src/cs2analytics/features/elo.py` — pure functions  ✅ **ALREADY IMPLEMENTED**
+
+> Status: this file and `evaluation/metrics.py` were written and are covered by
+> `tests/test_elo.py` (passing). Read them, don't rewrite them — your job in M4 is §1
+> (the derivation notebook), §3 (the backtest report + model variants) and §4 (PyMC).
+
+The shipped signatures (match these exactly if you extend):
 
 ```python
 def expected_score(ra: float, rb: float) -> float
 def update_rating(ra: float, rb: float, result: float, k: float = 32.0) -> float
-def bo3_win_probability(p_map: float) -> float     # p^2 * (3 - 2p), from spec derivation
-def run_elo_backtest(df, k: float, base: float = 1500.0, map_specific: bool = False) -> pd.DataFrame
+def bo3_win_probability(p_map: float) -> float     # p^2 * (3 - 2p)
+def run_elo_backtest(df, k: float = 32.0, base: float = 1500.0) -> pd.DataFrame
 ```
 
-Contract (ALL tested in `tests/test_elo.py` with EXACT numbers — no data needed):
+`run_elo_backtest` already: sorts by `datetime` (mergesort), walks chronologically, records
+PRE-match ratings (`elo_t1_pre`, `elo_t2_pre`, `p_t1`), applies the update after the
+prediction, and returns per-match `logloss` / `brier`. Map-specific Elo is **not** in it —
+that's a variant YOU build in §3.
+
+Contract (all enforced by `tests/test_elo.py` with EXACT numbers — no data needed):
 - `expected_score(1500, 1500) == 0.5` (exactly)
-- `expected_score(1650, 1750)` ≈ 0.359935 (assert `pytest.approx(..., abs=1e-6)`)
-- `expected_score(2800, 1500) > 0.99` (dominant champ vs newcomer)
-- `update_rating(1650, 1750, result=1.0, k=32)` ≈ 1670.48 (winner)
-- `update_rating(1650, 1750, result=0.0, k=32)` ≈ 1629.52 (loser symmetric)
-- `bo3_win_probability(0.5) == 0.5` exactly; `bo3_win_probability(0.55)` ≈ 0.575
-  (verify by the binomial formula p²(3−2p)); `bo3_win_probability(0.0) == 0.0`;
-  `bo3_win_probability(1.0) == 1.0`
-- Symmetry law: `expected_score(a, b) == 1 - expected_score(b, a)` for a grid of values.
-- Monotonicity law: expected_score strictly increasing in (ra − rb).
-- `run_elo_backtest` on the toy 10-row dataset: returns per-match rows with pre-match
-  ratings + predictions, no NaN, ratings updated chronologically (assert on the toy
-  fixture, which is tracked in git — CI runs this).
+- `expected_score(1650, 1750)` ≈ 0.359935; `expected_score(2800, 1500) > 0.99`
+- `update_rating(1650, 1750, result=1.0, k=32)` ≈ 1670.4821; `result=0.0` → 1629.5179
+- `bo3_win_probability`: 0 → 0.0, 0.5 → 0.5, 0.55 → 0.57475, 1 → 1.0 (+ a 200k-sim check)
+- symmetry: `expected_score(a, b) == 1 - expected_score(b, a)`; strictly increasing in (ra − rb)
+- `run_elo_backtest` on the tracked toy dataset: no NaN, first match uses base ratings.
 
-Rules: pure functions only (no I/O in this module), type hints, docstrings with the
-formula in LaTeX, no global state. The backtest function must process matches in
-datetime order and record PRE-match ratings (leakage law).
+Rules: pure functions only (no I/O in this module), type hints, docstrings with the formula
+in LaTeX, no global state, no leakage (pre-match ratings only).
 
-## §3 `src/cs2analytics/models/backtest.py` — walk-forward evaluation
+## §3 `src/cs2analytics/models/backtest.py` — YOUR file: the report harness
 
-Time-split law: **train = everything before 2025-08-01, test = on/after.** Fixed constant
-in the module: `TIME_SPLIT = pd.Timestamp("2025-08-01")`.
+It does NOT re-implement the engine. It *wraps* `run_elo_backtest` from §2 and adds the
+things the report needs:
 
-`run_elo_backtest(df, k, ...)` must:
-1. sort by `datetime` (stable, mergesort),
-2. walk chronologically: for each match, record both teams' pre-match ratings →
-   `expected` = expected_score → apply update with the actual `result`
-   (1 if winner == team1 else 0),
-3. return df with columns `[match_id, datetime, team1, team2, winner, elo_t1_pre,
-   elo_t2_pre, p_t1, result, logloss, brier]` (logloss/brier per match vs the true label).
+1. **`TIME_SPLIT = pd.Timestamp("2025-08-01")`** — train = strictly before, test = on/after.
+2. **`score_variant(df, variant, k)`** — returns the same frame as `run_elo_backtest` for
+   variants `elo_k8/16/32/64` and `elo_mapspecific_k32` (the last one: replay the engine
+   per map using the map-level rows, then aggregate to series level — this is the variant
+   §2's engine does not give you).
+3. **`summarize(pred_df, split)`** → `{"logloss", "brier", "acc", "n"}` using
+   `evaluation/metrics.py`.
+4. **`constant_0.5` baseline row** — compute it, don't hardcode: p = 0.5 for every match.
 
-Metrics in `src/cs2analytics/evaluation/metrics.py`:
+Metrics in `src/cs2analytics/evaluation/metrics.py` (✅ implemented):
 ```python
-def log_loss(p, y) -> float       # mean of -(y ln p + (1-y) ln(1-p)), clip p to [1e-15, 1-1e-15]
-def brier_score(p, y) -> float    # mean (p - y)^2
-def accuracy_from_probs(p, threshold=0.5) -> float
+def log_loss(p, y) -> float                        # clipped to [1e-15, 1-1e-15]
+def brier_score(p, y) -> float
+def accuracy_from_probs(p, y, threshold=0.5) -> float
 ```
 
 **Tested with exact values** (`tests/test_elo.py`): `log_loss([0.75],[1])` ≈ 0.2877,
 `log_loss([0.75],[0])` ≈ 1.3863, `brier_score([0.75],[1])` == 0.0625.
 
-The backtest report (`notebooks/m4_backtest_report.ipynb`) must produce a results table:
+The backtest report (`notebooks/m4_backtest_report.ipynb`) must produce
+`outputs/m4_backtest_results.csv` with this table:
 
 | model | split | logloss | brier | acc |
 |---|---|---|---|---|

@@ -11,18 +11,26 @@ validation, a calibration story, and the leakage demo. Everything runs on
 ## §1 `src/cs2analytics/features/matrix.py` (yours)
 
 ```python
-def build_feature_matrix(features_path, cutoffs: dict | None = None) -> FeatureSet
+def build_feature_matrix(
+    features_path,
+    extra_features: list[str] | None = None,   # appended to the default feature set
+    cutoff: pd.Timestamp = pd.Timestamp("2026-01-01"),
+) -> FeatureSet
 ```
 
 `FeatureSet`: dataclass with `X`, `y`, `feature_names`, `dates`, `split` (Series of
 "train"/"test"), and `cutoff` (Timestamp).
 
-- Features (ALL pre-match, leakage law): `elo_diff` (elo_t1_pre − elo_t2_pre),
+- Default features (ALL pre-match, leakage law): `elo_diff` (elo_t1_pre − elo_t2_pre),
   `form5_diff`, `rest_days_diff`, `is_bo1` (games_played==1), `tier` one-hot.
+- `extra_features` lets a caller append columns — and the guard below is what makes that
+  parameter dangerous by design (see the test).
 - **NEVER** use `games_played`, `margin`, `swept`, or any post-outcome column.
   (They're literally in the same table — this is the trap the tests check.)
-- Time split: `cutoff = pd.Timestamp("2026-01-01")` → train = strictly before, test = on/after.
-- Raises `LeakageError` if a forbidden column name appears in `feature_names`.
+- Time split: `cutoff` → train = strictly before, test = on/after.
+- Raises `LeakageError` (a ValueError subclass) if any name in `feature_names` — default
+  set or `extra_features` — is on the forbidden list. The check runs against the FINAL
+  feature list, so `extra_features=["games_played"]` must raise.
 
 ## §2 `src/cs2analytics/models/logistic.py` + `models/gbm.py` (yours)
 
