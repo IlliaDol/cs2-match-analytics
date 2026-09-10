@@ -5,14 +5,24 @@ These pin the BEHAVIOR of load_matches() against the real primary file
 
 Contract: load_matches() returns the SERIES table — exactly one row per match_id,
 with winner-sorted book scores disentangled into team-specific series scores.
+
+Tests that need the real Kaggle file skip automatically when it is absent
+(CI: data is git-ignored). Pure-function and error-handling tests always run.
 """
+
+from pathlib import Path
 
 import pandas as pd
 import pytest
 
 from cs2analytics.io import loader
 
-PRIMARY = "data/raw/cs2_all_tiers_games.csv"
+PRIMARY = Path("data/raw/cs2_all_tiers_games.csv")
+_HAS_REAL_DATA = PRIMARY.exists()
+
+_needs_real_data = pytest.mark.skipif(
+    not _HAS_REAL_DATA, reason="real Kaggle data not available (CI: data is git-ignored)"
+)
 
 # The contract schema: exactly these columns, exactly this order (DATA.md).
 EXPECTED_COLUMNS = (
@@ -39,15 +49,18 @@ def real_matches():
 # --- core contract -----------------------------------------------------------
 
 
+@_needs_real_data
 def test_load_returns_dataframe(real_matches):
     assert isinstance(real_matches, pd.DataFrame)
     assert len(real_matches) > 1000
 
 
+@_needs_real_data
 def test_columns_exact(real_matches):
     assert list(real_matches.columns) == list(EXPECTED_COLUMNS)
 
 
+@_needs_real_data
 def test_datetime_is_parsed(real_matches):
     assert pd.api.types.is_datetime64_any_dtype(real_matches["datetime"])
     assert real_matches["datetime"].notna().all()
@@ -55,17 +68,20 @@ def test_datetime_is_parsed(real_matches):
     assert real_matches["datetime"].max().year <= 2026
 
 
+@_needs_real_data
 def test_scores_are_non_negative_integers(real_matches):
     for col in ("score1_match", "score2_match", "t1_series_score", "t2_series_score"):
         assert pd.api.types.is_integer_dtype(real_matches[col]), col
         assert (real_matches[col] >= 0).all(), col
 
 
+@_needs_real_data
 def test_one_row_per_match(real_matches):
     """The loader returns the series table, deduped: match_id is unique."""
     assert real_matches["match_id"].is_unique
 
 
+@_needs_real_data
 def test_rows_sorted_by_datetime(real_matches):
     order = real_matches["datetime"].sort_values(kind="mergesort")
     assert order.index.equals(real_matches.index)
@@ -74,6 +90,7 @@ def test_rows_sorted_by_datetime(real_matches):
 # --- DATA.md Quirk 1: scores are winner-sorted, not team-sorted --------------
 
 
+@_needs_real_data
 def test_winner_sorted_scores_are_disentangled(real_matches):
     """t1/t2 series scores must be team-specific: t1 >= t2 exactly when
     team1 won (equal only for genuine Bo2 draws)."""
@@ -85,6 +102,7 @@ def test_winner_sorted_scores_are_disentangled(real_matches):
     assert (t2[t2_won] >= t1[t2_won]).all()
 
 
+@_needs_real_data
 def test_winner_score_values_are_valid(real_matches):
     """(loser, winner) series pairs come from a small valid set (DATA.md Quirk 1).
 
@@ -98,6 +116,7 @@ def test_winner_score_values_are_valid(real_matches):
     assert set(zip(lo, hi, strict=True)) <= valid
 
 
+@_needs_real_data
 def test_winner_is_one_of_the_two_teams(real_matches):
     winners = pd.concat([real_matches["team1"], real_matches["team2"]])
     assert real_matches["winner"].isin(winners).all()
@@ -106,12 +125,14 @@ def test_winner_is_one_of_the_two_teams(real_matches):
 # --- DATA.md Quirk 2: Bo1 masquerade -----------------------------------------
 
 
+@_needs_real_data
 def test_games_played_complete_and_positive(real_matches):
     assert real_matches["games_played"].notna().all()
     assert (real_matches["games_played"] > 0).all()
     assert (real_matches["games_played"] <= 7).all()
 
 
+@_needs_real_data
 def test_games_played_consistent_with_series_scores(real_matches):
     """For decided series: winner score + loser score == maps played.
     (Bo1s correctly yield 1; Bo3 2-1 yields 3; Bo2 draws yield 2.)"""
@@ -122,6 +143,7 @@ def test_games_played_consistent_with_series_scores(real_matches):
 # --- team names ---------------------------------------------------------------
 
 
+@_needs_real_data
 def test_team_names_stripped_and_present(real_matches):
     for col in ("team1", "team2", "winner"):
         s = real_matches[col].astype("string")
