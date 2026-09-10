@@ -1,0 +1,4 @@
+test,statistic,p_value,effect_size,interpretation
+welch_t_margin_bo1_vs_bo3plus,101.75958937715701,0,2.537190919379801,"Bo1 series end with smaller margin than multi-map series (mean 1.00 vs 1.58, p = 0.00e+00, d = 2.54), a real format effect."
+anova_margin_by_tier,8.96485510464563,1.2886279005678634e-4,0.0018043511157042921,"Series margin differs across tiers (F = 9.0, p = 1.29e-04, eta-sq = 0.002); the Tukey table shows which pairs differ, with tier3 the noisiest (forfeits), though variance-homogeneity is assumed, not tested (Levene skipped, car not installed)."
+proptest_sweep_share_50pct,149.527841052898,2.1986874189082086e-34,0.5688433308023285,"Sweeps happen in 56.9% of decided multi-map series (n = 7902), which differs significantly from 50% (p = 2.20e-34); Wald CI [0.558, 0.580] vs prop.test's Wilson interval differ because Wilson centers differently near p far from 0.5."
