@@ -35,9 +35,7 @@ def dirty_series():
     return pd.DataFrame(
         {
             "match_id": [1, 1, 2, 4],
-            "datetime": pd.to_datetime(
-                ["2025-01-10", "2025-01-10", "2025-01-11", "2025-01-12"]
-            ),
+            "datetime": pd.to_datetime(["2025-01-10", "2025-01-10", "2025-01-11", "2025-01-12"]),
             "team1": ["NAVI", "NAVI", "FaZe", "G2"],
             "team2": ["FaZe", "FaZe", "NAVI", "NAVI"],
             "winner": ["NAVI", "NAVI", "FaZe", "NAVI"],
@@ -68,7 +66,7 @@ def test_normalize_team_names_mapping():
     df = pd.DataFrame({"team1": ["NAVI", "Natus Vincere", "Unknown Five"]})
     mapping = {"natus vincere": "navi", "navi": "navi"}
     out = normalize_team_names(df, mapping)
-    assert (out["team1"].iloc[0] == out["team1"].iloc[1])  # both -> navi
+    assert out["team1"].iloc[0] == out["team1"].iloc[1]  # both -> navi
     assert out["team1"].iloc[2] == "Unknown Five"  # untouched
 
 
@@ -80,9 +78,7 @@ def test_flag_forfeits(dirty_series):
 
 
 def test_winsorize_round_scores():
-    df = pd.DataFrame(
-        {"t1_series_score": [0, 2, 3, 99], "t2_series_score": [0, 0, 2, -5]}
-    )
+    df = pd.DataFrame({"t1_series_score": [0, 2, 3, 99], "t2_series_score": [0, 0, 2, -5]})
     out = winsorize_round_scores(df, lo=0, hi=25)
     assert out["t1_series_score"].max() == 25
     assert out["t2_series_score"].min() == 0
