@@ -2,6 +2,9 @@
 
 Checks the artifacts that r/01_wrangle.R, r/02_inference.R, r/03_plots.R must produce
 per docs/SPEC_M3_r_inference.md. Run from repo root: pytest -q
+
+These tests need the real Kaggle data (git-ignored) plus R 4.6.1, so they are
+skipped automatically in CI / on machines without the data. Local run: pytest -q
 """
 
 from pathlib import Path
@@ -12,14 +15,18 @@ import pytest
 REPO = Path(__file__).parent.parent
 OUT = REPO / "outputs"
 RSCRIPT = Path("C:/Program Files/R/R-4.6.1/bin/Rscript.exe")
+PRIMARY = REPO / "data" / "raw" / "cs2_all_tiers_games.csv"
+
+_requires_real_data = pytest.mark.skipif(
+    not PRIMARY.exists() or not RSCRIPT.exists(),
+    reason="real Kaggle data or Rscript not available (CI: data is git-ignored)",
+)
 
 
 def _run(script: str) -> None:
     """Run an R script from the repo root; fail loudly on R errors."""
     import subprocess
 
-    if not RSCRIPT.exists():
-        pytest.fail(f"Rscript not found at {RSCRIPT}")
     res = subprocess.run(
         [str(RSCRIPT), f"r/{script}"],
         cwd=REPO,
@@ -43,6 +50,7 @@ def r_pipeline():
 # --- 01_wrangle.R contract ----------------------------------------------------
 
 
+@_requires_real_data
 def test_series_clean_exists_with_expected_columns(r_pipeline):
     required = {
         "match_id",
@@ -63,10 +71,12 @@ def test_series_clean_exists_with_expected_columns(r_pipeline):
     assert required <= set(r_pipeline.columns)
 
 
+@_requires_real_data
 def test_series_clean_row_count(r_pipeline):
     assert len(r_pipeline) == 9922
 
 
+@_requires_real_data
 def test_series_clean_derived_columns_consistent(r_pipeline):
     assert (
         r_pipeline["total_maps"] == r_pipeline["t1_series_score"] + r_pipeline["t2_series_score"]
@@ -80,6 +90,7 @@ def test_series_clean_derived_columns_consistent(r_pipeline):
     assert r_pipeline["margin"].notna().all()
 
 
+@_requires_real_data
 def test_bo1_share_matches_data_md_quirk(r_pipeline):
     """DATA.md Quirk 2: Bo1 share ~20.4% (2020/9922)."""
     share = r_pipeline["is_bo1"].mean()
@@ -89,6 +100,7 @@ def test_bo1_share_matches_data_md_quirk(r_pipeline):
 # --- 02_inference.R contract --------------------------------------------------
 
 
+@_requires_real_data
 def test_inference_results_exist_with_three_tests():
     res = pd.read_csv(REPO / "outputs" / "inference_results.csv")
     assert {"test", "statistic", "p_value", "effect_size", "interpretation"} <= set(res.columns)
@@ -98,6 +110,7 @@ def test_inference_results_exist_with_three_tests():
     assert (res["interpretation"].str.len() > 10).all()
 
 
+@_requires_real_data
 def test_anova_p_value_plausible():
     res = pd.read_csv(REPO / "outputs" / "inference_results.csv")
     anova = res[res["test"].str.contains("anova", case=False, na=False)]
@@ -109,6 +122,7 @@ def test_anova_p_value_plausible():
 # --- 03_plots.R contract ------------------------------------------------------
 
 
+@_requires_real_data
 def test_figures_render(tmp_path=None):
     _run("03_plots.R")
     for fig in ("fig_winshare_top15.png", "fig_margin_by_tier.png"):
