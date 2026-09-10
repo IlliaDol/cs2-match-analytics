@@ -11,3 +11,5 @@ data/raw/*
 data/interim/*
 !data/interim/.gitkeep
 mlruns/
+artifacts/*
+!artifacts/.gitkeep
