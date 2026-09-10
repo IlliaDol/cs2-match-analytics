@@ -7,8 +7,6 @@ Until then the whole module skips (guarded import), so CI and the rest of the
 suite stay green while M6 is pending.
 """
 
-from pathlib import Path
-
 import pandas as pd
 import pytest
 
