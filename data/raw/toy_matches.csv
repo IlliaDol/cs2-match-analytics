@@ -1,0 +1,11 @@
+match_id,game_id,datetime,team1,team2,score1,score2,map_name,is_total
+900001,1,2025-01-10 14:00:00,NAVI,FaZe,2,1,Mirage,True
+900001,2,2025-01-10 15:30:00,NAVI,FaZe,2,0,Inferno,True
+900002,3,2025-01-11 12:00:00,G2,NAVI,1,2,Anubis,True
+900003,4,2025-01-12 16:00:00,FaZe,G2,2,1,Nuke,True
+900004,5,2025-01-12 18:00:00,NAVI,FaZe,2,1,Ancient,True
+900005,6,2025-01-13 13:00:00,G2,FaZe,0,2,Inferno,True
+900005,7,2025-01-13 15:00:00,G2,FaZe,1,2,Mirage,True
+900006,8,2025-01-14 17:00:00,NAVI,G2,2,0,Anubis,True
+900007,9,2025-01-14 19:30:00,FaZe,NAVI,1,2,Nuke,True
+900008,10,2025-01-15 14:00:00,G2,NAVI,1,2,Inferno,True
