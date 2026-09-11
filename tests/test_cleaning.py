@@ -52,7 +52,7 @@ def dirty_series():
 def test_deduplicate_series_keeps_first_and_logs(dirty_series, capsys):
     out = deduplicate_series(dirty_series)
     assert out["match_id"].is_unique
-    assert len(out) == 4
+    assert len(out) == 3  # 4 rows, match_id 1 duplicated once
     assert "dropped" in capsys.readouterr().out.lower()
 
 
@@ -135,5 +135,7 @@ def test_days_rest_first_match_is_none(schedule):
 def test_h2h_record(schedule):
     # vs A: X won both before 2025-02-06 -> (2, 0)
     assert h2h_record(schedule, "X", "A", before_ts=pd.Timestamp("2025-02-06")) == (2, 0)
-    # vs C before 2025-02-04: match not played yet -> (0, 0)
-    assert h2h_record(schedule, "X", "C", before_ts=pd.Timestamp("2025-02-04")) == (0, 0)
+    # vs C: the only X-C match is ON 2025-02-03; strictly-before ref excludes it
+    assert h2h_record(schedule, "X", "C", before_ts=pd.Timestamp("2025-02-03")) == (0, 0)
+    # after it played: X lost -> (0, 1)
+    assert h2h_record(schedule, "X", "C", before_ts=pd.Timestamp("2025-02-04")) == (0, 1)

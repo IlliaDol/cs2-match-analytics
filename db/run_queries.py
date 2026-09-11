@@ -30,7 +30,9 @@ def main() -> None:
     # Q4 needs the M4 Elo predictions as a table
     preds_path = OUT / "m4_elo_predictions.csv"
     if not preds_path.exists():
-        raise SystemExit("outputs/m4_elo_predictions.csv missing — run the M4 report notebook first")
+        raise SystemExit(
+            "outputs/m4_elo_predictions.csv missing — run the M4 report notebook first"
+        )
     preds = pd.read_csv(preds_path)
     preds["datetime"] = pd.to_datetime(preds["datetime"])
     con.register("m4_preds", preds)
