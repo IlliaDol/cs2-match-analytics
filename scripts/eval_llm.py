@@ -73,9 +73,8 @@ def main() -> None:
     n_answerable = 20 - len(trap_ids)
     answered = int(eval_df.loc[~eval_df["question_id"].isin(trap_ids), "result_match"].sum())
     traps = int(eval_df.loc[eval_df["question_id"].isin(trap_ids), "refused_ok"].sum())
-    print(
-        f"{answered}/{n_answerable} answered correctly, {traps}/{len(trap_ids)} traps handled, {len(eval_df)}/20 total"
-    )
+    n_total = len(eval_df)
+    print(f"{answered}/{n_answerable} correct, {traps}/{len(trap_ids)} traps, {n_total}/20 total")
 
 
 if __name__ == "__main__":

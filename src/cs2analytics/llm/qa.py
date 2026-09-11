@@ -11,6 +11,8 @@ Design notes:
 
 from __future__ import annotations
 
+from pathlib import Path
+
 import duckdb
 
 DDL_PATTERNS = (
