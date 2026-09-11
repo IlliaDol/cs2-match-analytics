@@ -68,13 +68,12 @@ def train_model(
 
     idx_te = torch.tensor(X_test_idx, dtype=torch.long)
     num_te = torch.tensor(X_test_num, dtype=torch.float32)
-    y_te_t = torch.tensor(y_test, dtype=torch.float32)
 
     history: list[float] = []
     best_loss = float("inf")
     plateau = 0
     n = len(y_train)
-    for epoch in range(max_epochs):
+    for _epoch in range(max_epochs):
         model.train()
         order = rng.permutation(n)
         epoch_loss = 0.0
