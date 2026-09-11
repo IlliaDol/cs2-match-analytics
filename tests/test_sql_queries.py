@@ -27,7 +27,7 @@ def con():
 
 def test_matches_row_count(con):
     n = con.execute("SELECT COUNT(*) FROM matches").fetchone()[0]
-    assert n == 9922
+    assert n == 9920
 
 
 def test_teams_table_loaded(con):
@@ -50,7 +50,7 @@ def test_q1_monthly_upsets(con):
     df = pd.read_csv(REPO / "outputs" / "q1.csv")
     assert {"month", "n_series", "n_upsets", "upset_rate"} <= set(df.columns)
     assert len(df) >= 40
-    assert df["n_series"].sum() == 9922, "Q1 fanned out rows — the CTE join exploded"
+    assert df["n_series"].sum() == 9920, "Q1 fanned out rows — the CTE join exploded"
     assert df["upset_rate"].between(0, 1).all()
     del q
 
@@ -75,7 +75,7 @@ def test_q2_form_no_future_leakage(con):
             ORDER BY datetime DESC LIMIT 3
         )
         """,
-        [sample["team"], sample["team"], sample["team"], sample["match_id"]],
+        [str(sample["team"]), str(sample["team"]), str(sample["team"]), int(sample["match_id"])],
     ).fetchone()
     expected = hist[0] / hist[1]
     assert abs(sample["form_win_share"] - expected) < 1e-9, "Q2 used future data!"

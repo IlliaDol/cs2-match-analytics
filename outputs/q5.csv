@@ -1,0 +1,1031 @@
+team_a,team_b,a_wins,b_wins,n
+MOUZ,Team Vitality,4.0,14.0,18
+Team Vitality,MOUZ,14.0,4.0,18
+MOUZ,FaZe Clan,6.0,11.0,17
+FaZe Clan,MOUZ,11.0,6.0,17
+Team Spirit,MOUZ,11.0,5.0,16
+MOUZ,Team Spirit,5.0,11.0,16
+FaZe Clan,Team Vitality,4.0,11.0,15
+MOUZ,Team Falcons,7.0,8.0,15
+G2 Esports,Team Spirit,7.0,8.0,15
+Team Vitality,The Mongolz,13.0,2.0,15
+Team Spirit,G2 Esports,8.0,7.0,15
+Team Falcons,MOUZ,8.0,7.0,15
+Team Vitality,FaZe Clan,11.0,4.0,15
+The Mongolz,Team Vitality,2.0,13.0,15
+G2 Esports,Natus Vincere,3.0,11.0,14
+Natus Vincere,G2 Esports,11.0,3.0,14
+Natus Vincere,Team Spirit,2.0,12.0,14
+Team Spirit,Natus Vincere,12.0,2.0,14
+Heroic,Ninjas in Pyjamas,7.0,6.0,13
+B8 Esports,PARIVISION,6.0,7.0,13
+Natus Vincere,FaZe Clan,8.0,5.0,13
+Ninjas in Pyjamas,Heroic,6.0,7.0,13
+FaZe Clan,G2 Esports,5.0,8.0,13
+PARIVISION,B8 Esports,7.0,6.0,13
+FaZe Clan,Natus Vincere,5.0,8.0,13
+G2 Esports,FaZe Clan,8.0,5.0,13
+ENCE,Fnatic,7.0,5.0,12
+Monte,PARIVISION,7.0,5.0,12
+Imperial Esports,paiN Gaming,4.0,8.0,12
+paiN Gaming,Imperial Esports,8.0,4.0,12
+Team Vitality,G2 Esports,8.0,4.0,12
+PARIVISION,Monte,5.0,7.0,12
+G2 Esports,Team Vitality,4.0,8.0,12
+Fnatic,ENCE,5.0,7.0,12
+MOUZ,G2 Esports,8.0,3.0,11
+Aurora Gaming,PARIVISION,7.0,4.0,11
+Team Falcons,Team Vitality,5.0,6.0,11
+Aurora Gaming,FURIA Esports,3.0,8.0,11
+Lynn Vision Gaming,TYLOO,7.0,4.0,11
+Team 3DMAX,The Mongolz,4.0,7.0,11
+PARIVISION,Aurora Gaming,4.0,7.0,11
+Aurora Gaming,The Mongolz,4.0,7.0,11
+The Mongolz,FURIA Esports,5.0,6.0,11
+Team Spirit,Team Falcons,6.0,5.0,11
+Heroic,BIG,6.0,5.0,11
+G2 Esports,MOUZ,3.0,8.0,11
+The Mongolz,Team 3DMAX,7.0,4.0,11
+The Mongolz,G2 Esports,8.0,3.0,11
+Natus Vincere,The Mongolz,8.0,3.0,11
+The Mongolz,Aurora Gaming,7.0,4.0,11
+The Mongolz,Natus Vincere,3.0,8.0,11
+Team Falcons,Team Spirit,5.0,6.0,11
+G2 Esports,The Mongolz,3.0,8.0,11
+MOUZ,FURIA Esports,6.0,5.0,11
+BIG,Heroic,5.0,6.0,11
+FURIA Esports,MOUZ,5.0,6.0,11
+Team Vitality,Team Falcons,6.0,5.0,11
+TYLOO,Lynn Vision Gaming,4.0,7.0,11
+FURIA Esports,Team Falcons,5.0,6.0,11
+Team Falcons,FURIA Esports,6.0,5.0,11
+FURIA Esports,Aurora Gaming,8.0,3.0,11
+FURIA Esports,The Mongolz,6.0,5.0,11
+Team 3DMAX,G2 Esports,3.0,7.0,10
+Team Liquid,FaZe Clan,2.0,8.0,10
+Team Spirit,FaZe Clan,7.0,3.0,10
+Sinners Esports,PARIVISION,6.0,4.0,10
+FaZe Clan,Team Spirit,3.0,7.0,10
+PARIVISION,Sinners Esports,4.0,6.0,10
+G2 Esports,Team 3DMAX,7.0,3.0,10
+FaZe Clan,Team Liquid,8.0,2.0,10
+Team Liquid,The Mongolz,0.0,9.0,9
+The Mongolz,Team Liquid,9.0,0.0,9
+FaZe Clan,Astralis,3.0,6.0,9
+Team Vitality,Team Spirit,7.0,2.0,9
+Team Vitality,Natus Vincere,8.0,1.0,9
+Team Spirit,The Mongolz,6.0,3.0,9
+Team Liquid,FURIA Esports,7.0,2.0,9
+Natus Vincere,FURIA Esports,4.0,5.0,9
+FURIA Esports,Natus Vincere,5.0,4.0,9
+Team Falcons,FaZe Clan,5.0,4.0,9
+FURIA Esports,Team Spirit,3.0,6.0,9
+Fnatic,BetBoom Team,3.0,6.0,9
+FaZe Clan,Team Falcons,4.0,5.0,9
+FURIA Esports,Team Liquid,2.0,7.0,9
+Astralis,Team Vitality,1.0,8.0,9
+Team Falcons,Eternal Fire,1.0,8.0,9
+Virtus.pro,Team Falcons,5.0,4.0,9
+Team Spirit,Team Vitality,2.0,7.0,9
+The Mongolz,Team Spirit,3.0,6.0,9
+Team Falcons,Virtus.pro,4.0,5.0,9
+Team Vitality,Astralis,8.0,1.0,9
+Complexity,MOUZ,2.0,7.0,9
+Natus Vincere,Team Vitality,1.0,8.0,9
+MOUZ,Complexity,7.0,2.0,9
+Team Vitality,GamerLegion,9.0,0.0,9
+MOUZ,Natus Vincere,6.0,3.0,9
+Team Spirit,FURIA Esports,6.0,3.0,9
+BetBoom Team,Fnatic,6.0,3.0,9
+Astralis,FaZe Clan,6.0,3.0,9
+Natus Vincere,MOUZ,3.0,6.0,9
+Eternal Fire,Team Falcons,8.0,1.0,9
+GamerLegion,Team Vitality,0.0,9.0,9
+Legacy,MIBR,5.0,3.0,8
+FaZe Clan,paiN Gaming,5.0,3.0,8
+Astralis,Natus Vincere,4.0,4.0,8
+Astralis,Team Spirit,1.0,7.0,8
+Team Vitality,FURIA Esports,6.0,2.0,8
+MOUZ NXT,Bleed Esports,4.0,4.0,8
+M80,Wildcard Gaming,5.0,3.0,8
+Sinners Esports,Monte,4.0,4.0,8
+Team 3DMAX,Team Falcons,2.0,6.0,8
+paiN Gaming,FaZe Clan,3.0,5.0,8
+Fnatic,ECSTATIC,5.0,3.0,8
+CYBERSHOKE Esports,ECSTATIC,3.0,5.0,8
+9INE,EYEBALLERS,3.0,5.0,8
+SAW,9Pandas,4.0,4.0,8
+GamerLegion,BetBoom Team,1.0,7.0,8
+Rare Atom,TYLOO,3.0,5.0,8
+Team Falcons,Team 3DMAX,6.0,2.0,8
+Fnatic,Team 3DMAX,3.0,5.0,8
+EYEBALLERS,9INE,5.0,3.0,8
+ECSTATIC,CYBERSHOKE Esports,5.0,3.0,8
+Zero Tenacity,B8 Esports,4.0,4.0,8
+The Mongolz,TYLOO,5.0,3.0,8
+B8 Esports,Zero Tenacity,4.0,4.0,8
+paiN Gaming,The Mongolz,2.0,6.0,8
+Team Spirit,Astralis,7.0,1.0,8
+TYLOO,Rare Atom,5.0,3.0,8
+Sinners Esports,GamerLegion,4.0,4.0,8
+Fnatic,Ninjas in Pyjamas,4.0,4.0,8
+MIBR,Legacy,3.0,5.0,8
+Aurora Gaming,Heroic,4.0,4.0,8
+FURIA Esports,Team Vitality,2.0,6.0,8
+paiN Gaming,MIBR,3.0,5.0,8
+Team Spirit,Heroic,7.0,1.0,8
+TYLOO,The Mongolz,3.0,5.0,8
+Team 3DMAX,Fnatic,5.0,3.0,8
+Bleed Esports,MOUZ NXT,4.0,4.0,8
+G2 Esports,FURIA Esports,4.0,4.0,8
+Heroic,Aurora Gaming,4.0,4.0,8
+GamerLegion,Sinners Esports,4.0,4.0,8
+BetBoom Team,GamerLegion,7.0,1.0,8
+Heroic,Team Spirit,1.0,7.0,8
+Astralis,Heroic,3.0,5.0,8
+Ninjas in Pyjamas,Fnatic,4.0,4.0,8
+SAW,GamerLegion,5.0,3.0,8
+Monte,Sinners Esports,4.0,4.0,8
+Team Spirit,Team Liquid,6.0,2.0,8
+Aurora Gaming,Astralis,5.0,3.0,8
+Heroic,Astralis,5.0,3.0,8
+GamerLegion,SAW,3.0,5.0,8
+ENCE,PARIVISION,2.0,6.0,8
+Virtus.pro,Team Vitality,2.0,6.0,8
+Team Vitality,Virtus.pro,6.0,2.0,8
+ECSTATIC,Fnatic,3.0,5.0,8
+Astralis,Aurora Gaming,3.0,5.0,8
+The Mongolz,paiN Gaming,6.0,2.0,8
+Team Liquid,Team Spirit,2.0,6.0,8
+FURIA Esports,G2 Esports,4.0,4.0,8
+PARIVISION,ENCE,6.0,2.0,8
+Natus Vincere,Astralis,4.0,4.0,8
+9Pandas,SAW,4.0,4.0,8
+MIBR,paiN Gaming,5.0,3.0,8
+Wildcard Gaming,M80,3.0,5.0,8
+paiN Gaming,Astralis,3.0,4.0,7
+G2 Esports,Team Liquid,6.0,1.0,7
+BetBoom Team,Heroic,4.0,3.0,7
+GUN5,Sinners Esports,4.0,3.0,7
+Team Spirit,Virtus.pro,5.0,2.0,7
+HOTU,BetBoom Team,1.0,6.0,7
+Sinners Esports,GUN5,3.0,4.0,7
+CYBERSHOKE Esports,FAVBET Team,5.0,2.0,7
+RED Canids,Legacy,4.0,3.0,7
+Team Liquid,G2 Esports,1.0,6.0,7
+Aurora Gaming,Natus Vincere,0.0,7.0,7
+G2 Esports,Ninjas in Pyjamas,6.0,1.0,7
+Astralis,FUT Esports,4.0,3.0,7
+Ninjas in Pyjamas,G2 Esports,1.0,6.0,7
+FAVBET Team,CYBERSHOKE Esports,2.0,5.0,7
+Team Liquid,Team Vitality,0.0,7.0,7
+FaZe Clan,Team 3DMAX,4.0,3.0,7
+Nemiga Gaming,Zero Tenacity,5.0,2.0,7
+Virtus.pro,Team Spirit,2.0,5.0,7
+Team Liquid,MOUZ,1.0,6.0,7
+Astralis,FURIA Esports,2.0,5.0,7
+Zero Tenacity,Nemiga Gaming,2.0,5.0,7
+MOUZ,The Mongolz,5.0,2.0,7
+B8 Esports,Heroic,3.0,4.0,7
+Virtus.pro,MIBR,3.0,4.0,7
+MIBR,Sharks Esports,5.0,2.0,7
+OG,Fnatic,3.0,4.0,7
+Team Vitality,Team Liquid,7.0,0.0,7
+Sharks Esports,MIBR,2.0,5.0,7
+Heroic,BetBoom Team,3.0,4.0,7
+Team 3DMAX,B8 Esports,2.0,5.0,7
+Natus Vincere,Aurora Gaming,7.0,0.0,7
+SAW,Team 3DMAX,2.0,5.0,7
+Ninjas in Pyjamas,FaZe Clan,3.0,4.0,7
+Legacy,RED Canids,3.0,4.0,7
+Heroic,Team 3DMAX,4.0,3.0,7
+Team 3DMAX,SAW,5.0,2.0,7
+Team Falcons,G2 Esports,4.0,3.0,7
+FUT Esports,Astralis,3.0,4.0,7
+Aurora Gaming,Monte,2.0,5.0,7
+FURIA Esports,Astralis,5.0,2.0,7
+paiN Gaming,Virtus.pro,5.0,2.0,7
+paiN Gaming,FURIA Esports,2.0,5.0,7
+BetBoom Team,HOTU,6.0,1.0,7
+FURIA Esports,paiN Gaming,5.0,2.0,7
+MIBR,Virtus.pro,4.0,3.0,7
+Sinners Esports,ECSTATIC,4.0,3.0,7
+BIG,Virtus.pro,3.0,4.0,7
+Astralis,paiN Gaming,4.0,3.0,7
+Virtus.pro,BIG,4.0,3.0,7
+Team 3DMAX,FaZe Clan,3.0,4.0,7
+B8 Esports,Sinners Esports,4.0,3.0,7
+Team Falcons,GamerLegion,5.0,2.0,7
+MIBR,Imperial Esports,4.0,3.0,7
+GamerLegion,Astralis,4.0,3.0,7
+Fnatic,OG,4.0,3.0,7
+ECSTATIC,Sinners Esports,3.0,4.0,7
+Virtus.pro,Astralis,4.0,3.0,7
+Team Liquid,M80,3.0,4.0,7
+Astralis,GamerLegion,3.0,4.0,7
+FaZe Clan,Ninjas in Pyjamas,4.0,3.0,7
+Team 3DMAX,Heroic,3.0,4.0,7
+G2 Esports,Team Falcons,3.0,4.0,7
+MOUZ,Team Liquid,6.0,1.0,7
+Sinners Esports,B8 Esports,3.0,4.0,7
+Virtus.pro,paiN Gaming,2.0,5.0,7
+Monte,Aurora Gaming,5.0,2.0,7
+B8 Esports,Team 3DMAX,5.0,2.0,7
+Astralis,Virtus.pro,3.0,4.0,7
+M80,Team Liquid,4.0,3.0,7
+Heroic,B8 Esports,4.0,3.0,7
+Imperial Esports,MIBR,3.0,4.0,7
+GamerLegion,Team Falcons,2.0,5.0,7
+The Mongolz,MOUZ,2.0,5.0,7
+Heroic,Team Liquid,2.0,4.0,6
+Complexity,Team Liquid,1.0,5.0,6
+Monte,ENCE,3.0,3.0,6
+Zero Tenacity,FAVBET Team,5.0,1.0,6
+Zero Tenacity,EYEBALLERS,4.0,2.0,6
+Team Aunkere,Team Skywhywalker,4.0,2.0,6
+Sinners Esports,BetBoom Team,1.0,5.0,6
+Fluxo,BESTIA,4.0,2.0,6
+Cloud9,FaZe Clan,0.0,6.0,6
+Astralis,MIBR,5.0,1.0,6
+Sangal Esports,Monte,4.0,2.0,6
+OG,BIG,5.0,1.0,6
+Sashi Esport,Passion UA,2.0,4.0,6
+Sinners Esports,Zero Tenacity,2.0,4.0,6
+G2 Esports,Heroic,5.0,1.0,6
+NRG Esports,Nouns Esports,3.0,3.0,6
+Lynn Vision Gaming,FURIA Esports,1.0,5.0,6
+Fnatic,GamerLegion,2.0,4.0,6
+PARIVISION,Team 3DMAX,1.0,5.0,6
+ENCE,Astralis,3.0,3.0,6
+MIBR,BetBoom Team,3.0,3.0,6
+Team Falcons,Astralis,3.0,3.0,6
+Astralis,ENCE,3.0,3.0,6
+9Pandas,BetBoom Team,2.0,4.0,6
+BetBoom Team,9Pandas,4.0,2.0,6
+Zero Tenacity,Sinners Esports,4.0,2.0,6
+Aurora Gaming,Apeks,4.0,2.0,6
+BetBoom Team,Sinners Esports,5.0,1.0,6
+Team Liquid,Legacy,4.0,2.0,6
+Team Falcons,BetBoom Team,4.0,2.0,6
+Metizport,Zero Tenacity,1.0,5.0,6
+FaZe Clan,Cloud9,6.0,0.0,6
+Team Liquid,Wildcard Gaming,5.0,1.0,6
+MIBR,Astralis,1.0,5.0,6
+BetBoom Team,Eternal Fire,2.0,4.0,6
+Heroic,FaZe Clan,3.0,3.0,6
+G2 Esports,M80,5.0,1.0,6
+Team 3DMAX,Astralis,1.0,5.0,6
+Passion UA,Zero Tenacity,1.0,5.0,6
+FURIA Esports,Lynn Vision Gaming,5.0,1.0,6
+FUT Esports,B8 Esports,4.0,2.0,6
+The Mongolz,Eternal Fire,4.0,2.0,6
+paiN Gaming,MOUZ,0.0,6.0,6
+Team 3DMAX,MIBR,4.0,2.0,6
+FaZe Clan,Aurora Gaming,3.0,3.0,6
+Lynn Vision Gaming,The Mongolz,0.0,6.0,6
+Astralis,Legacy,3.0,3.0,6
+Passion UA,Permitta Esports,3.0,3.0,6
+CYBERSHOKE Esports,Nemiga Gaming,3.0,3.0,6
+Heroic,FURIA Esports,1.0,5.0,6
+ECSTATIC,Natus Vincere Junior,1.0,5.0,6
+BIG,Aurora Gaming,5.0,1.0,6
+MOUZ,paiN Gaming,6.0,0.0,6
+Zero Tenacity,Team 3DMAX,2.0,4.0,6
+Sashi Esport,PARIVISION,1.0,5.0,6
+Legacy,Team Liquid,2.0,4.0,6
+FURIA Esports,Heroic,5.0,1.0,6
+Nouns Esports,NRG Esports,3.0,3.0,6
+Virtus.pro,Heroic,4.0,2.0,6
+M80,G2 Esports,1.0,5.0,6
+Case Esports,RED Canids,2.0,4.0,6
+CYBERSHOKE Esports,Sangal Esports,3.0,3.0,6
+FaZe Clan,Eternal Fire,4.0,2.0,6
+Aurora Gaming,FaZe Clan,3.0,3.0,6
+Natus Vincere,Team Falcons,2.0,4.0,6
+Natus Vincere Junior,ECSTATIC,5.0,1.0,6
+Team Liquid,Complexity,5.0,1.0,6
+Zero Tenacity,Passion UA,5.0,1.0,6
+Virtus.pro,G2 Esports,1.0,5.0,6
+Zero Tenacity,Metizport,5.0,1.0,6
+Heroic,G2 Esports,1.0,5.0,6
+K27,WW Team,4.0,2.0,6
+BetBoom Team,Nemiga Gaming,4.0,2.0,6
+PARIVISION,Sashi Esport,5.0,1.0,6
+G2 Esports,Virtus.pro,5.0,1.0,6
+BetBoom Team,Team Falcons,2.0,4.0,6
+paiN Gaming,GamerLegion,3.0,3.0,6
+Sangal Esports,Nemiga Gaming,5.0,1.0,6
+The Mongolz,Lynn Vision Gaming,6.0,0.0,6
+B8 Esports,BetBoom Team,3.0,3.0,6
+Team Falcons,Natus Vincere,4.0,2.0,6
+Monte,Sangal Esports,2.0,4.0,6
+Team Liquid,Heroic,4.0,2.0,6
+Team Skywhywalker,Team Aunkere,2.0,4.0,6
+Apeks,Aurora Gaming,2.0,4.0,6
+FaZe Clan,Virtus.pro,3.0,3.0,6
+Heroic,Virtus.pro,2.0,4.0,6
+MIBR,Team 3DMAX,2.0,4.0,6
+WW Team,K27,2.0,4.0,6
+paiN Gaming,G2 Esports,1.0,5.0,6
+Legacy,Astralis,3.0,3.0,6
+BetBoom Team,MIBR,3.0,3.0,6
+Eternal Fire,FaZe Clan,2.0,4.0,6
+Eternal Fire,BetBoom Team,4.0,2.0,6
+EYEBALLERS,Zero Tenacity,2.0,4.0,6
+Sangal Esports,CYBERSHOKE Esports,3.0,3.0,6
+Permitta Esports,Passion UA,3.0,3.0,6
+BetBoom Team,B8 Esports,3.0,3.0,6
+Virtus.pro,FaZe Clan,3.0,3.0,6
+Astralis,Team 3DMAX,5.0,1.0,6
+FAVBET Team,Monte,1.0,5.0,6
+GamerLegion,paiN Gaming,3.0,3.0,6
+Nemiga Gaming,CYBERSHOKE Esports,3.0,3.0,6
+Eternal Fire,The Mongolz,2.0,4.0,6
+GamerLegion,Fnatic,4.0,2.0,6
+FaZe Clan,Complexity,4.0,2.0,6
+FAVBET Team,Zero Tenacity,1.0,5.0,6
+RED Canids,Case Esports,4.0,2.0,6
+BESTIA,Fluxo,2.0,4.0,6
+Passion UA,Sashi Esport,4.0,2.0,6
+Wildcard Gaming,Team Liquid,1.0,5.0,6
+Astralis,Team Falcons,3.0,3.0,6
+GamerLegion,Virtus.pro,4.0,2.0,6
+G2 Esports,paiN Gaming,5.0,1.0,6
+FaZe Clan,Heroic,3.0,3.0,6
+Nemiga Gaming,BetBoom Team,2.0,4.0,6
+Complexity,FaZe Clan,2.0,4.0,6
+Aurora Gaming,BIG,1.0,5.0,6
+B8 Esports,FUT Esports,2.0,4.0,6
+Virtus.pro,GamerLegion,2.0,4.0,6
+Team 3DMAX,PARIVISION,5.0,1.0,6
+BIG,OG,1.0,5.0,6
+ENCE,Monte,3.0,3.0,6
+Monte,FAVBET Team,5.0,1.0,6
+Nemiga Gaming,Sangal Esports,1.0,5.0,6
+Team 3DMAX,Zero Tenacity,4.0,2.0,6
+Sashi Esport,Zero Tenacity,1.0,4.0,5
+500,CYBERSHOKE Esports,3.0,2.0,5
+RED Canids,ODDIK,1.0,4.0,5
+BESTIA,Imperial Esports,3.0,2.0,5
+Dynamo Eclot,9Pandas,0.0,5.0,5
+Sinners Esports,9INE,4.0,1.0,5
+Virtus.pro,Complexity,3.0,2.0,5
+Team 3DMAX,Aurora Gaming,5.0,0.0,5
+Monte,9Pandas,2.0,3.0,5
+FURIA Esports,Eternal Fire,3.0,2.0,5
+Sashi Esport,OG,5.0,0.0,5
+MOUZ,GamerLegion,4.0,1.0,5
+Zero Tenacity,Nexus Gaming,3.0,2.0,5
+Legacy,M80,3.0,2.0,5
+Team Aunkere,Team Shadowkek,3.0,2.0,5
+Monte,Iberian Soul,3.0,2.0,5
+BCGame,OG,2.0,3.0,5
+Fnatic,Virtus.pro,1.0,4.0,5
+Passion UA,Fnatic,3.0,2.0,5
+Ninjas in Pyjamas,PARIVISION,3.0,2.0,5
+Cloud9,Fnatic,2.0,3.0,5
+Legacy,NRG Esports,4.0,1.0,5
+Natus Vincere,Ninjas in Pyjamas,5.0,0.0,5
+Sashi Esport,Monte,2.0,3.0,5
+Alliance,EYEBALLERS,2.0,3.0,5
+CYBERSHOKE Esports,500,2.0,3.0,5
+Nexus Gaming,Zero Tenacity,2.0,3.0,5
+B8 Esports,FURIA Esports,1.0,4.0,5
+Imperial Esports,Fluxo,5.0,0.0,5
+Ninjas in Pyjamas,Natus Vincere,0.0,5.0,5
+Eternal Fire,FURIA Esports,2.0,3.0,5
+Fluxo,Imperial Esports,0.0,5.0,5
+MIBR,Team Liquid,1.0,4.0,5
+BetBoom Team,Monte,5.0,0.0,5
+Team Liquid,GamerLegion,3.0,2.0,5
+Mindfreak,Rooster,3.0,2.0,5
+Sinners Esports,RUBY,2.0,3.0,5
+RED Canids,BESTIA,2.0,3.0,5
+Natus Vincere,Team Liquid,2.0,3.0,5
+Heroic,Complexity,2.0,3.0,5
+Nexus Gaming,Sashi Esport,3.0,2.0,5
+Team Liquid,Team 3DMAX,2.0,3.0,5
+FaZe Clan,SAW,4.0,1.0,5
+Team Liquid,FlyQuest,4.0,1.0,5
+9Pandas,Monte,3.0,2.0,5
+paiN Gaming,RED Canids,5.0,0.0,5
+Zero Tenacity,ECSTATIC,3.0,2.0,5
+MIBR,Heroic,2.0,3.0,5
+GUN5,Dynamo Eclot,3.0,2.0,5
+GamerLegion,The Mongolz,0.0,5.0,5
+BCGame,Alliance,2.0,3.0,5
+Alliance,ARCRED,5.0,0.0,5
+9Pandas,Dynamo Eclot,5.0,0.0,5
+FURIA Esports,Virtus.pro,2.0,3.0,5
+GUN5,Monte,3.0,2.0,5
+GamerLegion,Aurora Gaming,3.0,2.0,5
+Team Vitality,Team 3DMAX,5.0,0.0,5
+ENCE,The Mongolz,2.0,3.0,5
+Team Falcons,The Mongolz,3.0,2.0,5
+AMKAL Esports,Insilio,4.0,1.0,5
+Bleed Esports,B8 Esports,2.0,3.0,5
+SAW,FaZe Clan,1.0,4.0,5
+The Mongolz,FaZe Clan,4.0,1.0,5
+Passion UA,BIG,1.0,4.0,5
+GamerLegion,Team 3DMAX,4.0,1.0,5
+OG,Sinners Esports,3.0,2.0,5
+Aurora Gaming,Team 3DMAX,0.0,5.0,5
+MIBR,Team Spirit,1.0,4.0,5
+Astralis,MOUZ,1.0,4.0,5
+FaZe Clan,The Mongolz,1.0,4.0,5
+B8 Esports,GamerLegion,2.0,3.0,5
+Natus Vincere,Eternal Fire,4.0,1.0,5
+ARCRED,Alliance,0.0,5.0,5
+MOUZ,Eternal Fire,3.0,2.0,5
+Team Vitality,BetBoom Team,3.0,2.0,5
+ENCE,BetBoom Team,2.0,3.0,5
+paiN Gaming,Team 3DMAX,3.0,2.0,5
+Bad News Kangaroos,Rooster,2.0,3.0,5
+Zero Tenacity,Team Spirit Academy,3.0,2.0,5
+FURIA Esports,M80,4.0,1.0,5
+FlyQuest,Team Liquid,1.0,4.0,5
+ECSTATIC,Zero Tenacity,2.0,3.0,5
+Nemiga Gaming,Metizport,1.0,4.0,5
+Team 3DMAX,GamerLegion,1.0,4.0,5
+BetBoom Team,Cloud9,1.0,4.0,5
+MOUZ,Aurora Gaming,4.0,1.0,5
+500,ENCE,3.0,2.0,5
+RUBY,Sinners Esports,3.0,2.0,5
+B8 Esports,Natus Vincere,0.0,5.0,5
+Complexity,Heroic,3.0,2.0,5
+9INE,BIG,2.0,3.0,5
+Eternal Fire,Natus Vincere,1.0,4.0,5
+FURIA Esports,MIBR,3.0,2.0,5
+B8 Esports,Monte,4.0,1.0,5
+Aurora Gaming,9Pandas,3.0,2.0,5
+Monte,CYBERSHOKE Esports,4.0,1.0,5
+Fnatic,SAW,3.0,2.0,5
+paiN Gaming,Aurora Gaming,1.0,4.0,5
+GamerLegion,Team Liquid,2.0,3.0,5
+9z Team,BESTIA,4.0,1.0,5
+9z Team,MIBR,3.0,2.0,5
+Sinners Esports,OG,2.0,3.0,5
+Sashi Esport,9INE,3.0,2.0,5
+BCGame,Partizan Esports,3.0,2.0,5
+Heroic,PARIVISION,3.0,2.0,5
+Monte,GUN5,2.0,3.0,5
+BIG,FlyQuest,3.0,2.0,5
+Dynamo Eclot,GUN5,2.0,3.0,5
+Nouns Esports,Party Astronauts,4.0,1.0,5
+SAW,BetBoom Team,2.0,3.0,5
+ODDIK,RED Canids,4.0,1.0,5
+Metizport,Nemiga Gaming,4.0,1.0,5
+9INE,Sinners Esports,1.0,4.0,5
+Insilio,AMKAL Esports,1.0,4.0,5
+Natus Vincere,BIG,5.0,0.0,5
+The Mongolz,ENCE,3.0,2.0,5
+Fnatic,Passion UA,2.0,3.0,5
+B8 Esports,Astralis,2.0,3.0,5
+BIG,Natus Vincere,0.0,5.0,5
+The Mongolz,Team Falcons,2.0,3.0,5
+Team Vitality,Heroic,3.0,2.0,5
+SAW,Aurora Gaming,3.0,2.0,5
+Sashi Esport,500,2.0,3.0,5
+G2 Esports,GamerLegion,4.0,1.0,5
+Heroic,ENCE,4.0,1.0,5
+BIG,FURIA Esports,3.0,2.0,5
+Fnatic,Cloud9,3.0,2.0,5
+Rebels Gaming,Aurora Gaming,0.0,5.0,5
+Astralis,B8 Esports,3.0,2.0,5
+Monte,B8 Esports,1.0,4.0,5
+paiN Gaming,Natus Vincere,0.0,5.0,5
+MIBR,FURIA Esports,2.0,3.0,5
+FURIA Esports,B8 Esports,4.0,1.0,5
+Monte,Fnatic,2.0,3.0,5
+9INE,Zero Tenacity,3.0,2.0,5
+Fnatic,Monte,3.0,2.0,5
+TYLOO,Team 3DMAX,2.0,3.0,5
+B8 Esports,MOUZ NXT,3.0,2.0,5
+ENCE,500,2.0,3.0,5
+B8 Esports,Bleed Esports,3.0,2.0,5
+CYBERSHOKE Esports,Monte,1.0,4.0,5
+GamerLegion,FaZe Clan,3.0,2.0,5
+BIG,GamerLegion,3.0,2.0,5
+paiN Gaming,Legacy,3.0,2.0,5
+BetBoom Team,ENCE,3.0,2.0,5
+Johnny Speeds,Metizport,3.0,2.0,5
+paiN Gaming,ODDIK,4.0,1.0,5
+Zero Tenacity,9INE,2.0,3.0,5
+PARIVISION,Fnatic,3.0,2.0,5
+Team 3DMAX,Team Liquid,3.0,2.0,5
+Monte,Sashi Esport,3.0,2.0,5
+Team 3DMAX,Team Vitality,0.0,5.0,5
+Team 3DMAX,paiN Gaming,2.0,3.0,5
+Oxuji Esports,K27,1.0,4.0,5
+BIG,G2 Esports,0.0,5.0,5
+9Pandas,Aurora Gaming,2.0,3.0,5
+MOUZ,Astralis,4.0,1.0,5
+FlyQuest,BIG,2.0,3.0,5
+9INE,Sashi Esport,2.0,3.0,5
+Aurora Gaming,Rebels Gaming,5.0,0.0,5
+Team 3DMAX,Sinners Esports,2.0,3.0,5
+Alliance,Sinners Esports,2.0,3.0,5
+Sashi Esport,Nexus Gaming,2.0,3.0,5
+Party Astronauts,Nouns Esports,1.0,4.0,5
+9z Team,FURIA Esports,2.0,3.0,5
+Rooster,Bad News Kangaroos,3.0,2.0,5
+ODDIK,paiN Gaming,1.0,4.0,5
+NRG Esports,Legacy,1.0,4.0,5
+Monte,BetBoom Team,0.0,5.0,5
+Virtus.pro,FURIA Esports,3.0,2.0,5
+FaZe Clan,GamerLegion,2.0,3.0,5
+500,Sashi Esport,3.0,2.0,5
+BESTIA,RED Canids,3.0,2.0,5
+Metizport,Johnny Speeds,2.0,3.0,5
+SAW,Virtus.pro,0.0,5.0,5
+RED Canids,paiN Gaming,0.0,5.0,5
+Sinners Esports,Team 3DMAX,3.0,2.0,5
+PARIVISION,9INE,4.0,1.0,5
+The Mongolz,GamerLegion,5.0,0.0,5
+The Mongolz,Rare Atom,5.0,0.0,5
+Heroic,MIBR,3.0,2.0,5
+Sinners Esports,9Pandas,2.0,3.0,5
+BetBoom Team,Team Vitality,2.0,3.0,5
+OG,Sashi Esport,0.0,5.0,5
+GamerLegion,G2 Esports,1.0,4.0,5
+Team Liquid,Natus Vincere,3.0,2.0,5
+Cloud9,BetBoom Team,4.0,1.0,5
+Team Liquid,MIBR,4.0,1.0,5
+ENCE,Heroic,1.0,4.0,5
+Eternal Fire,MOUZ,2.0,3.0,5
+OG,BCGame,3.0,2.0,5
+Team Spirit Academy,Zero Tenacity,2.0,3.0,5
+GamerLegion,BIG,2.0,3.0,5
+Team 3DMAX,TYLOO,3.0,2.0,5
+Virtus.pro,Fnatic,4.0,1.0,5
+9INE,PARIVISION,1.0,4.0,5
+BIG,Passion UA,4.0,1.0,5
+The Mongolz,Astralis,1.0,4.0,5
+Sinners Esports,Alliance,3.0,2.0,5
+B8 Esports,Aurora Gaming,0.0,5.0,5
+Virtus.pro,SAW,5.0,0.0,5
+Aurora Gaming,GamerLegion,2.0,3.0,5
+Sharks Esports,paiN Gaming,1.0,4.0,5
+Team 3DMAX,Eternal Fire,2.0,3.0,5
+Team Shadowkek,Team Aunkere,2.0,3.0,5
+Eternal Fire,Team 3DMAX,3.0,2.0,5
+9Pandas,Sinners Esports,3.0,2.0,5
+FURIA Esports,BIG,2.0,3.0,5
+Imperial Esports,BESTIA,2.0,3.0,5
+BetBoom Team,SAW,3.0,2.0,5
+Partizan Esports,BCGame,2.0,3.0,5
+Iberian Soul,Monte,2.0,3.0,5
+Aurora Gaming,MOUZ,1.0,4.0,5
+GamerLegion,MOUZ,1.0,4.0,5
+BIG,9INE,3.0,2.0,5
+Rooster,Mindfreak,2.0,3.0,5
+K27,Oxuji Esports,4.0,1.0,5
+Zero Tenacity,PARIVISION,1.0,4.0,5
+Fnatic,PARIVISION,2.0,3.0,5
+Monte,Team Falcons,1.0,4.0,5
+RUBY,Zero Tenacity,3.0,2.0,5
+MOUZ NXT,B8 Esports,2.0,3.0,5
+Team Spirit,MIBR,4.0,1.0,5
+M80,Legacy,2.0,3.0,5
+Natus Vincere,paiN Gaming,5.0,0.0,5
+SAW,Fnatic,2.0,3.0,5
+Alliance,BCGame,3.0,2.0,5
+FURIA Esports,9z Team,3.0,2.0,5
+M80,FURIA Esports,1.0,4.0,5
+BESTIA,9z Team,1.0,4.0,5
+Natus Vincere,B8 Esports,5.0,0.0,5
+Astralis,The Mongolz,4.0,1.0,5
+Heroic,Team Vitality,2.0,3.0,5
+Team Falcons,Monte,4.0,1.0,5
+paiN Gaming,Sharks Esports,4.0,1.0,5
+Rare Atom,The Mongolz,0.0,5.0,5
+G2 Esports,BIG,5.0,0.0,5
+Complexity,Virtus.pro,2.0,3.0,5
+Zero Tenacity,RUBY,2.0,3.0,5
+Aurora Gaming,SAW,2.0,3.0,5
+Legacy,paiN Gaming,2.0,3.0,5
+PARIVISION,Heroic,2.0,3.0,5
+Aurora Gaming,B8 Esports,5.0,0.0,5
+EYEBALLERS,Alliance,3.0,2.0,5
+PARIVISION,Ninjas in Pyjamas,2.0,3.0,5
+GamerLegion,B8 Esports,3.0,2.0,5
+PARIVISION,Zero Tenacity,4.0,1.0,5
+Aurora Gaming,paiN Gaming,4.0,1.0,5
+Zero Tenacity,Sashi Esport,4.0,1.0,5
+MIBR,9z Team,2.0,3.0,5
+CYBERSHOKE Esports,EYEBALLERS,3.0,1.0,4
+MOUZ NXT,ALTERNATE aTTaX,3.0,1.0,4
+Heroic,Passion UA,4.0,0.0,4
+BetBoom Team,Ninjas in Pyjamas,4.0,0.0,4
+FURIA Esports,Legacy,1.0,3.0,4
+B8 Esports,Legacy,4.0,0.0,4
+Alliance,Johnny Speeds,3.0,1.0,4
+BIG,Astralis,0.0,4.0,4
+ARCRED,500,2.0,2.0,4
+500,9Pandas,4.0,0.0,4
+Team OverDrive,Team Shadowkek,1.0,3.0,4
+GamerLegion,NRG Esports,3.0,1.0,4
+Team Falcons,paiN Gaming,2.0,2.0,4
+Nemiga Gaming,ARCRED,2.0,2.0,4
+BIG,Sinners Esports,2.0,2.0,4
+Legacy,PARIVISION,2.0,2.0,4
+EYEBALLERS,Team Space,1.0,3.0,4
+Preasy Esport,ECSTATIC,1.0,3.0,4
+Team Spirit,FlyQuest,4.0,0.0,4
+GamerLegion,ENCE,2.0,2.0,4
+Sinners Esports,Sashi Esport,1.0,3.0,4
+Natus Vincere Junior,OG,2.0,2.0,4
+SAW,Zero Tenacity,3.0,1.0,4
+Natus Vincere,Heroic,1.0,3.0,4
+The Mongolz,Heroic,4.0,0.0,4
+EYEBALLERS,CYBERSHOKE Esports,1.0,3.0,4
+G2 Esports,Complexity,3.0,1.0,4
+Fnatic,AMKAL Esports,3.0,1.0,4
+SAW,Monte,3.0,1.0,4
+Team Liquid,Virtus.pro,3.0,1.0,4
+9Pandas,GUN5,3.0,1.0,4
+FAVBET Team,HOTU,2.0,2.0,4
+The Mongolz,Complexity,4.0,0.0,4
+Legacy,FURIA Esports,3.0,1.0,4
+Natus Vincere,Complexity,2.0,2.0,4
+PARIVISION,Team Falcons,4.0,0.0,4
+FORZE,Aurora Gaming,2.0,2.0,4
+ARCRED,FAVBET Team,1.0,3.0,4
+ARCRED,Johnny Speeds,2.0,2.0,4
+Copenhagen Wolves,Partizan Esports,1.0,3.0,4
+RED Canids,MIBR,0.0,4.0,4
+HOTU,9INE,2.0,2.0,4
+BetBoom Team,Sashi Esport,4.0,0.0,4
+Dynamo Eclot,Copenhagen Wolves,2.0,2.0,4
+Nexus Gaming,RUBY,1.0,3.0,4
+GamerLegion,FURIA Esports,3.0,1.0,4
+B8 Esports,BCGame,4.0,0.0,4
+1win Team,ARCRED,2.0,2.0,4
+Virtus.pro,OG,2.0,2.0,4
+Aurora Gaming,Legacy,4.0,0.0,4
+Team 3DMAX,Nemiga Gaming,2.0,2.0,4
+FUT Esports,G2 Esports,2.0,2.0,4
+Sashi Esport,Rebels Gaming,1.0,3.0,4
+Virtus.pro,Team Liquid,1.0,3.0,4
+MOUZ,Virtus.pro,3.0,1.0,4
+9Pandas,9INE,3.0,1.0,4
+FORZE,Preasy Esport,1.0,3.0,4
+G2 Esports,BetBoom Team,3.0,1.0,4
+BetBoom Team,OG,3.0,1.0,4
+Nemiga Gaming,B8 Esports,1.0,3.0,4
+Aurora Gaming,FORZE,2.0,2.0,4
+Sinners Esports,JiJieHao,3.0,1.0,4
+Team Spirit Academy,ARCRED,3.0,1.0,4
+TEAM NEXT LEVEL,BetBoom Team,1.0,3.0,4
+CYBERSHOKE Esports,Nexus Gaming,3.0,1.0,4
+Fire Flux Esports,Sashi Esport,2.0,2.0,4
+Aurora Gaming,Team Spirit,0.0,4.0,4
+9INE,Johnny Speeds,4.0,0.0,4
+Heroic,OG,1.0,3.0,4
+Cloud9,Team Vitality,1.0,3.0,4
+9INE,Gentle Mates,1.0,3.0,4
+Passion UA,B8 Esports,0.0,4.0,4
+Betera,CYBERSHOKE Esports,3.0,1.0,4
+WW Team,ARCRED,1.0,3.0,4
+FAVBET Team,Oramond,3.0,1.0,4
+OG,Virtus.pro,2.0,2.0,4
+NRG Esports,Wildcard Gaming,0.0,4.0,4
+FURIA Esports,Imperial Esports,4.0,0.0,4
+GamerLegion,Natus Vincere,0.0,4.0,4
+Team Spirit,Aurora Gaming,4.0,0.0,4
+Legacy,Aurora Gaming,0.0,4.0,4
+FlyQuest,Legacy,2.0,2.0,4
+Team Vitality,Cloud9,3.0,1.0,4
+Monte,Virtus.pro,1.0,3.0,4
+Lynn Vision Gaming,Team 3DMAX,2.0,2.0,4
+ESC Gaming,RUBY,1.0,3.0,4
+Legacy,FlyQuest,2.0,2.0,4
+Betclic,Sashi Esport,1.0,3.0,4
+JiJieHao,Onyx Ravens,2.0,2.0,4
+Passion UA,Monte,0.0,4.0,4
+Aurora Gaming,BetBoom Team,3.0,1.0,4
+Sashi Esport,Eternal Fire,3.0,1.0,4
+Team 3DMAX,Natus Vincere,2.0,2.0,4
+Nemiga Gaming,Heroic,3.0,1.0,4
+Legacy,Team 3DMAX,3.0,1.0,4
+Dynamo Eclot,Nexus Gaming,3.0,1.0,4
+Passion UA,Ninjas in Pyjamas,1.0,3.0,4
+Astralis,Team Liquid,2.0,2.0,4
+FAVBET Team,ARCRED,3.0,1.0,4
+FaZe Clan,FlyQuest,4.0,0.0,4
+Ninjas in Pyjamas,Passion UA,3.0,1.0,4
+PARIVISION,Natus Vincere Junior,2.0,2.0,4
+B8 Esports,OG,3.0,1.0,4
+Sinners Esports,CYBERSHOKE Esports,2.0,2.0,4
+Team Spirit Academy,BetBoom Team,1.0,3.0,4
+Sashi Esport,Sinners Esports,3.0,1.0,4
+Zero Tenacity,Alliance,1.0,3.0,4
+9INE,ENCE,1.0,3.0,4
+FURIA Esports,GamerLegion,1.0,3.0,4
+Passion UA,Heroic,0.0,4.0,4
+500,GUN5,1.0,3.0,4
+GUN5,500,3.0,1.0,4
+BIG,Complexity,2.0,2.0,4
+Zero Tenacity,DMS,4.0,0.0,4
+PARIVISION,Astralis,1.0,3.0,4
+Natus Vincere Junior,PARIVISION,2.0,2.0,4
+FlyQuest,TYLOO,0.0,4.0,4
+EYEBALLERS,ECSTATIC,1.0,3.0,4
+Sinners Esports,Natus Vincere Junior,2.0,2.0,4
+ECSTATIC,ENCE,1.0,3.0,4
+ENCE,9INE,3.0,1.0,4
+Metizport,Ninjas in Pyjamas,1.0,3.0,4
+Johnny Speeds,9INE,0.0,4.0,4
+DMS,EYEBALLERS,2.0,2.0,4
+Metizport,Monte,3.0,1.0,4
+Oramond,FAVBET Team,1.0,3.0,4
+Ninjas in Pyjamas,Monte,1.0,3.0,4
+Monte,GamerLegion,2.0,2.0,4
+WW Team,Nemiga Gaming,3.0,1.0,4
+Grayhound Gaming,Bad News Kangaroos,3.0,1.0,4
+RED Canids,9z Team,1.0,3.0,4
+Rebels Gaming,Passion UA,2.0,2.0,4
+AMKAL Esports,Monte,3.0,1.0,4
+CYBERSHOKE Esports,Sinners Esports,2.0,2.0,4
+Team Spirit Academy,Nemiga Gaming,2.0,2.0,4
+Preasy Esport,FORZE,3.0,1.0,4
+Sangal Esports,Alliance,1.0,3.0,4
+NRG Esports,GamerLegion,1.0,3.0,4
+Team 3DMAX,Virtus.pro,2.0,2.0,4
+OG,B8 Esports,1.0,3.0,4
+B8 Esports,Passion UA,4.0,0.0,4
+Ninjas in Pyjamas,OG,2.0,2.0,4
+Complexity,Natus Vincere,2.0,2.0,4
+Zero Tenacity,SAW,1.0,3.0,4
+Virtus.pro,Natus Vincere,1.0,3.0,4
+Nouns Esports,Legacy,0.0,4.0,4
+Nuclear TigeRES,ARCRED,1.0,3.0,4
+SAW,FURIA Esports,3.0,1.0,4
+EYEBALLERS,BetBoom Team,2.0,2.0,4
+Astralis,BetBoom Team,4.0,0.0,4
+Monte,Ninjas in Pyjamas,3.0,1.0,4
+paiN Gaming,Fluxo,3.0,1.0,4
+B8 Esports,Ninjas in Pyjamas,2.0,2.0,4
+RUBY,ESC Gaming,3.0,1.0,4
+Dynamo Eclot,Monte,2.0,2.0,4
+Dynamo Eclot,Zero Tenacity,3.0,1.0,4
+CYBERSHOKE Esports,B8 Esports,2.0,2.0,4
+ENCE,ECSTATIC,3.0,1.0,4
+Monte,Passion UA,4.0,0.0,4
+9z Team,Team Spirit,1.0,3.0,4
+Passion UA,GamerLegion,0.0,4.0,4
+ARCRED,Nemiga Gaming,2.0,2.0,4
+Sashi Esport,BetBoom Team,0.0,4.0,4
+BIG,paiN Gaming,1.0,3.0,4
+Legacy,Imperial Esports,2.0,2.0,4
+Virtus.pro,Monte,3.0,1.0,4
+HOTU,RUBY,4.0,0.0,4
+BIG,SAW,3.0,1.0,4
+Astralis,PARIVISION,3.0,1.0,4
+ARCRED,Team Spirit Academy,1.0,3.0,4
+Nemiga Gaming,Permitta Esports,2.0,2.0,4
+Team 3DMAX,Lynn Vision Gaming,2.0,2.0,4
+Astralis,TYLOO,0.0,4.0,4
+9INE,500,1.0,3.0,4
+9INE,HOTU,2.0,2.0,4
+ECSTATIC,Monte,3.0,1.0,4
+paiN Gaming,B8 Esports,2.0,2.0,4
+B8 Esports,CYBERSHOKE Esports,2.0,2.0,4
+Team Spirit,9z Team,3.0,1.0,4
+BESTIA,M80,3.0,1.0,4
+BetBoom Team,9INE,3.0,1.0,4
+Eternal Fire,MIBR,4.0,0.0,4
+ECSTATIC,GUN5,2.0,2.0,4
+Team CS2NEWS,Team Shadowkek,1.0,3.0,4
+Aurora Gaming,Eternal Fire,2.0,2.0,4
+Complexity,M80,2.0,2.0,4
+Complexity,G2 Esports,1.0,3.0,4
+BetBoom Team,G2 Esports,1.0,3.0,4
+Nemiga Gaming,Team 3DMAX,2.0,2.0,4
+GamerLegion,Passion UA,4.0,0.0,4
+FlyQuest,Team Spirit,0.0,4.0,4
+ESC Gaming,Nexus Gaming,3.0,1.0,4
+RUBY,HOTU,0.0,4.0,4
+Zero Tenacity,Partizan Esports,2.0,2.0,4
+Passion UA,Team 3DMAX,2.0,2.0,4
+9INE,Alliance,1.0,3.0,4
+Nemiga Gaming,Team Spirit Academy,2.0,2.0,4
+Ninjas in Pyjamas,BetBoom Team,0.0,4.0,4
+500,9INE,3.0,1.0,4
+Nexus Gaming,ENCE,1.0,3.0,4
+9Pandas,PARIVISION,1.0,3.0,4
+Team Liquid,Astralis,2.0,2.0,4
+Eternal Fire,Sashi Esport,1.0,3.0,4
+Aurora Gaming,Ninjas in Pyjamas,4.0,0.0,4
+Metizport,Aurora Gaming,0.0,4.0,4
+Monte,SAW,1.0,3.0,4
+FURIA Esports,Complexity,3.0,1.0,4
+Virtus.pro,Team 3DMAX,2.0,2.0,4
+Apeks,FURIA Esports,2.0,2.0,4
+Complexity,The Mongolz,0.0,4.0,4
+Virtus.pro,The Mongolz,3.0,1.0,4
+GamerLegion,Heroic,2.0,2.0,4
+MOUZ,Heroic,4.0,0.0,4
+Sprout,ALTERNATE aTTaX,2.0,2.0,4
+Sharks Esports,Imperial Esports,1.0,3.0,4
+500,Sinners Esports,1.0,3.0,4
+Heroic,Nemiga Gaming,1.0,3.0,4
+9INE,GUN5,3.0,1.0,4
+Aurora Gaming,Metizport,4.0,0.0,4
+OG,BetBoom Team,1.0,3.0,4
+Nemiga Gaming,WW Team,1.0,3.0,4
+paiN Gaming,TYLOO,3.0,1.0,4
+ECSTATIC,500,3.0,1.0,4
+ARCRED,Nuclear TigeRES,3.0,1.0,4
+GUN5,9Pandas,1.0,3.0,4
+Johnny Speeds,Alliance,1.0,3.0,4
+9z Team,The Mongolz,1.0,3.0,4
+CYBERSHOKE Esports,Passion UA,2.0,2.0,4
+HOTU,FAVBET Team,2.0,2.0,4
+Fluxo,RED Canids,1.0,3.0,4
+SAW,BIG,1.0,3.0,4
+B8 Esports,SAW,1.0,3.0,4
+B8 Esports,paiN Gaming,2.0,2.0,4
+OG,Heroic,3.0,1.0,4
+Natus Vincere,Team 3DMAX,2.0,2.0,4
+Fnatic,9INE,3.0,1.0,4
+9INE,Passion UA,4.0,0.0,4
+FURIA Esports,SAW,1.0,3.0,4
+BetBoom Team,Team Spirit Academy,3.0,1.0,4
+Heroic,The Mongolz,0.0,4.0,4
+Sashi Esport,Nemiga Gaming,0.0,4.0,4
+CYBERSHOKE Esports,GUN5,1.0,3.0,4
+BCGame,BIG,2.0,2.0,4
+Nemiga Gaming,9Pandas,3.0,1.0,4
+TYLOO,FlyQuest,4.0,0.0,4
+Monte,Dynamo Eclot,2.0,2.0,4
+BetBoom Team,BIG,4.0,0.0,4
+PARIVISION,OG,2.0,2.0,4
+Complexity,BIG,2.0,2.0,4
+BetBoom Team,Aurora Gaming,1.0,3.0,4
+OG,Ninjas in Pyjamas,2.0,2.0,4
+Ninjas in Pyjamas,Metizport,3.0,1.0,4
+The Mongolz,9z Team,3.0,1.0,4
+Complexity,Team Falcons,2.0,2.0,4
+9INE,BetBoom Team,1.0,3.0,4
+Bad News Kangaroos,Grayhound Gaming,1.0,3.0,4
+G2 Esports,FUT Esports,2.0,2.0,4
+ECSTATIC,Preasy Esport,3.0,1.0,4
+Zero Tenacity,Permitta Esports,3.0,1.0,4
+Team Sampi,B8 Esports,1.0,3.0,4
+GamerLegion,Monte,2.0,2.0,4
+Dynamo Eclot,BetBoom Team,0.0,4.0,4
+AMKAL Esports,B8 Esports,3.0,1.0,4
+Alliance,9INE,3.0,1.0,4
+G2 Esports,Aurora Gaming,1.0,3.0,4
+Heroic,GamerLegion,2.0,2.0,4
+Wildcard Gaming,NRG Esports,4.0,0.0,4
+Alliance,Sangal Esports,3.0,1.0,4
+Natus Vincere,Virtus.pro,3.0,1.0,4
+paiN Gaming,BIG,3.0,1.0,4
+EYEBALLERS,GUN5,2.0,2.0,4
+Monte,Partizan Esports,1.0,3.0,4
+Fluxo,paiN Gaming,1.0,3.0,4
+ARCRED,1win Team,2.0,2.0,4
+AMKAL Esports,Fnatic,1.0,3.0,4
+ALTERNATE aTTaX,MOUZ NXT,1.0,3.0,4
+The Mongolz,Virtus.pro,1.0,3.0,4
+Nexus Gaming,CYBERSHOKE Esports,1.0,3.0,4
+9INE,Fnatic,1.0,3.0,4
+Natus Vincere Junior,ENCE,4.0,0.0,4
+ENCE,Nexus Gaming,3.0,1.0,4
+Legacy,Nouns Esports,4.0,0.0,4
+Sashi Esport,CYBERSHOKE Esports,3.0,1.0,4
+Johnny Speeds,ARCRED,2.0,2.0,4
+GUN5,ECSTATIC,2.0,2.0,4
+Heroic,Natus Vincere,3.0,1.0,4
+Sinners Esports,Gaimin Gladiators,0.0,4.0,4
+paiN Gaming,Team Falcons,2.0,2.0,4
+Astralis,Ninjas in Pyjamas,2.0,2.0,4
+ECSTATIC,EYEBALLERS,3.0,1.0,4
+Ninjas in Pyjamas,B8 Esports,2.0,2.0,4
+M80,BESTIA,1.0,3.0,4
+paiN Gaming,9z Team,3.0,1.0,4
+Natus Vincere,GamerLegion,4.0,0.0,4
+Team Shadowkek,Team OverDrive,3.0,1.0,4
+GUN5,EYEBALLERS,2.0,2.0,4
+DMS,Zero Tenacity,0.0,4.0,4
+RUBY,Nexus Gaming,3.0,1.0,4
+Team Space,EYEBALLERS,3.0,1.0,4
+ENCE,GamerLegion,2.0,2.0,4
+BIG,BCGame,2.0,2.0,4
+ENCE,Natus Vincere Junior,0.0,4.0,4
+Virtus.pro,MOUZ,1.0,3.0,4
+Zero Tenacity,Dynamo Eclot,1.0,3.0,4
+G2 Esports,Eternal Fire,1.0,3.0,4
+Onyx Ravens,JiJieHao,2.0,2.0,4
+Permitta Esports,Zero Tenacity,1.0,3.0,4
+Complexity,FURIA Esports,1.0,3.0,4
+MIBR,Eternal Fire,0.0,4.0,4
+FURIA Esports,Apeks,2.0,2.0,4
+FURIA Esports,FaZe Clan,1.0,3.0,4
+9Pandas,Nemiga Gaming,1.0,3.0,4
+500,ARCRED,2.0,2.0,4
+500,Dynamo Eclot,4.0,0.0,4
+Heroic,paiN Gaming,1.0,3.0,4
+FlyQuest,FaZe Clan,0.0,4.0,4
+B8 Esports,AMKAL Esports,1.0,3.0,4
+Passion UA,Rebels Gaming,2.0,2.0,4
+Monte,AMKAL Esports,1.0,3.0,4
+Team Falcons,Complexity,2.0,2.0,4
+M80,Complexity,2.0,2.0,4
+Permitta Esports,Nemiga Gaming,2.0,2.0,4
+Eternal Fire,FAVBET Team,0.0,4.0,4
+OG,PARIVISION,2.0,2.0,4
+Team Space,FORZE,1.0,3.0,4
+GUN5,CYBERSHOKE Esports,3.0,1.0,4
+Ninjas in Pyjamas,Astralis,2.0,2.0,4
+Monte,Metizport,1.0,3.0,4
+Passion UA,CYBERSHOKE Esports,2.0,2.0,4
+BIG,BetBoom Team,0.0,4.0,4
+CYBERSHOKE Esports,Betera,1.0,3.0,4
+CYBERSHOKE Esports,Sashi Esport,1.0,3.0,4
+Sashi Esport,Betclic,3.0,1.0,4
+BetBoom Team,EYEBALLERS,2.0,2.0,4
+Gaimin Gladiators,AMKAL Esports,2.0,2.0,4
+Team 3DMAX,Passion UA,2.0,2.0,4
+Alliance,Zero Tenacity,3.0,1.0,4
+Imperial Esports,Sharks Esports,3.0,1.0,4
+Partizan Esports,Zero Tenacity,2.0,2.0,4
+Partizan Esports,Monte,3.0,1.0,4
+FUT Esports,BetBoom Team,2.0,2.0,4
+FaZe Clan,FURIA Esports,3.0,1.0,4
+Legacy,B8 Esports,0.0,4.0,4
+Sinners Esports,500,3.0,1.0,4
+BetBoom Team,FUT Esports,2.0,2.0,4
+Sinners Esports,BIG,2.0,2.0,4
+Nexus Gaming,ESC Gaming,1.0,3.0,4
+Heroic,MOUZ,0.0,4.0,4
+Team Falcons,PARIVISION,0.0,4.0,4
+EYEBALLERS,DMS,2.0,2.0,4
+paiN Gaming,Heroic,3.0,1.0,4
+9Pandas,500,0.0,4.0,4
+Copenhagen Wolves,Dynamo Eclot,2.0,2.0,4
+ALTERNATE aTTaX,Into The Breach,1.0,3.0,4
+1win Team,Sangal Esports,1.0,3.0,4
+RED Canids,Fluxo,3.0,1.0,4
+OG,ENCE,3.0,1.0,4
+Dynamo Eclot,500,0.0,4.0,4
+Natus Vincere Junior,Sinners Esports,2.0,2.0,4
+Eternal Fire,G2 Esports,3.0,1.0,4
+TYLOO,Astralis,4.0,0.0,4
+SAW,B8 Esports,3.0,1.0,4
+The Mongolz,B8 Esports,3.0,1.0,4
+Partizan Esports,Copenhagen Wolves,3.0,1.0,4
+BCGame,B8 Esports,0.0,4.0,4
+FORZE,Team Space,3.0,1.0,4
+9INE,9Pandas,1.0,3.0,4
+Monte,ECSTATIC,1.0,3.0,4
+ARCRED,WW Team,3.0,1.0,4
+PARIVISION,Legacy,2.0,2.0,4
+AMKAL Esports,Gaimin Gladiators,2.0,2.0,4
+JiJieHao,Sinners Esports,1.0,3.0,4
+Metizport,BetBoom Team,1.0,3.0,4
+Aurora Gaming,G2 Esports,3.0,1.0,4
+Team 3DMAX,Legacy,1.0,3.0,4
+Ninjas in Pyjamas,Aurora Gaming,0.0,4.0,4
+Passion UA,9INE,0.0,4.0,4
+Insilio,Permitta Esports,3.0,1.0,4
+BetBoom Team,Metizport,3.0,1.0,4
+BetBoom Team,TEAM NEXT LEVEL,3.0,1.0,4
+Sashi Esport,Fire Flux Esports,2.0,2.0,4
+Team Vitality,9z Team,2.0,2.0,4
+Team Shadowkek,Team CS2NEWS,3.0,1.0,4
+Monte,Betclic,3.0,1.0,4
+GUN5,9INE,1.0,3.0,4
+9INE,Iberian Soul,1.0,3.0,4
+9z Team,RED Canids,3.0,1.0,4
+Permitta Esports,Insilio,1.0,3.0,4
+B8 Esports,The Mongolz,1.0,3.0,4
+Astralis,BIG,4.0,0.0,4
+Sangal Esports,1win Team,3.0,1.0,4
+Nemiga Gaming,Sashi Esport,4.0,0.0,4
+9z Team,paiN Gaming,1.0,3.0,4
+Eternal Fire,Aurora Gaming,2.0,2.0,4
+MIBR,RED Canids,4.0,0.0,4
+BetBoom Team,Astralis,0.0,4.0,4
+Rebels Gaming,Sashi Esport,3.0,1.0,4
+9z Team,Team Vitality,2.0,2.0,4
+B8 Esports,Nemiga Gaming,3.0,1.0,4
+Imperial Esports,Legacy,2.0,2.0,4
+BetBoom Team,Dynamo Eclot,4.0,0.0,4
+Imperial Esports,FURIA Esports,0.0,4.0,4
+Gaimin Gladiators,Sinners Esports,4.0,0.0,4
+Nexus Gaming,Dynamo Eclot,1.0,3.0,4
+ENCE,OG,1.0,3.0,4
+OG,Natus Vincere Junior,2.0,2.0,4
+ALTERNATE aTTaX,Sprout,2.0,2.0,4
+Iberian Soul,9INE,3.0,1.0,4
+B8 Esports,Team Sampi,3.0,1.0,4
+Betclic,Monte,1.0,3.0,4
+FAVBET Team,Eternal Fire,4.0,0.0,4
+Gentle Mates,9INE,3.0,1.0,4
+TYLOO,paiN Gaming,1.0,3.0,4
+PARIVISION,9Pandas,3.0,1.0,4
+500,ECSTATIC,1.0,3.0,4
+Into The Breach,ALTERNATE aTTaX,3.0,1.0,4
