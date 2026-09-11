@@ -53,7 +53,9 @@ def fit_gbm_isotonic(X_tr: np.ndarray, y_tr: np.ndarray) -> CalibratedClassifier
         l2_regularization=1.0,
         random_state=RANDOM_STATE,
     )
-    return CalibratedClassifierCV(gbm, method="isotonic", cv=TimeSeriesSplit(n_splits=5)).fit(X_tr, y_tr)
+    return CalibratedClassifierCV(gbm, method="isotonic", cv=TimeSeriesSplit(n_splits=5)).fit(
+        X_tr, y_tr
+    )
 
 
 def predict_proba(model: object, X: np.ndarray) -> np.ndarray:

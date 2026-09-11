@@ -8,8 +8,6 @@ from __future__ import annotations
 import numpy as np
 import pandas as pd
 
-from cs2analytics.evaluation.metrics import brier_score
-
 
 def reliability_table(y: np.ndarray, p: np.ndarray, bins: int = 10) -> pd.DataFrame:
     """Per-bin [bin_lo, bin_hi, n, mean_pred, obs_rate] over probability bins in [0, 1]."""
