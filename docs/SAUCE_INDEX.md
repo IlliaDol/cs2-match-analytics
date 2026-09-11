@@ -8,7 +8,7 @@ each spec — attempt first, read hints second.
 
 | Module | Spec | Test file | Builds (in `src/`) | State |
 |---|---|---|---|---|
-| M4 Elo + Bayes | `docs/SPEC_M4_elo_engine.md` | `tests/test_elo.py`, `tests/test_elo_backtest.py` | `features/elo.py` ✅, `evaluation/metrics.py` ✅; **yours:** `models/backtest.py`, `models/bayes.py`, notebooks | part 1 green |
+| M4 Elo + Bayes | `docs/SPEC_M4_elo_engine.md` | `tests/test_elo.py`, `tests/test_elo_backtest.py` | `features/elo.py` ✅, `evaluation/metrics.py` ✅, `models/backtest.py` ✅, `models/bayes.py` ✅, `notebooks/elo_derivation.ipynb` ✅, `notebooks/m4_backtest_report.ipynb` ✅, `notebooks/m4_bayesian_ratings.ipynb` ✅ → `outputs/m4_backtest_results.csv`, `outputs/bayesian_ratings.csv` | **complete** |
 | M5 SQL | `docs/SPEC_M5_sql.md` | `tests/test_sql_queries.py` | **yours:** `db/build_db.py`, `db/queries.sql`, `db/run_queries.py` | sauce pushed |
 | M6 Wrangling | `docs/SPEC_M6_wrangling.md` | `tests/test_cleaning.py` | **yours:** `cleaning.py`, `features/form.py`, `notebooks/02_eda.ipynb` | sauce pushed |
 | M7 Calibrated model | `docs/SPEC_M7_calibrated_model.md` | `tests/test_m7_model.py` | **yours:** `features/matrix.py`, `models/logistic.py`, `models/gbm.py`, `evaluation/calibration.py`, `notebooks/03_model_experiments.ipynb` | sauce pushed |
