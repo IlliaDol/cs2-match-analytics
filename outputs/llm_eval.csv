@@ -1,0 +1,21 @@
+question_id,executable,result_match,refused_ok,error
+q01,True,True,False,
+q02,True,True,False,
+q03,True,True,False,
+q04,True,True,False,
+q05,True,True,False,
+q06,True,True,False,
+q07,True,True,False,
+q08,True,False,False,
+q09,False,False,False,model refused or returned no SQL (refusal is the correct trap behaviour)
+q10,True,True,False,
+q11,True,False,False,
+q12,False,False,False,model refused or returned no SQL (refusal is the correct trap behaviour)
+q13,True,False,False,
+q14,True,True,False,
+q15,True,False,False,
+q16,True,False,False,
+q17,False,False,True,model refused or returned no SQL (refusal is the correct trap behaviour)
+q18,False,False,True,model refused or returned no SQL (refusal is the correct trap behaviour)
+q19,False,False,True,model refused or returned no SQL (refusal is the correct trap behaviour)
+q20,False,False,True,model refused or returned no SQL (refusal is the correct trap behaviour)
