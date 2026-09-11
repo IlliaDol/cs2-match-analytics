@@ -73,7 +73,7 @@ def test_series_clean_exists_with_expected_columns(r_pipeline):
 
 @_requires_real_data
 def test_series_clean_row_count(r_pipeline):
-    assert len(r_pipeline) == 9922
+    assert len(r_pipeline) == 9920
 
 
 @_requires_real_data
@@ -92,7 +92,7 @@ def test_series_clean_derived_columns_consistent(r_pipeline):
 
 @_requires_real_data
 def test_bo1_share_matches_data_md_quirk(r_pipeline):
-    """DATA.md Quirk 2: Bo1 share ~20.4% (2020/9922)."""
+    """DATA.md Quirk 2: Bo1 share ~20% (2020/9920)."""
     share = r_pipeline["is_bo1"].mean()
     assert 0.18 < share < 0.23, f"Bo1 share {share:.3f} outside expected band"
 

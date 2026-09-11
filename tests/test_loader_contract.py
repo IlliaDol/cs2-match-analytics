@@ -4,7 +4,7 @@ These pin the BEHAVIOR of load_matches() against the real primary file
 (cs2_all_tiers_games.csv) and the quirks documented in DATA.md.
 
 Contract: load_matches() returns the SERIES table — exactly one row per match_id,
-with winner-sorted book scores disentangled into team-specific series scores.
+with series scores verified as TEAM-sorted (score1 = team1's maps won).
 
 Tests that need the real Kaggle file skip automatically when it is absent
 (CI: data is git-ignored). Pure-function and error-handling tests always run.
@@ -87,39 +87,94 @@ def test_rows_sorted_by_datetime(real_matches):
     assert order.index.equals(real_matches.index)
 
 
-# --- DATA.md Quirk 1: scores are winner-sorted, not team-sorted --------------
+# --- DATA.md Quirk 1 (corrected): series scores are TEAM-sorted ----------------
 
 
 @_needs_real_data
-def test_winner_sorted_scores_are_disentangled(real_matches):
-    """t1/t2 series scores must be team-specific: t1 >= t2 exactly when
-    team1 won (equal only for genuine Bo2 draws)."""
-    t1 = real_matches["t1_series_score"]
-    t2 = real_matches["t2_series_score"]
+def test_scores_are_team_sorted_and_winner_is_higher_score(real_matches):
+    """score1_match = team1's maps won, score2_match = team2's maps won.
+    Verified vs map-level round scores and two external Major finals.
+    The winner must be the team with the HIGHER score (ties dropped)."""
     t1_won = real_matches["winner"] == real_matches["team1"]
     t2_won = real_matches["winner"] == real_matches["team2"]
-    assert (t1[t1_won] >= t2[t1_won]).all()
-    assert (t2[t2_won] >= t1[t2_won]).all()
+    assert (t1_won | t2_won).all(), "every row must have a decisive winner"
+    assert (
+        real_matches.loc[t1_won, "t1_series_score"] > real_matches.loc[t1_won, "t2_series_score"]
+    ).all()
+    assert (
+        real_matches.loc[t2_won, "t2_series_score"] > real_matches.loc[t2_won, "t1_series_score"]
+    ).all()
+    # team-sorted, not winner-sorted: both score orders occur (~55/45)
+    assert (real_matches["score1_match"] > real_matches["score2_match"]).mean() > 0.40
+    assert (real_matches["score2_match"] > real_matches["score1_match"]).mean() > 0.40
 
 
 @_needs_real_data
-def test_winner_score_values_are_valid(real_matches):
-    """(loser, winner) series pairs come from a small valid set (DATA.md Quirk 1).
+def test_scores_match_map_level_evidence(real_matches):
+    """Ground-truth cross-check vs map-level rows, using STRONG map evidence:
+    a map is attributed only when the round-score direction and the team1_win
+    flag AGREE (DATA.md Quirk 4: they contradict on ~1.5% of map rows, and on
+    those rows neither source is trustworthy). Forfeited maps carry no reliable
+    rounds and are invisible to this check, so agreement cannot be 100%.
+    Contract: winner agreement >= 99% on matches with >= 1 strongly-attributed
+    map (validated: 99.3%; residuals are forfeit-pattern series)."""
+    import numpy as np
 
-    Orientation note: `lo`/`hi` are min/max across the team-specific score
-    columns, so the pair is (loser_score, winner_score) — e.g. (0, 2) is a
-    2-0 series regardless of which team won.
-    """
-    lo = real_matches[["t1_series_score", "t2_series_score"]].min(axis=1).astype(int)
-    hi = real_matches[["t1_series_score", "t2_series_score"]].max(axis=1).astype(int)
-    valid = {(0, 1), (0, 2), (1, 2), (0, 3), (1, 3), (2, 3), (1, 1), (2, 2)}
-    assert set(zip(lo, hi, strict=True)) <= valid
+    raw = pd.read_csv(PRIMARY, low_memory=False)
+    maps = raw.loc[raw["is_total"] == False].copy()  # noqa: E712
+    for c in ("score1_game", "score2_game"):
+        maps[c] = pd.to_numeric(maps[c], errors="coerce")
+    rounds_t1 = maps["score1_game"] > maps["score2_game"]
+    flag_t1 = maps["team1_win"] == 1
+    strong = (
+        maps["score1_game"].notna()
+        & maps["score2_game"].notna()
+        & (maps["score1_game"] != maps["score2_game"])
+        & (rounds_t1 == flag_t1)
+    )
+    maps["map_winner"] = np.where(
+        strong & rounds_t1, maps["team1"], np.where(strong, maps["team2"], None)
+    )
+    wins = (
+        maps.dropna(subset=["map_winner"])
+        .groupby(["match_id", "map_winner"])
+        .size()
+        .unstack(fill_value=0)
+    )
+
+    comparable = real_matches[real_matches["match_id"].isin(wins.index)]
+    sampled = comparable.sample(min(800, len(comparable)), random_state=42)
+
+    winner_ok = 0
+    decided = 0
+    for _, row in sampled.iterrows():
+        w1 = int(wins.loc[row["match_id"]].get(row["team1"], 0))
+        w2 = int(wins.loc[row["match_id"]].get(row["team2"], 0))
+        if w1 == w2:
+            continue  # strong evidence split evenly / forfeit-invisible
+        decided += 1
+        if (w1 > w2 and row["winner"] == row["team1"]) or (
+            w2 > w1 and row["winner"] == row["team2"]
+        ):
+            winner_ok += 1
+    assert decided > 500, f"too few strongly-decided comparisons: {decided}"
+    assert winner_ok / decided >= 0.99, f"winner agreement only {winner_ok}/{decided}"
 
 
 @_needs_real_data
 def test_winner_is_one_of_the_two_teams(real_matches):
     winners = pd.concat([real_matches["team1"], real_matches["team2"]])
     assert real_matches["winner"].isin(winners).all()
+
+
+@_needs_real_data
+def test_known_major_finals_have_correct_winners(real_matches):
+    """External ground truth: NAVI beat FaZe 2-1 (PGL Copenhagen 2024 final),
+    Team Spirit beat FaZe 2-1 (Perfect World Shanghai 2024 final)."""
+    cph = real_matches[real_matches["match_id"] == 1048414]
+    assert len(cph) == 1 and cph["winner"].iloc[0] == "Natus Vincere"
+    sh = real_matches[real_matches["match_id"] == 1859211]
+    assert len(sh) == 1 and sh["winner"].iloc[0] == "Team Spirit"
 
 
 # --- DATA.md Quirk 2: Bo1 masquerade -----------------------------------------

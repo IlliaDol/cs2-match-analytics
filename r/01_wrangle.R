@@ -21,7 +21,7 @@ series <- read_csv(
   )
 )
 
-stopifnot(nrow(series) == 9922)
+stopifnot(nrow(series) == 9920)  # 9,923 raw series - 1 no-teams - 1 undrawable (Quirk 1 fix, 2026-09-11)
 
 wrangled <- series |>
   mutate(

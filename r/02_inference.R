@@ -10,7 +10,7 @@ clean <- read_csv(
   "outputs/series_clean.csv",
   col_types = cols(tier = col_factor(levels = c("tier1", "tier2", "tier3")))
 )
-stopifnot(nrow(clean) == 9922)
+stopifnot(nrow(clean) == 9920)  # corrected after Quirk-1 fix (2026-09-11)
 
 results <- tibble::tibble(
   test = character(), statistic = numeric(), p_value = numeric(),
