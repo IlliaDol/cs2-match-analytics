@@ -8,7 +8,9 @@ from __future__ import annotations
 import numpy as np
 import pandas as pd
 
-from cs2analytics.evaluation.metrics import brier_score  # noqa: F401 (re-exported for the contract test)
+from cs2analytics.evaluation.metrics import (
+    brier_score,  # noqa: F401 (re-exported for the contract test)
+)
 
 
 def reliability_table(y: np.ndarray, p: np.ndarray, bins: int = 10) -> pd.DataFrame:
