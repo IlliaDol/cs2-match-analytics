@@ -8,3 +8,6 @@ One entry per design decision that a reviewer would question. Format: date, deci
 | 2026-09-10 | ruff for lint+format | one tool, zero config fights |
 | 2026-09-10 | toy CSV tracked, real data git-ignored | CI must run without local data |
 | 2026-09-10 | time-based splits (fixed cutoff) | teams/rosters/meta drift; random splits leak |
+| 2026-09-10 | Spark via Colab, not local — Windows + no JVM, and the dataset doesn't justify a cluster; the notebook is the artifact. *(Superseded 2026-09-11: Java 25 Temurin found installed, so M9 runs Spark locally with `PYSPARK_PYTHON` pointed at the repo venv; notebook + timing CSV are the artifacts either way.)* | dataset doesn't justify a cluster; the notebook is the artifact |
+| 2026-09-11 | M9 window span rowsBetween(-5, -1) | the spec's rowsBetween(-4, -1) hint is off by one: pandas `rolling(5).mean().shift(1)` covers up to 5 pre-match rows; correctness proof (max |diff| < 1e-9) pins the right span |
+| 2026-09-11 | m9 timing kept full-precision | the timing contract asserts speedup == pandas_sec/spark_sec exactly; rounding before dividing breaks the identity |

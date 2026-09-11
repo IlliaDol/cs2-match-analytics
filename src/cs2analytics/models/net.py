@@ -27,7 +27,9 @@ class TeamEmbeddingNet(nn.Module):
         self.relu = nn.ReLU()
         self.dropout = nn.Dropout(0.2)
 
-    def forward(self, team1_idx: torch.Tensor, team2_idx: torch.Tensor, numeric: torch.Tensor) -> torch.Tensor:
+    def forward(
+        self, team1_idx: torch.Tensor, team2_idx: torch.Tensor, numeric: torch.Tensor
+    ) -> torch.Tensor:
         e1 = self.embedding(team1_idx.long())
         e2 = self.embedding(team2_idx.long())
         diff = e1 - e2
