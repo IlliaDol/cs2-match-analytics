@@ -13,3 +13,6 @@ data/interim/*
 mlruns/
 artifacts/*
 !artifacts/.gitkeep
+artifacts/
+mlruns/
+mlflow.db
