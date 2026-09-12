@@ -52,8 +52,9 @@ def test_psi_near_shift_below_threshold():
 def client():
     if not ARTIFACTS.exists():
         pytest.skip("artifacts/model.pkl missing — run cs2analytics.models.train (M11 §1)")
-    from cs2analytics.serve.app import app
     from fastapi.testclient import TestClient
+
+    from cs2analytics.serve.app import app
 
     return TestClient(app)
 
