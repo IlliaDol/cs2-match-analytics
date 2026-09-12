@@ -1,0 +1,2 @@
+n_test_maps,map_logloss,flat_baseline_logloss,n_maps_in_train,n_unique_maps
+1691,0.6428946118808286,0.6829566536774497,10504,9

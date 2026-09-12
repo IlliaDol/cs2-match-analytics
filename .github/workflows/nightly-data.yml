@@ -1,0 +1,46 @@
+name: nightly-data
+
+# Runs the data-gated suite on real data once a night (UTC). The private Kaggle
+# CSVs are NOT in the repo — they are fetched from DATA_SOURCE_URL, which you set
+# as a repo secret (see docs/CI_DATA_JOB.md). This job fails loudly if the data
+# is absent so the suite never silently skips.
+
+on:
+  schedule:
+    - cron: "23 3 * * *"  # 03:23 UTC daily
+  workflow_dispatch: {}
+
+jobs:
+  data-suite:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Fetch private data
+        env:
+          DATA_SOURCE_URL: ${{ secrets.DATA_SOURCE_URL }}
+          DATA_SOURCE_TOKEN: ${{ secrets.DATA_SOURCE_TOKEN }}
+        run: |
+          mkdir -p data/raw
+          if [ -z "$DATA_SOURCE_URL" ]; then
+            echo "::error::DATA_SOURCE_URL secret is not set — cannot run the data-gated suite"
+            exit 1
+          fi
+          curl -fsSL -H "Authorization: Bearer $DATA_SOURCE_TOKEN" "$DATA_SOURCE_URL" -o data_raw.zip
+          unzip -o data_raw.zip -d data/raw
+      - run: pip install -e ".[dev]"
+      - name: Rebuild artifacts the data-gated tests need
+        run: |
+          python scripts/build_interim.py
+          python scripts/build_features_v1.py
+          python -m cs2analytics.models.train
+          python -m cs2analytics.serve.monitor
+      - name: Run the full suite (skip guards keyed on file existence make this honest)
+        run: pytest -q
+      - name: Upload honest metrics as an artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: cs2-metrics
+          path: outputs/*.csv

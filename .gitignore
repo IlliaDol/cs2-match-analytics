@@ -10,9 +10,6 @@ data/raw/*
 !data/raw/toy_matches.csv
 data/interim/*
 !data/interim/.gitkeep
-mlruns/
-artifacts/*
-!artifacts/.gitkeep
 artifacts/
 mlruns/
 mlflow.db

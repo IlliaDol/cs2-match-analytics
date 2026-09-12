@@ -1,0 +1,4 @@
+# Start the FastAPI service
+# uvicorn cs2analytics.serve.app:app --host 0.0.0.0 --port $PORT
+pip install fastapi uvicorn joblib pydantic
+python -m uvicorn cs2analytics.serve.app:app --host 0.0.0.0 --port ${PORT:-8000}

@@ -16,7 +16,8 @@ model must beat, shown on purpose.
 
 | model | logloss | brier | acc | ece |
 |---|---|---|---|---|
-| **lr** (Elo diff + form/rest/h2h) | **0.6464** | 0.2278 | 0.6190 | 0.0242 |
+| **lr+roster** (Elo + form/rest/h2h + roster-stability/stand-in) | **0.6377** | 0.2237 | 0.6367 | 0.0185 |
+| lr (Elo diff + form/rest/h2h) | 0.6464 | 0.2278 | 0.6190 | 0.0242 |
 | elo_k32 (from-scratch engine) | 0.6472 | 0.2282 | 0.6179 | 0.0251 |
 | gbm | 0.6511 | 0.2298 | 0.6218 | 0.0255 |
 | gbm_isotonic | 0.6560 | 0.2321 | 0.6102 | 0.0190 |
@@ -24,8 +25,12 @@ model must beat, shown on purpose.
 | dl_embedding (PyTorch) | 0.6632 | 0.2349 | 0.6052 | — |
 
 Reads: a from-scratch Elo engine gets 0.647; adding form/rest/head-to-head features to a
-logistic model edges it to 0.646; the deep-learning variant *loses* to logistic — at this
-data size the signal is linear-ish in Elo space, and that honest negative is a finding.
+logistic model edges it to 0.6464; adding **roster-stability + stand-in** (the per-map
+lineups that sat unused) drops it to **0.6377** — the single biggest feature-family win in
+the repo, and it was the one thing the Limitations section had promised to try. The
+deep-learning variant *loses* to logistic — at this data size the signal is linear-ish in
+Elo space, and that honest negative is a finding. Per-regime calibration shows the
+aggregate number also hides a tier-3 problem: ECE 0.126 (vs 0.02–0.03 elsewhere).
 Bayesian ratings (PyMC Bradley-Terry, `outputs/bayesian_ratings.csv`) quantify what Elo
 cannot: per-team uncertainty.
 
@@ -48,12 +53,16 @@ cannot: per-team uncertainty.
   chart, so calibration is vs *outcomes* only.
 - Bo1s are a different regime (map-veto-free); the format flag helps but doesn't fully
   capture it — and the Bo1/Bo3 scatter shows format specialists exist.
-- Roster/stand-in information sits unused in the raw data (per-map lineups) — the next
-  feature family with the most upside.
+- Roster/stand-in features are now **built and used** (lr+roster, see Results). But the
+  raw signal is skewed: 92.6% of lineups are fully stable between consecutive series, so
+  `roster_stability_diff` is mostly zeros and `standin` fires ~2% of rows — a rare-but-real
+  signal, not a strong continuous one.
 - Tier-3 forfeit noise: ~1.5% of map rows carry unreliable winner flags; 2 corrupt
   series rows were dropped rather than repaired.
 - Predictions are symmetric-by-construction but calibrated only on the aggregate —
-  per-regime calibration (Bo1 vs Bo3, tier) is untested.
+  per-regime calibration is now tested: ECE is honest (0.02–0.03) at tier1/2 and
+  bo1/bo3, but **tier-3 is 0.126** — the model is over-confident precisely where the
+  data is noisiest.
 
 ## Reproducibility
 

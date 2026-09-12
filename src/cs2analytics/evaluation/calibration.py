@@ -5,11 +5,15 @@ Identity (bin-based Murphy decomposition): brier ≈ reliability − resolution 
 
 from __future__ import annotations
 
+from collections.abc import Iterable
+
 import numpy as np
 import pandas as pd
 
 from cs2analytics.evaluation.metrics import (
+    accuracy_from_probs,
     brier_score,  # noqa: F401 (re-exported for the contract test)
+    log_loss,
 )
 
 
@@ -43,6 +47,54 @@ def expected_calibration_error(y: np.ndarray, p: np.ndarray, bins: int = 10) -> 
     n_total = int(filled["n"].sum())
     weights = filled["n"] / n_total
     return float((weights * (filled["obs_rate"] - filled["mean_pred"]).abs()).sum())
+
+
+def calibration_by_group(
+    y: np.ndarray,
+    p: np.ndarray,
+    groups: Iterable[Iterable[str]] | pd.Series | np.ndarray,
+    bins: int = 10,
+) -> pd.DataFrame:
+    """One calibration row per group (Bo1 vs Bo3, tier, ...), plus a logloss/ECE/brier split.
+
+    `groups` may be a Series/array of scalar labels, or an iterable of label-tuples
+    (one tuple per sample) which get joined into a single "a/b" key. Groups with
+    fewer than `min_samples` (fixed at 30) rows are dropped so ECE is computed on
+    enough data to be meaningful.
+    """
+    y = np.asarray(y, dtype=float)
+    p = np.asarray(p, dtype=float)
+    min_samples = 30
+
+    if isinstance(groups, pd.Series):
+        labels = groups.astype(str).to_numpy()
+    else:
+        raw = list(groups)
+        if raw and isinstance(raw[0], (list, tuple, np.ndarray)):
+            labels = np.asarray(["/".join(str(x) for x in g) for g in raw])
+        else:
+            labels = np.asarray([str(g) for g in raw])
+
+    rows = []
+    for label in sorted(set(labels)):
+        mask = labels == label
+        n = int(mask.sum())
+        if n < min_samples:
+            continue
+        yy, pp = y[mask], p[mask]
+        rows.append(
+            {
+                "group": label,
+                "n": n,
+                "logloss": log_loss(pp, yy),
+                "brier": brier_score(pp, yy),
+                "acc": accuracy_from_probs(pp, yy),
+                "ece": expected_calibration_error(yy, pp, bins=bins),
+                "mean_pred": float(pp.mean()),
+                "obs_rate": float(yy.mean()),
+            }
+        )
+    return pd.DataFrame(rows)
 
 
 def brier_decomposition(y: np.ndarray, p: np.ndarray, bins: int = 10) -> dict[str, float]:

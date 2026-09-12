@@ -44,7 +44,30 @@ The most suspicious thing? There's no bookmaker odds in the comparison — the f
 data that exists is too thin to trust. So this is a calibration study against outcomes,
 not a market test, and I say so in the README instead of pretending otherwise.
 
-What I'd do next is already scaffolded: roster-stability features from the lineup
-columns, per-format calibration, and weekly refits driven by the drift monitor that
-ships with the serving API — the model deploys as a FastAPI endpoint with PSI monitoring
-on the feature it depends on most.
+What came next is actually already done. Three things, each one closing a hole a
+reviewer would spot:
+
+One — the roster signal. The dataset ships full five-player lineups per map, and my
+first version ignored them. Adding roster-stability and stand-in flags to the logistic
+model took log loss from 0.6464 to 0.6377 — the single biggest feature win in the repo,
+and it was sitting in the data the whole time unused. That's the honest version of
+"the model got better because I fed it information I already had."
+
+Two — calibration wasn't as clean as the aggregate chart claimed. Splitting the
+reliability diagram by format and tier shows the aggregate number was hiding a tier-3
+problem: expected calibration error of 0.126 in tier 3 versus 0.02 to 0.03 everywhere
+else. The model is over-confident exactly where the data is noisiest, and saying that
+out loud is the point.
+
+Three — one test split is one anecdote. So there's now a rolling-origin backtest across
+six monthly cutoffs: mean log loss 0.6476 with a 95% confidence band from 0.628 to
+0.667. The headline 0.6377 was real but it sat near the optimistic edge; the June
+window alone, with only 200 series, degrades to 0.683. Small test sets are fragile,
+and the backtest proves it instead of hiding it.
+
+Plus a map-level model underneath the series-level one — per-map win probability from
+rating gap + map win-rate + map name, lifted to best-of-three and best-of-five — which
+is the structure that lets the next version make map vetoes meaningful. The model-vs-
+market comparison is scaffolded with the de-vigging math and the metrics; it just needs
+odds that aren't too thin to trust. Everything keeps shipping as a FastAPI endpoint
+with PSI monitoring, and the deploy + nightly-data-rerun configs are in the repo.

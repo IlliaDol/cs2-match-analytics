@@ -19,6 +19,7 @@ import pandas as pd
 
 from cs2analytics.features.elo import run_elo_backtest
 from cs2analytics.features.form import h2h_record, rolling_form
+from cs2analytics.features.roster import build_roster_features
 
 REPO = Path(__file__).resolve().parents[1]
 
@@ -62,6 +63,29 @@ def main() -> None:
     long = _long_format(series)
     pre = _per_team_pre_features(long)
 
+    # roster features: needs the raw per-map lineup ids, joined onto series rows
+    print("[features] computing roster features from raw lineups...")
+    raw = pd.read_csv(REPO / "data" / "raw" / "cs2_all_tiers_games.csv")
+    raw_series = raw[raw["is_total"] == True].copy()  # noqa: E712 — dataset Boolean column
+    lineup_cols = [
+        "match_id",
+        "datetime",
+        "team1",
+        "team2",
+        *[f"team{s}_player{i}_id" for s in (1, 2) for i in range(1, 6)],
+    ]
+    missing = [c for c in lineup_cols if c not in raw_series.columns]
+    if missing:
+        print(f"[features] WARNING: raw lineup columns missing ({missing}); roster features = NaN")
+        roster = pd.DataFrame({"match_id": series["match_id"].to_numpy()})
+        for side in ("team1", "team2"):
+            roster[f"{side}_stability"] = np.nan
+            roster[f"{side}_standin"] = np.nan
+    else:
+        roster = build_roster_features(
+            raw_series[lineup_cols].sort_values("datetime", kind="mergesort")
+        )
+
     t1_map = pre.rename(columns={"team": "team1", "form5": "form5_t1", "rest_days": "rest_t1"})
     t2_map = pre.rename(columns={"team": "team2", "form5": "form5_t2", "rest_days": "rest_t2"})
     feat = (
@@ -104,6 +128,10 @@ def main() -> None:
     assert h2h_by_match["match_id"].is_unique
     feat = feat.merge(h2h_by_match, on="match_id", how="left")
 
+    # roster features joined by match_id, then oriented as t1-minus-t2 diffs
+    roster = roster[roster["match_id"].isin(feat["match_id"])]
+    feat = feat.merge(roster, on="match_id", how="left")
+
     features = pd.DataFrame(
         {
             "match_id": bt["match_id"].to_numpy(),
@@ -116,6 +144,12 @@ def main() -> None:
                 feat["rest_t1"].fillna(7.0) - feat["rest_t2"].fillna(7.0)
             ).to_numpy(),
             "h2h_t1_win_share": feat["h2h_t1_win_share"].to_numpy(),
+            "roster_stability_diff": (
+                feat["team1_stability"].fillna(0.5) - feat["team2_stability"].fillna(0.5)
+            ).to_numpy(),
+            "standin_diff": (
+                feat["team1_standin"].fillna(0.0) - feat["team2_standin"].fillna(0.0)
+            ).to_numpy(),
             "result": bt["result"].to_numpy(),
         }
     )
@@ -143,7 +177,16 @@ def main() -> None:
     features.to_parquet(dest, index=False)
     print(f"[features] wrote {dest.relative_to(REPO)}: {len(features)} rows")
     print(
-        features[["elo_diff", "form5_diff", "rest_days_diff", "h2h_t1_win_share"]]
+        features[
+            [
+                "elo_diff",
+                "form5_diff",
+                "rest_days_diff",
+                "h2h_t1_win_share",
+                "roster_stability_diff",
+                "standin_diff",
+            ]
+        ]
         .describe()
         .loc[["mean", "std", "min", "max"]]
         .to_string()

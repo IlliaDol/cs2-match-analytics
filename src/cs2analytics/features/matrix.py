@@ -88,6 +88,11 @@ def build_feature_matrix(
     base = df[["elo_diff", "form5_diff", "rest_days_diff", "is_bo1"]].astype(float)
     X_frame = pd.concat([base, tier_onehot], axis=1)
 
+    # extra pre-match features arrive as columns of the feature store; append them
+    for n in (extra_features or []):
+        if n != "tier" and n not in X_frame.columns and n in df.columns:
+            X_frame = pd.concat([X_frame, df[[n]].astype(float).reset_index(drop=True)], axis=1)
+
     ordered: list[str] = []
     for n in names:
         if n == "tier":
@@ -100,7 +105,12 @@ def build_feature_matrix(
     X_frame = X_frame[ordered]
 
     tz = df["datetime"].dt.tz
-    boundary = cutoff.tz_localize(tz) if tz is not None else cutoff
+    if (cutoff.tz is None) and (tz is not None):
+        boundary = cutoff.tz_localize(tz)
+    elif (cutoff.tz is not None) and (tz is not None) and cutoff.tz != tz:
+        boundary = cutoff.tz_convert(tz)
+    else:
+        boundary = cutoff
     split = np.where(df["datetime"] < boundary, "train", "test")
     split = pd.Series(split, name="split")
 
