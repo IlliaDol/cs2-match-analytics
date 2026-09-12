@@ -71,6 +71,18 @@ The analysis notebooks (`notebooks/`) run top-to-bottom with `jupyter execute` a
 produce every chart/table in `outputs/`. Tests: `pytest -q` (contract tests skip
 automatically where data/artifacts are absent, so CI is green without the private data).
 
+## Going deeper
+
+- [`notebooks/07_break_effect_did.ipynb`](notebooks/07_break_effect_did.ipynb) — does a
+  ≥30-day break hurt a team's next match? A DiD with three specifications; the naive
+  "rust" story is **not** supported, selection into breaks dominates.
+  Results: [`outputs/m13_did_results.csv`](outputs/m13_did_results.csv).
+- [`r/04_rating_forecast.R`](r/04_rating_forecast.R) — Holt's linear trend vs a naive
+  random walk on monthly Elo: the random walk wins for all 10 teams (ratings are
+  near-martingale). Results: [`outputs/rating_forecast_metrics.csv`](outputs/rating_forecast_metrics.csv).
+- [`docs/DECISIONS.md`](docs/DECISIONS.md) — every design decision a reviewer would
+  question, one line each.
+
 ## Data & ethics
 
 Match data comes from a public Kaggle dataset (git-ignored here; see DATA.md for schema

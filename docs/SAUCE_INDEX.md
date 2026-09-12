@@ -9,15 +9,15 @@ each spec — attempt first, read hints second.
 | Module | Spec | Test file | Builds (in `src/`) | State |
 |---|---|---|---|---|
 | M4 Elo + Bayes | `docs/SPEC_M4_elo_engine.md` | `tests/test_elo.py`, `tests/test_elo_backtest.py` | `features/elo.py` ✅, `evaluation/metrics.py` ✅, `models/backtest.py` ✅, `models/bayes.py` ✅, `notebooks/elo_derivation.ipynb` ✅, `notebooks/m4_backtest_report.ipynb` ✅, `notebooks/m4_bayesian_ratings.ipynb` ✅ → `outputs/m4_backtest_results.csv`, `outputs/bayesian_ratings.csv` | **complete** |
-| M5 SQL | `docs/SPEC_M5_sql.md` | `tests/test_sql_queries.py` | **yours:** `db/build_db.py`, `db/queries.sql`, `db/run_queries.py` | sauce pushed |
-| M6 Wrangling | `docs/SPEC_M6_wrangling.md` | `tests/test_cleaning.py` | **yours:** `cleaning.py`, `features/form.py`, `notebooks/02_eda.ipynb` | sauce pushed |
-| M7 Calibrated model | `docs/SPEC_M7_calibrated_model.md` | `tests/test_m7_model.py` | **yours:** `features/matrix.py`, `models/logistic.py`, `models/gbm.py`, `evaluation/calibration.py`, `notebooks/03_model_experiments.ipynb` | sauce pushed |
-| M8 Deep learning | `docs/SPEC_M8_deep_learning.md` | `tests/test_m8_net.py` | **yours:** `models/net.py`, `models/train_dl.py`, `notebooks/04_embedding_experiments.ipynb` | sauce pushed |
-| M9 Spark | `docs/SPEC_M9_spark.md` | `tests/test_m9_artifacts.py` | **yours:** `notebooks/05_spark_features.ipynb` (Colab) | sauce pushed |
-| M10 LLM analyst | `docs/SPEC_M10_llm_analyst.md` | `tests/test_m10_llm.py` | **yours:** `db/gold_questions.csv`, `llm/qa.py`, `scripts/eval_llm.py`, `notebooks/06_llm_analyst.ipynb` | sauce pushed |
-| M11 MLOps | `docs/SPEC_M11_mlops.md` | `tests/test_m11_serve.py` | **yours:** `models/train.py`, `serve/app.py`, `serve/monitor.py` | sauce pushed |
-| M12 Capstone | `docs/SPEC_M12_capstone.md` | `tests/test_m12_readme.py` | **yours:** `README.md`, `reports/method_note.md`, `serve/dashboard.py`, `docs/presentation.md` | sauce pushed |
-| M13 Gaps | `docs/SPEC_M13_gaps.md` | `tests/test_m13_gaps.py` | **yours:** `r/04_rating_forecast.R`, `notebooks/07_break_effect_did.ipynb` | sauce pushed |
+| M5 SQL | `docs/SPEC_M5_sql.md` | `tests/test_sql_queries.py` | `db/build_db.py` ✅, `db/queries.sql` ✅ (5 marker queries), `db/run_queries.py` ✅ → `outputs/cs2.duckdb`, `outputs/q1..q5.csv` | **complete** |
+| M6 Wrangling | `docs/SPEC_M6_wrangling.md` | `tests/test_cleaning.py` | `cleaning.py` ✅, `features/form.py` ✅, `scripts/build_features_v1.py` ✅ → `outputs/features_v1.parquet`, `notebooks/02_eda.ipynb` ✅ | **complete** |
+| M7 Calibrated model | `docs/SPEC_M7_calibrated_model.md` | `tests/test_m7_model.py` | `features/matrix.py` ✅, `models/logistic.py` ✅, `models/gbm.py` ✅, `evaluation/calibration.py` ✅, `notebooks/03_model_experiments.ipynb` ✅ → `fig_calibration.png`, `m7_leakage_demo.csv`, `m7_model_comparison.csv` | **complete** |
+| M8 Deep learning | `docs/SPEC_M8_deep_learning.md` | `tests/test_m8_net.py` | `models/net.py` ✅, `models/train_dl.py` ✅, `notebooks/04_embedding_experiments.ipynb` ✅ → `m8_model_comparison.csv` | **complete** |
+| M9 Spark | `docs/SPEC_M9_spark.md` | `tests/test_m9_artifacts.py` | `notebooks/05_spark_features.ipynb` ✅ (runs LOCAL — Java 25 found) → `m9_spark_vs_pandas.csv` | **complete** |
+| M10 LLM analyst | `docs/SPEC_M10_llm_analyst.md` | `tests/test_m10_llm.py` | `db/gold_questions.csv` ✅, `llm/qa.py` ✅, `scripts/eval_llm.py` ✅ → `llm_eval.csv` (9/16 correct, 4/4 traps refused) | **complete** |
+| M11 MLOps | `docs/SPEC_M11_mlops.md` | `tests/test_m11_serve.py` | `models/train.py` ✅, `serve/app.py` ✅ (FastAPI, symmetrized), `serve/monitor.py` ✅ (PSI) → `artifacts/`, `m11_drift.csv` | **complete** |
+| M12 Capstone | `docs/SPEC_M12_capstone.md` | `tests/test_m12_readme.py` | `README.md` ✅ rewrite, `reports/method_note.md` ✅, `serve/dashboard.py` ✅ (streamlit), `docs/presentation.md` ✅ | **complete** |
+| M13 Gaps | `docs/SPEC_M13_gaps.md` | `tests/test_m13_gaps.py` | `r/04_rating_forecast.R` ✅ (+ `scripts/build_elo_monthly.py`), `notebooks/07_break_effect_did.ipynb` ✅ → `rating_forecast.csv`, `m13_did_results.csv` | **complete** |
 
 ## How the skip-guards work
 
