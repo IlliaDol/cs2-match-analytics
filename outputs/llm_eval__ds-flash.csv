@@ -1,0 +1,37 @@
+question_id,executable,result_match,refused_ok,error,prompt_tokens,completion_tokens,finish_reason,repair_attempts
+q01,True,True,False,,395,65,stop,0
+q02,True,True,False,,392,26,stop,0
+q03,True,True,False,,395,51,stop,0
+q04,True,True,False,,397,54,stop,0
+q05,True,True,False,,394,91,stop,0
+q06,True,True,False,,401,254,stop,0
+q07,True,True,False,,395,40,stop,0
+q08,True,True,False,,391,86,stop,0
+q09,True,False,False,,400,1437,stop,0
+q10,True,True,False,,400,239,stop,0
+q11,True,False,False,,397,221,stop,0
+q12,True,False,False,,401,720,stop,0
+q13,True,False,False,,405,34,stop,0
+q14,True,True,False,,405,125,stop,0
+q15,True,False,False,,398,175,stop,0
+q16,True,False,False,,410,117,stop,0
+q21,True,False,False,,409,239,stop,0
+q22,True,False,False,,398,134,stop,0
+q23,True,True,False,,392,20,stop,0
+q24,True,True,False,,394,374,stop,0
+q25,True,False,False,,399,120,stop,0
+q26,True,False,False,,395,79,stop,0
+q27,True,True,False,,402,117,stop,0
+q28,True,True,False,,401,80,stop,0
+q17,False,False,True,model refused or returned no SQL (refusal is the correct trap behaviour),394,24,stop,0
+q18,False,False,True,model refused or returned no SQL (refusal is the correct trap behaviour),394,26,stop,0
+q19,False,False,True,model refused or returned no SQL (refusal is the correct trap behaviour),394,27,stop,0
+q20,False,False,True,model refused or returned no SQL (refusal is the correct trap behaviour),395,25,stop,0
+q29,False,False,True,model refused or returned no SQL (refusal is the correct trap behaviour),396,33,stop,0
+q30,False,False,True,model refused or returned no SQL (refusal is the correct trap behaviour),395,26,stop,0
+q31,False,False,True,model refused or returned no SQL (refusal is the correct trap behaviour),396,26,stop,0
+q32,False,False,True,model refused or returned no SQL (refusal is the correct trap behaviour),397,27,stop,0
+q33,False,False,True,model refused or returned no SQL (refusal is the correct trap behaviour),393,52,stop,0
+q34,False,False,True,model refused or returned no SQL (refusal is the correct trap behaviour),395,50,stop,0
+q35,False,False,True,model refused or returned no SQL (refusal is the correct trap behaviour),396,41,stop,0
+q36,False,False,True,model refused or returned no SQL (refusal is the correct trap behaviour),395,31,stop,0
