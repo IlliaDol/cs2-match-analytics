@@ -3,35 +3,45 @@
 Loads artifacts at first request (module-level lazy cache). Unknown teams get
 Elo 1500 (documented fallback) and are listed in `unknown_team`. `best_of`
 maps to the `is_bo1` feature exactly as in training (Bo1 iff best_of == 1).
-Numeric features other than elo_diff/is_bo1 are set to training-neutral values
-(form5_diff=0, rest_days_diff=0, h2h=0.5) so the endpoint is a pure rating gap
-+ format model unless a caller supplies more context.
+
+Feature assembly + symmetrization live in `serve/inference.py` — the single
+source of truth shared with the Streamlit dashboard. The trained model is
+`lr+roster`; callers MAY supply form/rest/h2h/roster context and the endpoint
+uses their values, otherwise it applies training-neutral defaults.
 """
 
 from __future__ import annotations
 
 from functools import lru_cache
 from pathlib import Path
+from typing import Any
 
 import joblib
-import numpy as np
 from fastapi import FastAPI, HTTPException
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
+
+from cs2analytics.serve.inference import build_feature_row, predict_symmetrized
 
 REPO = Path(__file__).resolve().parents[3]
 ARTIFACTS = REPO / "artifacts"
 
-app = FastAPI(title="CS2 match analytics API", version="1.0")
+app = FastAPI(title="CS2 match analytics API", version="1.1")
 
 
 class PredictBody(BaseModel):
     team1: str
     team2: str
     best_of: int
+    # optional pre-match context; default None -> training-neutral value
+    form5_diff: float | None = None
+    rest_days_diff: float | None = None
+    h2h_t1_win_share: float | None = None
+    roster_stability_diff: float | None = None
+    standin_diff: float | None = Field(default=None, ge=-1.0, le=1.0)
 
 
 @lru_cache(maxsize=1)
-def _artifacts() -> dict:
+def _artifacts() -> dict[str, Any]:
     model = joblib.load(ARTIFACTS / "model.pkl")
     meta = json_load(ARTIFACTS / "features.json")
     elo = json_load(ARTIFACTS / "elo_ratings.json")
@@ -74,39 +84,23 @@ def predict(body: PredictBody) -> dict:
 
     unknown = [n for n, u in ((body.team1, unk1), (body.team2, unk2)) if u]
 
-    # assemble the feature row in the EXACT trained order
-    row = {}
-    for name in meta["feature_names"]:
-        if name == "elo_diff":
-            row[name] = elo_t1 - elo_t2
-        elif name == "is_bo1":
-            row[name] = 1.0 if body.best_of == 1 else 0.0
-        elif name == "form5_diff":
-            row[name] = 0.0
-        elif name == "rest_days_diff":
-            row[name] = 0.0
-        elif name.startswith("tier_"):
-            row[name] = 0.0  # tier unknown at prediction time -> all zeros
-        else:
-            row[name] = 0.0
-    X = np.array([[row[name] for name in meta["feature_names"]]])
+    X = build_feature_row(
+        meta["feature_names"],
+        elo_t1 - elo_t2,
+        body.best_of,
+        form5_diff=body.form5_diff,
+        rest_days_diff=body.rest_days_diff,
+        h2h_t1_win_share=body.h2h_t1_win_share,
+        roster_stability_diff=body.roster_stability_diff,
+        standin_diff=body.standin_diff,
+    )
 
-    # Symmetrize over both orientations: p(a,b) + p(b,a) must equal 1 by
-    # definition. The raw pipeline is NOT odd in elo_diff (the scaler's
-    # training mean is ~+23.6 because team1 wins 55% of rows — a seeding
-    # artifact, see EDA surprise 3), so serving the raw output would encode
-    # column order into every prediction. Averaging the model over (1,2) and
-    # (2,1) removes the artifact while keeping the learned magnitudes.
-    X_swap = X.copy()
-    X_swap[0, meta["feature_names"].index("elo_diff")] *= -1.0
-    p_raw = float(art["model"].predict_proba(X)[0, 1])
-    p_swap = float(art["model"].predict_proba(X_swap)[0, 1])
-    p = (p_raw + (1.0 - p_swap)) / 2.0
+    result = predict_symmetrized(art["model"], meta, elo_t1, elo_t2, X)
     return {
-        "p_team1": p,
+        "p_team1": result["p_team1"],
         "model_version": meta["model_version"],
-        "elo_t1": elo_t1,
-        "elo_t2": elo_t2,
+        "elo_t1": result["elo_t1"],
+        "elo_t2": result["elo_t2"],
         "n_train": int(meta["metrics"]["n_train"]),
         "unknown_team": unknown,
     }

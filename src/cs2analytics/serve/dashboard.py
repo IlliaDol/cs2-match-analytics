@@ -2,7 +2,8 @@
 
 Run from repo root:  .venv/Scripts/python.exe -m streamlit run src/cs2analytics/serve/dashboard.py
 Ships with artifacts only (model.pkl + features.json + elo_ratings.json, git-ignored);
-the match data itself is not shipped.
+the match data itself is not shipped. Prediction logic is shared with serve/app.py
+via serve/inference.py — no duplicated feature assembly/symmetrization here.
 """
 
 from __future__ import annotations
@@ -11,9 +12,10 @@ import json
 from pathlib import Path
 
 import joblib
-import numpy as np
 import pandas as pd
 import streamlit as st
+
+from cs2analytics.serve.inference import build_feature_row, predict_symmetrized
 
 REPO = Path(__file__).resolve().parents[2]
 ARTIFACTS = REPO / "artifacts"
@@ -33,7 +35,7 @@ def main() -> None:
     st.set_page_config(page_title="CS2 Match Analytics", page_icon="🎯", layout="wide")
     st.title("CS2 Match Analytics — win probability demo")
     st.caption(
-        "Calibrated logistic model on Elo gap + form/rest/h2h features. "
+        "Calibrated logistic model (lr+roster) on Elo gap + form/rest/h2h + roster features. "
         "Unknown teams fall back to a neutral 1500 rating."
     )
 
@@ -42,7 +44,7 @@ def main() -> None:
 
     col1, col2, col3 = st.columns([2, 2, 1])
     default_t1 = teams.index("Natus Vincere") if "Natus Vincere" in teams else 0
-    default_t2 = teams.index("FaZe Clan") if "FaZe Clan" in teams else 1
+    default_t2 = teams.index("FaZe Clan") if "FaZe Clan" in teams else min(1, len(teams) - 1)
     with col1:
         team1 = st.selectbox("Team A", teams, index=default_t1)
     with col2:
@@ -50,27 +52,18 @@ def main() -> None:
     with col3:
         best_of = st.selectbox("Format", (1, 3, 5), index=1)
 
-    if st.button("Predict", type="primary") or True:
+    if st.button("Predict", type="primary"):
         if team1 == team2:
             st.warning("Pick two different teams.")
         else:
             elo = art["elo"]
             meta = art["meta"]
-            e1, e2 = elo.get(team1, 1500.0), elo.get(team2, 1500.0)
-            row = {}
-            for name in meta["feature_names"]:
-                if name == "elo_diff":
-                    row[name] = e1 - e2
-                elif name == "is_bo1":
-                    row[name] = 1.0 if best_of == 1 else 0.0
-                else:
-                    row[name] = 0.0
-            X = np.array([[row[n] for n in meta["feature_names"]]])
-            X_swap = X.copy()
-            X_swap[0, meta["feature_names"].index("elo_diff")] *= -1.0
-            p_raw = float(art["model"].predict_proba(X)[0, 1])
-            p_swap = float(art["model"].predict_proba(X_swap)[0, 1])
-            p = (p_raw + (1.0 - p_swap)) / 2.0
+            e1 = elo.get(team1, 1500.0)
+            e2 = elo.get(team2, 1500.0)
+
+            X = build_feature_row(meta["feature_names"], e1 - e2, best_of)
+            result = predict_symmetrized(art["model"], meta, e1, e2, X)
+            p = result["p_team1"]
 
             c1, c2 = st.columns(2)
             c1.metric(f"{team1} (Elo {e1:.0f})", f"{p:.1%}")

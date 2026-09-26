@@ -10,8 +10,12 @@ shifted enough that the model needs refitting."
 
 from __future__ import annotations
 
+import logging
+
 import numpy as np
 import pandas as pd
+
+logger = logging.getLogger(__name__)
 
 PSI_FLAG = 0.25  # conventional "investigate" threshold
 
@@ -39,17 +43,36 @@ def drift_report(
     features: pd.DataFrame,
     cutoff: pd.Timestamp,
     bins: int = 10,
+    columns: list[str] | None = None,
 ) -> pd.DataFrame:
-    """Per-month PSI of elo_diff vs the training window (pre-cutoff) distribution."""
+    """Per-month PSI of every monitored column vs its pre-cutoff distribution.
+
+    Default columns: every numeric feature present in the frame except
+    datetime/meta columns — i.e. the full feature set, not just elo_diff.
+    Column names go into a `feature` column; the classic single-feature report
+    is the special case columns=["elo_diff"].
+    """
     df = features.copy()
     df["datetime"] = pd.to_datetime(df["datetime"], utc=True)
     boundary = cutoff.tz_localize("UTC") if cutoff.tz is None else cutoff
-    train = df.loc[df["datetime"] < boundary, "elo_diff"].to_numpy()
+    if columns is None:
+        skip = {"datetime", "month", "match_id", "result", "tier", "is_bo1"}
+        columns = [c for c in df.columns if c not in skip and pd.api.types.is_numeric_dtype(df[c])]
     df["month"] = df["datetime"].dt.to_period("M").astype(str)
     rows = []
     for month, sub in df.groupby("month"):
-        p = psi(train, sub["elo_diff"].to_numpy(), bins=bins)
-        rows.append({"month": month, "n": len(sub), "psi": p, "flag": p > PSI_FLAG})
+        for col in columns:
+            train = df.loc[df["datetime"] < boundary, col].dropna().to_numpy()
+            p = psi(train, sub[col].dropna().to_numpy(), bins=bins)
+            rows.append(
+                {
+                    "month": month,
+                    "feature": col,
+                    "n": len(sub),
+                    "psi": p,
+                    "flag": p > PSI_FLAG,
+                }
+            )
     return pd.DataFrame(rows)
 
 
@@ -59,13 +82,30 @@ def main() -> None:
     from cs2analytics.features.matrix import DEFAULT_CUTOFF, build_feature_matrix
 
     repo = Path(__file__).resolve().parents[3]
-    fs = build_feature_matrix(repo / "outputs" / "features_v1.parquet")
-    df = fs.dates.to_frame("datetime").assign(elo_diff=fs.X[:, fs.feature_names.index("elo_diff")])
-    report = drift_report(df, DEFAULT_CUTOFF)
+    fs = build_feature_matrix(
+        repo / "outputs" / "features_v1.parquet",
+        extra_features=["roster_stability_diff", "standin_diff"],
+    )
+    # monitor EVERY trained feature, not just elo_diff: rebuild the wide frame
+    # from the matrix (X columns are exactly fs.feature_names)
+    df = fs.dates.to_frame("datetime").reset_index(drop=True)
+    X = pd.DataFrame(fs.X, columns=fs.feature_names).reset_index(drop=True)
+    wide = pd.concat([df, X], axis=1)
+    report = drift_report(wide, DEFAULT_CUTOFF)
     dest = repo / "outputs" / "m11_drift.csv"
     report.to_csv(dest, index=False)
     flagged = int(report["flag"].sum())
-    print(f"wrote {dest.name}: {len(report)} months, {flagged} flagged (psi > {PSI_FLAG})")
+    per_feature = report.groupby("feature")["flag"].sum()
+    logger.info(
+        "wrote %s: %d months x %d features, %d flags (psi > %s)",
+        dest.name,
+        report["month"].nunique(),
+        report["feature"].nunique(),
+        flagged,
+        PSI_FLAG,
+    )
+    for feat, n_flags in per_feature[per_feature > 0].items():
+        logger.warning("drift flags on %s: %d months", feat, n_flags)
 
 
 if __name__ == "__main__":

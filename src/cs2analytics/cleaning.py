@@ -6,7 +6,11 @@ Each function documents its "what does this cost me" trade-off.
 
 from __future__ import annotations
 
+import logging
+
 import pandas as pd
+
+logger = logging.getLogger(__name__)
 
 
 def deduplicate_series(df: pd.DataFrame) -> pd.DataFrame:
@@ -21,7 +25,7 @@ def deduplicate_series(df: pd.DataFrame) -> pd.DataFrame:
     out = out.drop_duplicates(subset="match_id", keep="first")
     n_dropped = n_before - len(out)
     if n_dropped:
-        print(f"[cleaning] deduplicate_series: dropped {n_dropped} duplicate match_id rows")
+        logger.info("deduplicate_series: dropped %d duplicate match_id rows", n_dropped)
     return out.reset_index(drop=True)
 
 
