@@ -49,11 +49,14 @@ def dirty_series():
 # --- cleaning.py -----------------------------------------------------------------
 
 
-def test_deduplicate_series_keeps_first_and_logs(dirty_series, capsys):
-    out = deduplicate_series(dirty_series)
+def test_deduplicate_series_keeps_first_and_logs(dirty_series, caplog):
+    import logging
+
+    with caplog.at_level(logging.INFO, logger="cs2analytics.cleaning"):
+        out = deduplicate_series(dirty_series)
     assert out["match_id"].is_unique
     assert len(out) == 3  # 4 rows, match_id 1 duplicated once
-    assert "dropped" in capsys.readouterr().out.lower()
+    assert "dropped" in caplog.text.lower()
 
 
 def test_deduplicate_series_returns_copy(dirty_series):

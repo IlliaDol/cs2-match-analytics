@@ -20,46 +20,41 @@ import numpy as np
 import pandas as pd
 
 
-def _lineup(row: pd.Series, side: str) -> tuple[int, ...] | None:
-    """Sorted tuple of that side's player ids, or None if any of the 5 are NaN."""
-    ids = [row[f"{side}_player{i}_id"] for i in range(1, 6)]
-    if any(pd.isna(x) for x in ids):
-        return None
-    return tuple(sorted(int(x) for x in ids))
-
-
 def build_roster_features(matches: pd.DataFrame) -> pd.DataFrame:
     """One row per series with team1/team2 roster_stability and standin flags.
 
     `matches` must be chronological and contain the 10 lineup id columns
     (team1_player1_id .. team2_player5_id) plus match_id, datetime, team1, team2.
+
+    Implementation note: sequential per-row state (each row needs the team's
+    PREVIOUS lineup) — vectorizable only with per-team groupby tricks that cost
+    more clarity than they save at 10k rows. Uses itertuples (10-20x faster than
+    iterrows) and keeps the state machine explicit.
     """
     df = matches.copy()
-    df["_dt"] = pd.to_datetime(df["datetime"])
 
     rows: list[dict] = []
-    # per-team rolling state: team -> (last_ts, last_lineup)
-    last: dict[str, tuple[pd.Timestamp, tuple[int, ...] | None]] = {}
+    # per-team rolling state: team -> last known lineup (frozenset for fast intersect)
+    last: dict[str, frozenset[int]] = {}
 
-    for _, row in df.iterrows():
-        ts = row["_dt"]
-        rec: dict = {"match_id": row["match_id"]}
+    for tup in df.itertuples(index=False):
+        rec: dict = {"match_id": tup.match_id}
         for side in ("team1", "team2"):
-            team = row[side]
-            cur = _lineup(row, side)
-            prev = last.get(team)
-            _, prev_lu = prev if prev else (None, None)
-
+            team = getattr(tup, side)
+            ids = [getattr(tup, f"{side}_player{i}_id") for i in range(1, 6)]
+            cur = (
+                frozenset(int(x) for x in ids) if not any(pd.isna(x) for x in ids) else None
+            )
+            prev_lu = last.get(team)
             if cur is None or prev_lu is None:
                 rec[f"{side}_stability"] = np.nan
                 rec[f"{side}_standin"] = np.nan
             else:
-                shared = len(set(cur) & set(prev_lu))
+                shared = len(cur & prev_lu)
                 rec[f"{side}_stability"] = shared / 5.0
                 rec[f"{side}_standin"] = 1.0 if shared <= 3 else 0.0
-            # update only if we actually saw a lineup this row
             if cur is not None:
-                last[team] = (ts, cur)
+                last[team] = cur
         rows.append(rec)
 
     return pd.DataFrame(rows)

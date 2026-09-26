@@ -8,6 +8,7 @@ Deterministic: fixed seeds; features.json sorted keys -> byte-identical re-runs.
 from __future__ import annotations
 
 import json
+import logging
 from pathlib import Path
 
 import joblib
@@ -18,18 +19,25 @@ from cs2analytics.features.elo import run_elo_backtest
 from cs2analytics.features.matrix import build_feature_matrix
 from cs2analytics.models.logistic import RANDOM_STATE, fit_logistic, predict_proba
 
+logger = logging.getLogger(__name__)
+
 REPO = Path(__file__).resolve().parents[3]
 ARTIFACTS = REPO / "artifacts"
 FEATURES_PATH = REPO / "outputs" / "features_v1.parquet"
 SERIES_PATH = REPO / "outputs" / "series_clean.csv"
 
-MODEL_VERSION = "lr-2026-09-11"
+#: the extra pre-match features that make lr beat Elo — must match the README
+#: headline (lr+roster, logloss 0.6377), otherwise the deployed model lags the
+#: documented best result by a whole feature family.
+ROSTER_FEATURES = ["roster_stability_diff", "standin_diff"]
+
+MODEL_VERSION = "lr-roster-2026-09-12"
 
 
 def main() -> None:
     ARTIFACTS.mkdir(exist_ok=True)
 
-    fs = build_feature_matrix(FEATURES_PATH)
+    fs = build_feature_matrix(FEATURES_PATH, extra_features=ROSTER_FEATURES)
     X_tr, y_tr = fs.X[fs.train_mask], fs.y[fs.train_mask]
     X_te, y_te = fs.X[fs.test_mask], fs.y[fs.test_mask]
 
@@ -43,9 +51,11 @@ def main() -> None:
         "n_test": int(len(y_te)),
         "n_train": int(len(y_tr)),
     }
-    print(
-        f"model={MODEL_VERSION} | logloss={metrics['logloss']:.4f} brier={metrics['brier']:.4f} "
-        f"acc={metrics['acc']:.4f} ece={metrics['ece']:.4f} n_test={metrics['n_test']}"
+    logger.info(
+        "model=%s | logloss=%(logloss).4f brier=%(brier).4f "
+        "acc=%(acc).4f ece=%(ece).4f n_test=%(n_test)d",
+        MODEL_VERSION,
+        metrics,
     )
 
     joblib.dump(model, ARTIFACTS / "model.pkl")
@@ -67,7 +77,7 @@ def main() -> None:
     )
 
     _mlflow_log(model, metrics, fs)
-    print(f"artifacts written to {ARTIFACTS}")
+    logger.info("artifacts written to %s", ARTIFACTS)
 
 
 def _elo_ratings_json() -> dict[str, float]:
@@ -104,7 +114,7 @@ def _mlflow_log(model, metrics: dict, fs) -> None:
             mlflow.log_metrics({k: v for k, v in metrics.items() if isinstance(v, (int, float))})
             mlflow.sklearn.log_model(model, artifact_path="model")
     except Exception as exc:
-        print(f"[train] mlflow logging skipped ({exc})")
+        logger.warning("mlflow logging skipped (%s)", exc)
 
 
 if __name__ == "__main__":

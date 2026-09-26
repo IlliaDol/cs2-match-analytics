@@ -14,14 +14,17 @@ Contract (enforced by tests/test_loader_contract.py and documented in DATA.md):
 
 from __future__ import annotations
 
+import logging
 from pathlib import Path
 
 import numpy as np
 import pandas as pd
 
+logger = logging.getLogger(__name__)
+
 # Columns kept from the raw file, in contract order (game_id / is_total are
 # intentionally dropped: the loader returns the series table only).
-_RAW_KEEP = [
+_RAW_KEEP = (
     "match_id",
     "datetime",
     "tournament",
@@ -32,9 +35,9 @@ _RAW_KEEP = [
     "score2_match",
     "games_played",
     "bestOf",
-]
+)
 
-_CONTRACT_COLUMNS = [
+_CONTRACT_COLUMNS = (
     "match_id",
     "datetime",
     "tournament",
@@ -47,7 +50,152 @@ _CONTRACT_COLUMNS = [
     "t2_series_score",
     "games_played",
     "bestOf",
-]
+)
+
+
+def _read_raw_tables(path: Path) -> tuple[pd.DataFrame, pd.DataFrame]:
+    """Read the raw file and separate series rows from map rows."""
+    raw = pd.read_csv(path, parse_dates=["datetime"])
+    maps = raw.loc[raw["is_total"] == False, :].copy()  # noqa: E712
+    series = raw.loc[raw["is_total"] == True, _RAW_KEEP].copy()  # noqa: E712
+    return series, maps
+
+
+def _clean_series_rows(series: pd.DataFrame) -> pd.DataFrame:
+    """Remove duplicate and unusable series rows before deriving outcomes."""
+    before = len(series)
+    series = series.drop_duplicates(subset="match_id", keep="first")
+    if dropped := before - len(series):
+        logger.info("dropped %d duplicate series rows", dropped)
+
+    missing_teams = series["team1"].isna() | series["team2"].isna()
+    if dropped := int(missing_teams.sum()):
+        logger.info("dropped %d rows with missing team labels", dropped)
+        series = series.loc[~missing_teams]
+    return series
+
+
+def _winner_from_series_scores(
+    series: pd.DataFrame,
+) -> tuple[pd.Series, pd.Series, pd.Series]:
+    """Return winner, team-1 score, and team-2 score from series evidence."""
+    score1 = pd.to_numeric(series["score1_match"], errors="coerce")
+    score2 = pd.to_numeric(series["score2_match"], errors="coerce")
+    winner = pd.Series(pd.NA, index=series.index, dtype="object")
+    winner[score1 > score2] = series.loc[score1 > score2, "team1"]
+    winner[score2 > score1] = series.loc[score2 > score1, "team2"]
+    return winner, score1, score2
+
+
+def _winner_counts_from_maps(maps: pd.DataFrame, match_ids: pd.Series) -> pd.DataFrame:
+    """Count map winners for matches whose series scores need a fallback."""
+    maps = maps.copy()
+    score1 = pd.to_numeric(maps["score1_game"], errors="coerce")
+    score2 = pd.to_numeric(maps["score2_game"], errors="coerce")
+    rounds_known = score1.notna() & score2.notna() & (score1 != score2)
+    maps["map_winner"] = np.where(
+        rounds_known & (score1 > score2),
+        maps["team1"],
+        np.where(
+            rounds_known,
+            maps["team2"],
+            np.where(maps["team1_win"] == 1, maps["team1"], maps["team2"]),
+        ),
+    )
+    return (
+        maps.loc[maps["match_id"].isin(match_ids), ["match_id", "map_winner"]]
+        .dropna()
+        .groupby(["match_id", "map_winner"])
+        .size()
+        .unstack(fill_value=0)
+    )
+
+
+def _recover_missing_winners(
+    series: pd.DataFrame,
+    maps: pd.DataFrame,
+    winner: pd.Series,
+    score1: pd.Series,
+    score2: pd.Series,
+) -> tuple[pd.Series, pd.Series, pd.Series]:
+    """Use map-level evidence to repair tied or missing series scores."""
+    missing = winner.isna()
+    if not missing.any():
+        return winner, score1, score2
+
+    logger.info(
+        "%d series rows with tied/missing scores — deriving winner from map-level rows",
+        int(missing.sum()),
+    )
+    counts = _winner_counts_from_maps(maps, series.loc[missing, "match_id"])
+
+    for row_index in series.index[missing]:
+        match_id = series.at[row_index, "match_id"]
+        if match_id not in counts.index:
+            continue
+
+        match_counts = counts.loc[match_id]
+        team1_wins = match_counts.get(series.at[row_index, "team1"], 0)
+        team2_wins = match_counts.get(series.at[row_index, "team2"], 0)
+        if team1_wins > team2_wins:
+            winner.loc[row_index] = series.at[row_index, "team1"]
+        elif team2_wins > team1_wins:
+            winner.loc[row_index] = series.at[row_index, "team2"]
+        else:
+            continue
+
+        # Keep the repaired scores team-oriented, matching the loader contract.
+        score1.loc[row_index] = float(team1_wins)
+        score2.loc[row_index] = float(team2_wins)
+
+    return winner, score1, score2
+
+
+def _drop_invalid_series(
+    series: pd.DataFrame,
+    winner: pd.Series,
+    score1: pd.Series,
+    score2: pd.Series,
+) -> pd.DataFrame:
+    """Attach derived values and discard rows that cannot support the contract."""
+    series = series.copy()
+    series["winner"] = winner
+    if unresolved := int(series["winner"].isna().sum()):
+        logger.info("dropping %d rows with undeterminable winner", unresolved)
+        series = series.dropna(subset=["winner"])
+
+    series["t1_series_score"] = score1
+    series["t2_series_score"] = score2
+    games_played = pd.to_numeric(series["games_played"], errors="coerce")
+    inconsistent = ((series["t1_series_score"] + series["t2_series_score"]) != games_played).fillna(
+        False
+    )
+    if dropped := int(inconsistent.sum()):
+        logger.info("dropping %d rows where scores contradict games_played", dropped)
+        series = series.loc[~inconsistent]
+    return series
+
+
+def _finalize_series(series: pd.DataFrame) -> pd.DataFrame:
+    """Apply the public schema, dtypes, stable ordering, and index reset."""
+    series = series.drop(columns=["team1_win"])
+    nullable_integer_columns = (
+        "score1_match",
+        "score2_match",
+        "t1_series_score",
+        "t2_series_score",
+        "bestOf",
+    )
+    for column in nullable_integer_columns:
+        series[column] = series[column].astype("Int64")
+
+    # A missing games_played means one map in this source (DATA.md Quirk 2).
+    series["games_played"] = (
+        pd.to_numeric(series["games_played"], errors="coerce").fillna(1).astype("int64")
+    )
+    return series[list(_CONTRACT_COLUMNS)].sort_values("datetime", kind="mergesort").reset_index(
+        drop=True
+    )
 
 
 def load_matches(path: str | Path) -> pd.DataFrame:
@@ -67,120 +215,23 @@ def load_matches(path: str | Path) -> pd.DataFrame:
     if not src.exists():
         raise FileNotFoundError(f"no such file: {src}")
 
-    df = pd.read_csv(src, parse_dates=["datetime"])
-    maps_all = df.loc[df["is_total"] == False, :].copy()  # noqa: E712
-
-    # 2) series table only (Quirk 3: series rows are authoritative)
-    series = df.loc[df["is_total"] == True, _RAW_KEEP].copy()  # noqa: E712
-
-    # drop duplicated series rows (same match_id), keep first; log count
-    n_before = len(series)
-    series = series.drop_duplicates(subset="match_id", keep="first")
-    n_dropped = n_before - len(series)
-    if n_dropped:
-        print(f"[loader] dropped {n_dropped} duplicate series rows")
-
-    # drop matches with missing team labels first (1 row: match_id 10064713 —
-    # both team fields empty in the raw file; a match without teams is unusable)
-    n_bad_teams = int((series["team1"].isna() | series["team2"].isna()).sum())
-    series = series.dropna(subset=["team1", "team2"])
-    if n_bad_teams:
-        print(f"[loader] dropped {n_bad_teams} rows with missing team labels")
-
-    # --- winner (Quirk 1, corrected): series scores are TEAM-sorted, the
-    # team with MORE maps won the series. 100% consistent with games_played.
-    s1 = pd.to_numeric(series["score1_match"], errors="coerce")
-    s2 = pd.to_numeric(series["score2_match"], errors="coerce")
-    winner = pd.Series(pd.NA, index=series.index, dtype="object")
-    winner[s1 > s2] = series.loc[s1 > s2, "team1"]
-    winner[s2 > s1] = series.loc[s2 > s1, "team2"]
-
-    # fallback for the few rows where scores are tied/missing (6 of 9,922):
-    # map-level rows are trustworthy (round scores + a 98.4%-reliable flag).
-    broken = winner.isna()
-    if broken.any():
-        print(
-            f"[loader] {int(broken.sum())} series rows with tied/missing scores — "
-            f"deriving winner from map-level rows"
-        )
-        maps_all["score1_game"] = pd.to_numeric(maps_all["score1_game"], errors="coerce")
-        maps_all["score2_game"] = pd.to_numeric(maps_all["score2_game"], errors="coerce")
-        rounds_ok = (
-            maps_all["score1_game"].notna()
-            & maps_all["score2_game"].notna()
-            & (maps_all["score1_game"] != maps_all["score2_game"])
-        )
-        # map row: rounds are team-sorted too -> team with more rounds won the map
-        maps_all["map_winner"] = np.where(
-            rounds_ok & (maps_all["score1_game"] > maps_all["score2_game"]),
-            maps_all["team1"],
-            np.where(
-                rounds_ok,
-                maps_all["team2"],
-                np.where(maps_all["team1_win"] == 1, maps_all["team1"], maps_all["team2"]),
-            ),
-        )
-        map_winner_by_match = maps_all.loc[
-            maps_all["match_id"].isin(series.loc[broken, "match_id"]),
-            ["match_id", "map_winner"],
-        ].dropna()
-        wins = map_winner_by_match.groupby(["match_id", "map_winner"]).size().unstack(fill_value=0)
-        for idx in series.index[broken]:
-            mid = series.at[idx, "match_id"]
-            if mid not in wins.index:
-                continue
-            row = wins.loc[mid]
-            w1 = row.get(series.at[idx, "team1"], 0)
-            w2 = row.get(series.at[idx, "team2"], 0)
-            if w1 > w2:
-                winner.loc[idx] = series.at[idx, "team1"]
-                s1.loc[idx], s2.loc[idx] = float(w1), float(w2)  # heal corrupt scores
-            elif w2 > w1:
-                winner.loc[idx] = series.at[idx, "team2"]
-                s1.loc[idx], s2.loc[idx] = float(w1), float(w2)
-            # w1 == w2 (genuine Bo2 draw / forfeit) -> stays NA and gets dropped
-
-    series["winner"] = winner
-    n_unresolved = int(series["winner"].isna().sum())
-    if n_unresolved:
-        print(f"[loader] dropping {n_unresolved} rows with undeterminable winner")
-        series = series.dropna(subset=["winner"])
-
-    # team-specific series scores: identity columns (score1 = team1's maps)
-    series["t1_series_score"] = s1
-    series["t2_series_score"] = s2
-
-    # corrupt-record guard: scores must sum to games_played (held for 100% of
-    # raw decided rows; catches fallback-healed rows that violate it)
-    gp = pd.to_numeric(series["games_played"], errors="coerce")
-    bad_sum = (series["t1_series_score"] + series["t2_series_score"]) != gp
-    bad_sum = bad_sum.fillna(False)
-    if bad_sum.any():
-        n_bad = int(bad_sum.sum())
-        print(f"[loader] dropping {n_bad} rows where scores contradict games_played")
-        series = series.loc[~bad_sum]
-
-    # tidy up: contract columns, dtypes, order
-    series = series.drop(columns=["team1_win"])
-    int_cols = [
-        "score1_match",
-        "score2_match",
-        "t1_series_score",
-        "t2_series_score",
-        "games_played",
-        "bestOf",
-    ]
-    for col in int_cols:
-        series[col] = series[col].astype("Int64")  # nullable int: no floats
-    series["games_played"] = series["games_played"].fillna(1).astype("int64")
-
-    series = series[_CONTRACT_COLUMNS]
-    series = series.sort_values("datetime", kind="mergesort").reset_index(drop=True)
-    return series
+    series, maps = _read_raw_tables(src)
+    series = _clean_series_rows(series)
+    winner, score1, score2 = _winner_from_series_scores(series)
+    winner, score1, score2 = _recover_missing_winners(
+        series, maps, winner, score1, score2
+    )
+    series = _drop_invalid_series(series, winner, score1, score2)
+    return _finalize_series(series)
 
 
 def normalize_team_name(name: str | None) -> str | None:
-    """Canonicalize a team name: strip whitespace, lowercase; None stays None."""
+    """Canonicalize a team name: strip whitespace, lowercase; None stays None.
+
+    EXPOSED UTILITY, not a pipeline step: `load_matches` prefers the id/`teams.csv`
+    resolution path (see DATA.md Quirk 6) and does not call this. Callers who want
+    a casing/whitespace-only canonical form may import it directly.
+    """
     if name is None:
         return None
     return str(name).strip().lower()
