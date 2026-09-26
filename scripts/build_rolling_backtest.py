@@ -15,7 +15,12 @@ from cs2analytics.models.rolling import rolling_backtest, summarize_rolling
 
 REPO = Path(__file__).resolve().parents[1]
 
-CUTOFFS = [pd.Timestamp(f"2026-{m:02d}-01", tz="UTC") for m in (1, 2, 3, 4, 5, 6)]
+# Monthly cutoffs proved fragile at the tail (June fold n=201, logloss 0.683).
+# Widen: 2025 quarterly cutoffs (expanding train) + all 2026 monthly ones.
+CUTOFFS = (
+    [pd.Timestamp(f"{y}-{m:02d}-01", tz="UTC") for y, m in ((2024, 7), (2025, 1), (2025, 7))]
+    + [pd.Timestamp(f"2026-{m:02d}-01", tz="UTC") for m in (1, 2, 3, 4, 5, 6)]
+)
 
 
 def main() -> None:

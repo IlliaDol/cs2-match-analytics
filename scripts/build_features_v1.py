@@ -153,6 +153,8 @@ def main() -> None:
             "result": bt["result"].to_numpy(),
         }
     )
+    # derived pre-match interaction: Bo1 changes the rating gap's meaning
+    features["bo1_elo"] = features["is_bo1"].astype(float) * features["elo_diff"]
 
     # --- sample verification against the scalar reference implementations ---
     rng = np.random.default_rng(7)

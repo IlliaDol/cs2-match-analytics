@@ -22,8 +22,12 @@ def main() -> None:
 
     if DB_PATH.exists():
         DB_PATH.unlink()
-    con = duckdb.connect(str(DB_PATH))
 
+    with duckdb.connect(str(DB_PATH)) as con:
+        _build(con, series, teams)
+
+
+def _build(con, series: pd.DataFrame, teams: pd.DataFrame) -> None:
     con.register("series_df", series)
     con.register("teams_df", teams)
     # typed matches table: datetime arrives as ISO-8601 VARCHAR with Z suffix
@@ -62,7 +66,6 @@ def main() -> None:
     ).fetchall()
     for tbl, n in counts:
         print(f"{tbl}: {n} rows")
-    con.close()
 
 
 if __name__ == "__main__":
