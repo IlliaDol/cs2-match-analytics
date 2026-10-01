@@ -1,0 +1,17 @@
+{
+ "generated_at": "2026-09-14T15:54:52+00:00",
+ "rows_before": 9920,
+ "rows_after": 9920,
+ "rows_delta": 0,
+ "latest_before": "2026-06-28",
+ "latest_after": "2026-06-28",
+ "mean_shift": {
+  "elo_diff": 0.0,
+  "form5_diff": 0.0,
+  "rest_days_diff": 0.0,
+  "h2h_t1_win_share": 0.0
+ },
+ "flagged": [
+  "latest date did not advance (2026-06-28)"
+ ]
+}
