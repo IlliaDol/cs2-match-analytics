@@ -1,0 +1,37 @@
+section,metric,"ZywOo (Mathieu Herbaut), FR","Donk (Danil Kryshkovets), RU"
+headline,Maps played,439,408
+headline,Kills,8082,8133
+headline,Deaths,5513,5965
+headline,Assists,2266,2044
+headline,K/D,1.47,1.36
+headline,ADR,88.1,97.2
+headline,KAST,78.2%,77.3%
+headline,Kills per round,0.849,0.919
+headline,Map win rate,72.4%,70.1%
+headline,Events,46,47
+head_to_head,shared maps,23,23
+head_to_head,A team map wins,17,
+head_to_head,B team map wins,6,
+shared_map,2024-06-01 IEM Dallas 2024 Mirage,90.5,89.6
+shared_map,2024-06-01 IEM Dallas 2024 Dust2,101.2,67.9
+shared_map,2024-06-15 BLAST Premier: Spring Final 2024 Dust2,79.6,72.5
+shared_map,2024-06-15 BLAST Premier: Spring Final 2024 Mirage,93.7,86.1
+shared_map,2024-06-15 BLAST Premier: Spring Final 2024 Anubis,70.8,86.6
+shared_map,2024-10-30 BLAST Premier: World Final 2024 Anubis,86.0,66.9
+shared_map,2024-10-30 BLAST Premier: World Final 2024 Mirage,101.2,98.0
+shared_map,2025-02-09 IEM Katowice 2025 Mirage,98.0,69.0
+shared_map,2025-02-09 IEM Katowice 2025 Dust2,88.7,45.5
+shared_map,2025-02-09 IEM Katowice 2025 Nuke,127.0,93.9
+shared_map,2025-03-29 BLAST Open Lisbon 2025 Mirage,104.5,97.4
+shared_map,2025-03-29 BLAST Open Lisbon 2025 Nuke,72.6,111.6
+shared_map,2025-03-29 BLAST Open Lisbon 2025 Anubis,76.7,91.1
+shared_map,2025-05-03 BLAST Rivals Spring 2025 Mirage,123.0,94.8
+shared_map,2025-05-03 BLAST Rivals Spring 2025 Nuke,66.8,86.6
+shared_map,2025-11-14 BLAST Rivals Fall 2025 Nuke,104.5,82.3
+shared_map,2025-11-14 BLAST Rivals Fall 2025 Dust2,62.5,75.7
+shared_map,2025-11-14 BLAST Rivals Fall 2025 Mirage,88.4,85.4
+shared_map,2025-12-13 StarLadder Budapest Major 2025 Mirage,65.4,107.1
+shared_map,2025-12-13 StarLadder Budapest Major 2025 Dust2,95.5,68.5
+shared_map,2026-04-19 IEM Rio 2026 Nuke,81.5,66.3
+shared_map,2026-04-19 IEM Rio 2026 Mirage,76.6,76.3
+shared_map,2026-04-19 IEM Rio 2026 Dust2,98.3,93.7
