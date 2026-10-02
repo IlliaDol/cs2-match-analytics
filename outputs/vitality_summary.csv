@@ -1,0 +1,98 @@
+section,metric,value,extra
+headline,team,Team Vitality,
+headline,window_requested,2025-08-20..2026-05-05,
+headline,first_series,2025-08-20,
+headline,last_series,2026-05-03,
+headline,events,14,
+headline,opponents,26,
+headline,series,53-11,win rate 82.8%
+headline,maps,113-35,win rate 76.4%
+headline,maps_expected_from_series,159,
+headline,maps_with_rows,148,coverage 93.1%
+headline,series_without_map_rows,2,series-level facts still counted; map-level facts cannot
+headline,longest_win_streak,18,
+headline,longest_loss_streak,2,
+headline,series_win_rate,0.8281,
+headline,map_win_rate,0.7635,
+format,Bo1,2-1,66.7%
+format,Bo3,44-8,84.6%
+format,Bo5,7-2,77.8%
+closeness,close_maps_abs_diff_le_2,24,54.2% won
+closeness,overtime_maps,26,73.1% won
+closeness,series_going_the_distance,25,68.0% won
+closeness,sweeps_for,34,
+closeness,sweeps_against,3,
+closeness,series_lost_by_one_map,8,
+elo,elo_window_start,2049.2,
+elo,elo_window_end,2121.3,
+elo,elo_peak,2121.3,2026-05-03
+elo,elo_window_low,1953.1,
+elo,avg_opponent_elo,1778.0,
+elo,hardest_opponent,FURIA Esports,1975.4
+elo,expected_series_wins_by_elo,50.5,
+elo,actual_series_wins,53,
+elo,delta_vs_elo_expectation,2.5,
+event,Esports World Cup 2025 по CS2,2-2,"maps 6-3 (67%), map rows 9/10 | 2025-08-20..2025-08-24"
+event,BLAST Open London 2025. Closed Qualifiers,3-0,"maps 6-3 (67%), map rows 9/9 | 2025-08-27..2025-09-01"
+event,BLAST Open London 2025,1-1,"maps 4-3 (57%), map rows 7/7 | 2025-09-06..2025-09-07"
+event,ESL Pro League Season 22,6-1,"maps 12-4 (75%), map rows 16/17 | 2025-10-04..2025-10-12"
+event,IEM Chengdu 2025,5-2,"maps 9-7 (56%), map rows 16/19 | 2025-11-03..2025-11-09"
+event,BLAST Rivals Fall 2025,2-2,"maps 5-6 (45%), map rows 11/11 | 2025-11-12..2025-11-15"
+event,StarLadder Budapest Major 2025,6-1,"maps 10-2 (83%), map rows 12/13 | 2025-12-04..2025-12-14"
+event,BLAST Bounty Winter 2026. Closed Qualifiers,2-0,"maps 4-0 (100%), map rows 4/4 | 2026-01-14..2026-01-18"
+event,BLAST Bounty Winter 2026,1-1,"maps 3-2 (60%), map rows 5/5 | 2026-01-23..2026-01-24"
+event,IEM Krakow 2026,5-0,"maps 11-1 (92%), map rows 12/12 | 2026-01-31..2026-02-08"
+event,PGL Cluj-Napoca 2026,6-0,"maps 12-1 (92%), map rows 13/15 | 2026-02-14..2026-02-22"
+event,BLAST Open Spring 2026,5-0,"maps 10-0 (100%), map rows 10/11 | 2026-03-19..2026-03-29"
+event,IEM Rio 2026,5-1,"maps 12-3 (80%), map rows 15/15 | 2026-04-13..2026-04-19"
+event,BLAST Rivals Spring 2026,4-0,"maps 9-0 (100%), map rows 9/11 | 2026-04-29..2026-05-03"
+month,2025-08,4-2,"maps 15, map wr 67%, avg elo 2033.6"
+month,2025-09,2-1,"maps 10, map wr 60%, avg elo 2019.5"
+month,2025-10,6-1,"maps 16, map wr 75%, avg elo 1991.0"
+month,2025-11,7-4,"maps 27, map wr 52%, avg elo 2007.0"
+month,2025-12,6-1,"maps 12, map wr 83%, avg elo 1972.7"
+month,2026-01,4-1,"maps 11, map wr 82%, avg elo 2007.5"
+month,2026-02,10-0,"maps 23, map wr 91%, avg elo 2033.4"
+month,2026-03,5-0,"maps 10, map wr 100%, avg elo 2083.9"
+month,2026-04,7-1,"maps 19, map wr 84%, avg elo 2101.1"
+month,2026-05,2-0,"maps 5, map wr 100%, avg elo 2119.8"
+map,Inferno,24-7,"77% over 31, avg round diff +2.90, OT 6"
+map,Dust2,25-3,"89% over 28, avg round diff +5.89, OT 1"
+map,Mirage,19-7,"73% over 26, avg round diff +2.27, OT 8"
+map,Nuke,17-9,"65% over 26, avg round diff +2.23, OT 6"
+map,Overpass,18-3,"86% over 21, avg round diff +3.67, OT 3"
+map,Train,4-5,"44% over 9, avg round diff -1.33, OT 0"
+map,Anubis,4-0,"100% over 4, avg round diff +4.25, OT 1"
+map,Ancient,2-1,"67% over 3, avg round diff +1.33, OT 1"
+opponent,G2 Esports,5-1,"83%, maps 12-3, avg opp elo 1801.4"
+opponent,MOUZ,4-1,"80%, maps 9-3, avg opp elo 1908.1"
+opponent,The Mongolz,4-1,"80%, maps 9-2, avg opp elo 1827.6"
+opponent,FURIA Esports,3-2,"60%, maps 8-7, avg opp elo 1899.3"
+opponent,Team Falcons,1-4,"20%, maps 5-9, avg opp elo 1876.9"
+opponent,GamerLegion,4-0,"100%, maps 7-1, avg opp elo 1684.8"
+opponent,Natus Vincere,4-0,"100%, maps 9-0, avg opp elo 1873.0"
+opponent,FaZe Clan,3-1,"75%, maps 7-4, avg opp elo 1749.9"
+opponent,Aurora Gaming,3-0,"100%, maps 6-0, avg opp elo 1774.8"
+opponent,Team Spirit,3-0,"100%, maps 7-1, avg opp elo 1926.8"
+opponent,PARIVISION,2-0,"100%, maps 5-0, avg opp elo 1842.7"
+opponent,TYLOO,2-0,"100%, maps 4-1, avg opp elo 1651.6"
+opponent,Team 3DMAX,2-0,"100%, maps 3-0, avg opp elo 1660.0"
+opponent,Virtus.pro,2-0,"100%, maps 2-0, avg opp elo 1612.5"
+opponent,9z Team,1-0,"100%, maps 2-0, avg opp elo 1572.2"
+opponent,Astralis,1-0,"100%, maps 2-1, avg opp elo 1679.1"
+opponent,B8 Esports,1-0,"100%, maps 0-0, avg opp elo 1730.1"
+opponent,BCGame,1-0,"100%, maps 2-0, avg opp elo 1527.1"
+opponent,EYEBALLERS,1-0,"100%, maps 2-0, avg opp elo 1753.9"
+opponent,FUT Esports,1-0,"100%, maps 2-0, avg opp elo 1815.1"
+opponent,HOTU,1-0,"100%, maps 2-0, avg opp elo 1704.0"
+opponent,Lynn Vision Gaming,1-0,"100%, maps 2-0, avg opp elo 1585.5"
+opponent,M80,1-0,"100%, maps 2-1, avg opp elo 1520.4"
+opponent,RED Canids,1-0,"100%, maps 2-0, avg opp elo 1453.7"
+opponent,Team Liquid,1-0,"100%, maps 2-0, avg opp elo 1640.2"
+opponent,Gentle Mates,0-1,"0%, maps 0-2, avg opp elo 1574.3"
+player,"ZywOo (Mathieu Herbaut), FR",148 maps,"K/D 1.47, ADR 87.5, KAST 77.4%, map wr 76%, 2025-08-20..2026-05-03"
+player,"apEX (Dan Madesclaire), FR",148 maps,"K/D 0.85, ADR 69.8, KAST 71.2%, map wr 76%, 2025-08-20..2026-05-03"
+player,"flameZ (Shahar Shushan), IL",148 maps,"K/D 1.08, ADR 78.5, KAST 76.1%, map wr 76%, 2025-08-20..2026-05-03"
+player,"mezii (William Merriman), GB",148 maps,"K/D 1.03, ADR 69.0, KAST 76.2%, map wr 76%, 2025-08-20..2026-05-03"
+player,"ropz (Robin Kool), EE",148 maps,"K/D 1.22, ADR 77.0, KAST 76.4%, map wr 76%, 2025-08-20..2026-05-03"
+lineup,"ZywOo (Mathieu Herbaut), FR / apEX (Dan Madesclaire), FR / flameZ (Shahar Shushan), IL / mezii (William Merriman), GB / ropz (Robin Kool), EE",62 series,"148 maps, 2025-08-20..2026-05-03"
