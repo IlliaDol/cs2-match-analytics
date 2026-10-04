@@ -1,0 +1,26 @@
+{
+  "did": {
+    "treated_pre": 0.42274247491638794,
+    "treated_post": 0.5390189520624303,
+    "control_pre": 0.5678929765886288,
+    "control_post": 0.5546265328874025,
+    "treated_change": 0.11627647714604239,
+    "control_change": -0.013266443701226316,
+    "estimate": 0.1295429208472687,
+    "n_treated": 3289,
+    "n_control": 3289
+  },
+  "bootstrap": {
+    "estimate": 0.1295429208472687,
+    "ci_low": 0.08673355629877372,
+    "ci_high": 0.17358138238573023,
+    "n_boot": 2000,
+    "n_clusters": 299,
+    "seed": 20260921
+  },
+  "pretrend": {
+    "lead_minus_one": -0.45484949832775917,
+    "max_abs_lead_difference": 0.45484949832775917,
+    "passes_screen": false
+  }
+}
