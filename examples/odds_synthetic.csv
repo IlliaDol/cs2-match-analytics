@@ -1,0 +1,9 @@
+date,team1,team2,odds1,odds2,bookmaker
+# SYNTHETIC EXAMPLE — NOT REAL MARKET DATA.
+# No real odds file ships with this repo: the v1 odds subset is too small (see README
+# Limitations, "No market odds"). These numbers exist only so `find_edge.py` can be run and
+# tested end to end. Team names must match artifacts/elo_ratings.json.
+2026-04-29,Natus Vincere,G2 Esports,1.72,2.10,example-book
+2026-04-30,Team Vitality,Team Spirit,1.55,2.40,example-book
+2026-05-02,FURIA Esports,MOUZ,2.60,1.48,example-book
+2026-05-03,FaZe Clan,Team Falcons,2.05,1.78,example-book
