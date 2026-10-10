@@ -2,9 +2,9 @@
 
 [![CI](https://github.com/IlliaDol/cs2-match-analytics/actions/workflows/ci.yml/badge.svg)](https://github.com/IlliaDol/cs2-match-analytics/actions/workflows/ci.yml)
 
-A from-scratch probabilistic model of professional CS2 match outcomes — Elo baseline,
-calibrated logistic/GBM, Bayesian team ratings, validated walk-forward — built as a
-walkthrough of the whole data-science stack.
+How honest are win probabilities for professional CS2? This repo builds them from
+scratch — Elo baseline, logistic/GBM on strictly pre-match features, Bayesian ratings —
+and measures calibration on a fixed time split, not just accuracy.
 
 ![calibration](outputs/fig_calibration.png)
 
