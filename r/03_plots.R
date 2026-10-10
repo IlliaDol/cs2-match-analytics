@@ -7,7 +7,7 @@ clean <- read_csv(
   "outputs/series_clean.csv",
   col_types = cols(tier = col_factor(levels = c("tier1", "tier2", "tier3")))
 )
-stopifnot(nrow(clean) == 9920)  # corrected after Quirk-1 fix (2026-09-11)
+stopifnot(nrow(clean) == 11052)  # Tier A refresh 2026-10-11 (was 9920)
 
 dir.create("outputs", showWarnings = FALSE)
 

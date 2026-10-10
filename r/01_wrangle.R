@@ -21,7 +21,7 @@ series <- read_csv(
   )
 )
 
-stopifnot(nrow(series) == 9920)  # 9,923 raw series - 1 no-teams - 1 undrawable (Quirk 1 fix, 2026-09-11)
+stopifnot(nrow(series) == 11052)  # tier files 5034+5132+886, 0 cross-tier dupes (Tier A refresh 2026-10-11)
 
 wrangled <- series |>
   mutate(

@@ -73,7 +73,7 @@ def test_series_clean_exists_with_expected_columns(r_pipeline):
 
 @_requires_real_data
 def test_series_clean_row_count(r_pipeline):
-    assert len(r_pipeline) == 9920
+    assert len(r_pipeline) == 11052
 
 
 @_requires_real_data
@@ -92,7 +92,7 @@ def test_series_clean_derived_columns_consistent(r_pipeline):
 
 @_requires_real_data
 def test_bo1_share_matches_data_md_quirk(r_pipeline):
-    """DATA.md Quirk 2: Bo1 share ~20% (2020/9920)."""
+    """DATA.md Quirk 2: Bo1 share ~20% (2227/11052)."""
     share = r_pipeline["is_bo1"].mean()
     assert 0.18 < share < 0.23, f"Bo1 share {share:.3f} outside expected band"
 
@@ -115,7 +115,7 @@ def test_anova_p_value_plausible():
     res = pd.read_csv(REPO / "outputs" / "inference_results.csv")
     anova = res[res["test"].str.contains("anova", case=False, na=False)]
     assert len(anova) == 1
-    # sanity: with n≈9900 the F test on 3 groups is almost surely significant
+    # sanity: with n≈11000 the F test on 3 groups is almost surely significant
     assert float(anova["p_value"].iloc[0]) < 0.05
 
 

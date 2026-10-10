@@ -27,7 +27,7 @@ def con():
 
 def test_matches_row_count(con):
     n = con.execute("SELECT COUNT(*) FROM matches").fetchone()[0]
-    assert n == 9920
+    assert n == 11052
 
 
 def test_teams_table_loaded(con):
@@ -50,7 +50,7 @@ def test_q1_monthly_upsets(con):
     df = pd.read_csv(REPO / "outputs" / "q1.csv")
     assert {"month", "n_series", "n_upsets", "upset_rate"} <= set(df.columns)
     assert len(df) >= 40
-    assert df["n_series"].sum() == 9920, "Q1 fanned out rows — the CTE join exploded"
+    assert df["n_series"].sum() == 11052, "Q1 fanned out rows — the CTE join exploded"
     assert df["upset_rate"].between(0, 1).all()
     del q
 

@@ -128,9 +128,14 @@ def main() -> None:
     assert h2h_by_match["match_id"].is_unique
     feat = feat.merge(h2h_by_match, on="match_id", how="left")
 
-    # roster features joined by match_id, then oriented as t1-minus-t2 diffs
+    # roster features joined by match_id, then oriented as t1-minus-t2 diffs.
+    # dedupe first: the raw table can carry two series rows for one match
+    # (Tier A refresh 2026-10-11: 4 such matches) — without this the left merge
+    # fans out and feat outgrows bt, crashing the store build below.
+    roster = roster.drop_duplicates(subset="match_id", keep="first")
     roster = roster[roster["match_id"].isin(feat["match_id"])]
     feat = feat.merge(roster, on="match_id", how="left")
+    assert len(feat) == len(bt), "roster merge fanned out — duplicate match_ids"
 
     features = pd.DataFrame(
         {

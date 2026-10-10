@@ -10,7 +10,7 @@ clean <- read_csv(
   "outputs/series_clean.csv",
   col_types = cols(tier = col_factor(levels = c("tier1", "tier2", "tier3")))
 )
-stopifnot(nrow(clean) == 9920)  # corrected after Quirk-1 fix (2026-09-11)
+stopifnot(nrow(clean) == 11052)  # Tier A refresh 2026-10-11 (was 9920)
 
 results <- tibble::tibble(
   test = character(), statistic = numeric(), p_value = numeric(),
@@ -21,7 +21,7 @@ results <- tibble::tibble(
 # Test A — two-sample t-test (Welch): Do Bo1s differ from Bo3+/Bo5 in margin?
 # H0: mean(margin | Bo1) == mean(margin | Bo3+).  Excludes Bo2 draws (margin 0, 2 maps).
 # Welch is the R default and correct here: group sizes are wildly unequal
-# (2020 vs ~7900) and variances may differ.
+# (2227 vs 8825) and variances may differ.
 # ---------------------------------------------------------------------------
 
 decided <- clean |>

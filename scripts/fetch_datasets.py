@@ -57,14 +57,14 @@ def download(slug: str, force: bool = False) -> int:
         print(f"  = {slug}: already in {target.relative_to(REPO)} (use --force to refetch)")
         return 0
     target.mkdir(parents=True, exist_ok=True)
-    print(f"  ↓ {slug} → {target.relative_to(REPO)}")
+    print(f"  -> {slug} -> {target.relative_to(REPO)}")
     result = subprocess.run(
         [sys.executable, "-m", "kaggle", "datasets", "download", "-d", slug, "-p", str(target),
          "--unzip"],
         check=False,
     )
     if result.returncode != 0:
-        print(f"  ✗ {slug}: kaggle client exited {result.returncode}")
+        print(f"  x {slug}: kaggle client exited {result.returncode}")
     return result.returncode
 
 

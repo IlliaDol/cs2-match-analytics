@@ -1,17 +1,15 @@
 {
- "generated_at": "2026-09-14T15:54:52+00:00",
+ "generated_at": "2026-10-10T23:27:34+00:00",
  "rows_before": 9920,
- "rows_after": 9920,
- "rows_delta": 0,
+ "rows_after": 11052,
+ "rows_delta": 1132,
  "latest_before": "2026-06-28",
- "latest_after": "2026-06-28",
+ "latest_after": "2026-10-03",
  "mean_shift": {
-  "elo_diff": 0.0,
-  "form5_diff": 0.0,
-  "rest_days_diff": 0.0,
-  "h2h_t1_win_share": 0.0
+  "elo_diff": -0.126827,
+  "form5_diff": 0.001186,
+  "rest_days_diff": -0.091525,
+  "h2h_t1_win_share": -0.002117
  },
- "flagged": [
-  "latest date did not advance (2026-06-28)"
- ]
+ "flagged": []
 }
