@@ -10,39 +10,42 @@ and measures calibration on a fixed time split, not just accuracy.
 
 ## Results
 
-Time-split test set (train < 2026-01-01, n = 1,811 series). Lower logloss is better;
+Time-split test set (train < 2026-01-01, n = 2,943 series). Lower logloss is better;
 `constant_0.5` = always predict 0.5 (logloss ln 2 = 0.6931) — the floor every real
-model must beat, shown on purpose.
+model must beat, shown on purpose. Refreshed 2026-10-11 on the Tier A data
+(11,052 series); all rows re-measured except `dl_embedding` (torch re-run pending).
 
 | model | logloss | brier | acc | ece |
 |---|---|---|---|---|
-| **lr+roster** (Elo + form/rest/h2h + roster-stability/stand-in) | **0.6377** | 0.2237 | 0.6367 | 0.0185 |
-| lr (Elo diff + form/rest/h2h) | 0.6464 | 0.2278 | 0.6190 | 0.0242 |
-| elo_k32 (from-scratch engine) | 0.6472 | 0.2282 | 0.6179 | 0.0251 |
-| gbm | 0.6511 | 0.2298 | 0.6218 | 0.0255 |
-| gbm_isotonic | 0.6560 | 0.2321 | 0.6102 | 0.0190 |
-| constant_0.5 | 0.6931 | 0.2500 | 0.5721 | 0.0721 |
-| dl_embedding (PyTorch) | 0.6632 | 0.2349 | 0.6052 | — |
+| **lr+roster** (Elo + form/rest/h2h + roster-stability/stand-in) | **0.6342** | 0.2219 | 0.6306 | 0.0159 |
+| lr (Elo diff + form/rest/h2h) | 0.6496 | 0.2290 | 0.6089 | 0.0176 |
+| elo_k32 (from-scratch engine) | 0.6512 | 0.2297 | 0.6123 | 0.0301 |
+| gbm | 0.6349 | 0.2222 | 0.6371 | 0.0106 |
+| gbm_isotonic | 0.6403 | 0.2246 | 0.6306 | 0.0205 |
+| constant_0.5 | 0.6931 | 0.2500 | 0.5671 | 0.0671 |
+| dl_embedding (PyTorch, 2026-09-12 snapshot) | 0.6632 | 0.2349 | 0.6052 | — |
 
 `ece` is the Expected Calibration Error — the average gap between a stated probability and
 what actually happened. The chart built from it is
 [`outputs/fig_calibration.png`](outputs/fig_calibration.png); if the axes look cryptic,
 [`docs/CALIBRATION-README.md`](docs/CALIBRATION-README.md) walks through how to read them —
-including why `gbm_isotonic` wins on `ece` while *losing* on logloss.
+including why the plain `gbm` is now the best-calibrated row while per-tier
+`isotonic` refits lose on both metrics (rejected; measured below).
 
-Reads: a from-scratch Elo engine gets 0.647; adding form/rest/head-to-head features to a
-logistic model edges it to 0.6464; adding **roster-stability + stand-in** (the per-map
-lineups that sat unused) drops it to **0.6377** — the single biggest feature-family win in
-the repo, and it was the one thing the Limitations section had promised to try. The
-deep-learning variant *loses* to logistic — at this data size the signal is linear-ish in
-Elo space, and that honest negative is a finding. Per-regime calibration shows the
-aggregate number also hides a tier-3 problem: ECE 0.126 (vs 0.02–0.03 elsewhere).
+Reads: a from-scratch Elo engine gets 0.651; adding form/rest/head-to-head features to a
+logistic model edges it to 0.6496; adding **roster-stability + stand-in** (the per-map
+lineups that sat unused) drops the linear model to **0.6342** — still the biggest
+feature-family win for logistic. New since the refresh: with ~60% more test series the
+**GBM has caught up** (0.6349, and the best accuracy and ECE in the table) — the old
+linear-vs-GBM gap did not survive new data, and that revision is a finding. The
+deep-learning row is stale (2026-09-12 snapshot, torch re-run pending). Per-regime
+calibration still flags tier-3: ECE 0.047 (vs 0.02–0.03 elsewhere).
 Bayesian ratings (PyMC Bradley-Terry, `outputs/bayesian_ratings.csv`) quantify what Elo
 cannot: per-team uncertainty.
 
 ## Method
 
-- **Data:** 9,920 professional CS2 series (2023–2026, 3 tiers) from Kaggle; winners
+- **Data:** 11,052 professional CS2 series (2023-01 → 2026-10, 3 tiers) from Kaggle; winners
   verified against map-level evidence and two real Major finals.
 - **Elo:** the update rule derived as one SGD step on logistic log-loss; replayed
   time-ordered with pre-match ratings only (K-sweep peaks at K=32).
@@ -69,28 +72,28 @@ cannot: per-team uncertainty.
   per-regime calibration is tested: ECE is honest (0.02–0.03) at tier1/2 and
   bo1/bo3, and **tier-3 remains the weak spot** (measured refits below, none
   enabled by default).
-
 ### Per-tier calibration refits (measured)
 
-`scripts/build_tier_calibration.py` on the test split (1,811 series). `before` is the shipped
+`scripts/build_tier_calibration.py` on the test split (2,943 series). `before` is the shipped
 model; the other two columns are the refit applied to the same rows.
 
 | tier | n | ECE before | ECE isotonic | ECE platt | logloss before | logloss isotonic | logloss platt |
 |---|---|---|---|---|---|---|---|
-| tier1 | 643 | 0.0202 | 0.0411 ✗ | 0.0326 ✗ | 0.6227 | 0.6242 | 0.6228 |
-| tier2 | 926 | 0.0344 | 0.0322 | **0.0229** | 0.6522 | 0.6525 | **0.6517** |
-| tier3 | 242 | 0.0788 | 0.0616 | **0.0669** | 0.6220 | 0.7517 ✗ | **0.6199** |
-| all | 1811 | 0.0185 | 0.0317 | 0.0233 | 0.6377 | 0.6557 | **0.6372** |
+| tier1 | 1259 | 0.0335 | 0.0245 | **0.0229** | 0.6210 | 0.6441 ✗ | **0.6194** |
+| tier2 | 1327 | 0.0238 | 0.0272 | **0.0229** | 0.6411 | 0.6413 | 0.6424 |
+| tier3 | 357 | 0.0474 | 0.0715 ✗ | 0.0530 | 0.6546 | 0.7479 ✗ | 0.6572 |
+| all | 2943 | 0.0159 | 0.0224 | 0.0172 | 0.6342 | 0.6555 | 0.6344 |
 
-**Verdict.** Per-tier *isotonic* is rejected: it buys tier-3 ECE by wrecking tier-3 logloss
-(0.622 → 0.752) — the map fits bin edges, not signal. Per-tier **Platt** fixes the tiers that
-actually needed it (tier-3 ECE −15% *with* better logloss; tier-2 better on both) but costs
-tier-1 ECE, so the aggregate ECE rises while the aggregate logloss improves slightly. None of
+**Verdict.** Per-tier *isotonic* is rejected again, harder: tier-3 ECE worsens
+0.047 → 0.072 while logloss blows out 0.655 → 0.748, and the aggregate is worse on
+both (ECE 0.016 → 0.022, logloss 0.634 → 0.656) — the map fits bin edges, not signal.
+Per-tier **Platt** is the only map that helps anywhere (tier-1 better on both:
+ECE 0.034 → 0.023 with logloss 0.621 → 0.619) but costs tier-3 on both, leaving the
+aggregate essentially flat (ECE 0.016 → 0.017, logloss 0.6342 → 0.6344). None of
 this is enabled in serving by default. The actionable finding is the one already in
-`docs/DECISIONS.md`: **tier-3 needs more data** (529 train / 242 test series), not a fancier map.
-A train-only "calibrate only the tiers that look miscalibrated" rule was tested too and cannot
-discriminate here — pooled train ECE 0.0066 vs 0.0124 / 0.0220 / 0.0325 per tier, because the
-tiers' miscalibrations partly cancel in the mixture — so it degenerates to plain Platt.
+`docs/DECISIONS.md`: **tier-3 needs more data** (529 train / 357 test series), not a fancier map.
+The selective "calibrate only suspicious tiers" variant selected every tier (nothing
+skipped), so it degenerates to plain Platt.
 
 ## Reproducibility
 
@@ -107,8 +110,8 @@ python -m cs2analytics.serve.monitor                   # drift report
 `Rscript` is resolved from PATH by the Makefile (falling back to the local
 Windows install) — no hardcoded path anywhere else.
 
-The trained artifact is **`lr-roster-2026-09-12`**: the exact `lr+roster` model
-from the Results table (logloss 0.6377), including the roster features. The
+The trained artifact is **`lr-roster-2026-10-11`**: the exact `lr+roster` model
+from the Results table (logloss 0.6342), including the roster features. The
 serving API and the Streamlit demo both report `model_version` from
 `artifacts/features.json`, so the live demo is verifiably the paper's model —
 not a stale `lr` from before the roster work.

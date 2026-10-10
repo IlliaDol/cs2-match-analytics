@@ -14,19 +14,19 @@ question that matters about one:
 
 > When the model says 40%, does it actually happen 40% of the time?
 
-Binary outcome here: team1 wins, or team2 wins. 1,811 test matches.
+Binary outcome here: team1 wins, or team2 wins. 2,943 test matches.
 
 ## How each axis is built
 
-1. Score every test match → 1,811 numbers between 0 and 1.
+1. Score every test match → 2,943 numbers between 0 and 1.
 2. Sort them and cut into **10 equally-populated groups** (`reliability_table(..., bins=10)`).
 3. For each group compute two things:
    * **X** = the mean of the predicted probabilities in that group — what the model promised.
    * **Y** = the fraction of those matches actually won — what happened.
-4. Plot one point per group. Note that each point stands for **~181 matches**, not one.
+4. Plot one point per group. Note that each point stands for **~294 matches**, not one.
 
-Worked example from the figure: the blue point at **x ≈ 0.36, y ≈ 0.41** means "in the group
-where the model averaged 36%, the team actually won 41%".
+Worked example from the figure: the orange point at **x ≈ 0.36, y ≈ 0.35** means "in the group
+where the model averaged 36%, the team actually won 35%".
 
 ## Why both axes run 0 → 1
 
@@ -47,30 +47,31 @@ not rise means the probabilities are close to random.
 
 | line | model | shape |
 |---|---|---|
-| **Logistic** (blue) | logistic regression on Elo | tracks the diagonal closely |
-| **GBM** (orange) | gradient boosting | also close, with a visible miss at the bottom (x ≈ 0.12 → y ≈ 0.0) |
-| **GBM + isotonic** (green) | the same GBM with a post-hoc isotonic recalibration | pulled toward the diagonal, but breaks at the low end |
+| **Logistic** (blue) | logistic regression on Elo + form/rest/h2h/roster | tracks the diagonal closely |
+| **GBM** (orange) | gradient boosting | the closest tracker (ECE 0.0106 — e.g. x ≈ 0.26 → y ≈ 0.26, x ≈ 0.65 → y ≈ 0.65) |
+| **GBM + isotonic** (green) | the same GBM with a post-hoc isotonic recalibration | close in the middle, thin at the extremes (top bin empty; low bins pool few matches) |
 | **perfect** | the diagonal itself | a reference, not a model |
 | **constant 0.5** | predicting 0.5 for everything | the baseline — a single point at x = 0.5, y = the base win rate |
 
-## The anomaly at the left edge, and what it proves
+## The thin extremes, and what they prove
 
-The green line jumps to **y ≈ 0.50 at x ≈ 0.15**, then falls to ≈ 0.27. That is not a
-plotting bug — it is what isotonic regression does. To stay monotonic it pools the rare,
-very-low-probability matches into one block averaging ≈50%, which **destroys the distinction
-at the low end**.
+The green line's top bin is **empty** and its bottom bins hold 1–2 matches each
+(x ≈ 0.15 → y ≈ 0.00). That is not a plotting bug — it is what isotonic regression
+does with 2,943 test points: to stay monotonic it pools the rare, extreme-probability
+matches into blocks too small to trust, which is exactly why the per-tier isotonic
+refits in the README lose on both metrics and stay rejected.
 
-Measured in `notebooks/03_model_experiments.ipynb`:
+Re-measured on the refreshed split:
 
-    GBM logloss 0.6511 -> isotonic 0.6560     worse  (lower is better)
-    GBM ECE     0.0255 -> isotonic 0.0190     better
+    GBM logloss 0.6349 -> isotonic 0.6403     worse  (lower is better)
+    GBM ECE     0.0106 -> isotonic 0.0205     worse
 
 * **logloss** grades the predictions themselves — how good they are.
 * **ECE** (Expected Calibration Error) grades their honesty — the average gap from the diagonal.
 
-So isotonic buys honesty (ECE) at the cost of sharpness (logloss). That is the
-**honest negative** the README reports for isotonic, and this figure is the evidence. An ECE
-of ≈0.02 means the stated probability is off by about **2 percentage points** on average,
+So on this data isotonic buys neither honesty nor sharpness — a cleaner rejection
+than the old snapshot's tradeoff story. An ECE of ≈0.01 (the plain GBM row) means the
+stated probability is off by about **1 percentage point** on average,
 which is why calibrated uncertainty can be claimed as a real result rather than a hope.
 
 ## How to regenerate it

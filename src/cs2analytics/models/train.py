@@ -31,7 +31,7 @@ SERIES_PATH = REPO / "outputs" / "series_clean.csv"
 #: documented best result by a whole feature family.
 ROSTER_FEATURES = ["roster_stability_diff", "standin_diff"]
 
-MODEL_VERSION = "lr-roster-2026-09-12"
+MODEL_VERSION = "lr-roster-2026-10-11"
 
 
 def main() -> None:

@@ -5,8 +5,8 @@ Two serve surfaces exist:
 - `cs2analytics.serve.dashboard` — Streamlit demo (M12), local-first.
 
 Both load `artifacts/{model.pkl,features.json,elo_ratings.json}` at request time.
-The trained model is **lr+roster** (`MODEL_VERSION = lr-roster-2026-09-12`) — the
-same model the README headline reports (logloss 0.6377). `python -m
+The trained model is **lr+roster** (`MODEL_VERSION = lr-roster-2026-10-11`) — the
+same model the README headline reports (logloss 0.6342). `python -m
 cs2analytics.models.train` regenerates all three artifacts.
 
 ## Why the Dockerfile needs a build-arg
