@@ -144,7 +144,7 @@ def test_missing_columns_produce_a_clear_error(tmp_path: Path):
 
 def test_load_ratings_reads_the_shipped_artifact():
     if not fe.ELO_PATH.exists():
-        pytest.skip("artifacts/elo_ratings.json missing — run python -m cs2analytics.models.train (git-ignored in CI)")
+        pytest.skip("artifacts/elo_ratings.json missing (git-ignored in CI)")
     ratings = fe.load_ratings()
     assert len(ratings) > 100
     assert all(isinstance(v, float) for v in list(ratings.values())[:5])
