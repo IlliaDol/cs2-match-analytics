@@ -13,17 +13,17 @@ and measures calibration on a fixed time split, not just accuracy.
 Time-split test set (train < 2026-01-01, n = 2,943 series). Lower logloss is better;
 `constant_0.5` = always predict 0.5 (logloss ln 2 = 0.6931) — the floor every real
 model must beat, shown on purpose. Refreshed 2026-10-11 on the Tier A data
-(11,052 series); all rows re-measured except `dl_embedding` (torch re-run pending).
+(11,052 series); every row re-measured on the same split.
 
 | model | logloss | brier | acc | ece |
 |---|---|---|---|---|
 | **lr+roster** (Elo + form/rest/h2h + roster-stability/stand-in) | **0.6342** | 0.2219 | 0.6306 | 0.0159 |
 | lr (Elo diff + form/rest/h2h) | 0.6496 | 0.2290 | 0.6089 | 0.0176 |
 | elo_k32 (from-scratch engine) | 0.6512 | 0.2297 | 0.6123 | 0.0301 |
-| gbm | 0.6349 | 0.2222 | 0.6371 | 0.0106 |
-| gbm_isotonic | 0.6403 | 0.2246 | 0.6306 | 0.0205 |
+| gbm | 0.6491 | 0.2286 | 0.6259 | 0.0214 |
+| gbm_isotonic | 0.6529 | 0.2305 | 0.6188 | 0.0280 |
 | constant_0.5 | 0.6931 | 0.2500 | 0.5671 | 0.0671 |
-| dl_embedding (PyTorch, 2026-09-12 snapshot) | 0.6632 | 0.2349 | 0.6052 | — |
+| dl_embedding (PyTorch) | 0.6681 | 0.2371 | 0.5916 | — |
 
 `ece` is the Expected Calibration Error — the average gap between a stated probability and
 what actually happened. The chart built from it is
@@ -35,10 +35,10 @@ including why the plain `gbm` is now the best-calibrated row while per-tier
 Reads: a from-scratch Elo engine gets 0.651; adding form/rest/head-to-head features to a
 logistic model edges it to 0.6496; adding **roster-stability + stand-in** (the per-map
 lineups that sat unused) drops the linear model to **0.6342** — still the biggest
-feature-family win for logistic. New since the refresh: with ~60% more test series the
-**GBM has caught up** (0.6349, and the best accuracy and ECE in the table) — the old
-linear-vs-GBM gap did not survive new data, and that revision is a finding. The
-deep-learning row is stale (2026-09-12 snapshot, torch re-run pending). Per-regime
+feature-family win in the repo, and the gradient booster (0.6491) still trails it,
+so the linear story survives the refresh with ~60% more test series. The
+deep-learning variant still *loses* to logistic (0.6681) — at this data size the signal
+stays linear-ish in Elo space, and that honest negative is a finding. Per-regime
 calibration still flags tier-3: ECE 0.047 (vs 0.02–0.03 elsewhere).
 Bayesian ratings (PyMC Bradley-Terry, `outputs/bayesian_ratings.csv`) quantify what Elo
 cannot: per-team uncertainty.

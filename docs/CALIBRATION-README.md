@@ -25,8 +25,8 @@ Binary outcome here: team1 wins, or team2 wins. 2,943 test matches.
    * **Y** = the fraction of those matches actually won — what happened.
 4. Plot one point per group. Note that each point stands for **~294 matches**, not one.
 
-Worked example from the figure: the orange point at **x ≈ 0.36, y ≈ 0.35** means "in the group
-where the model averaged 36%, the team actually won 35%".
+Worked example from the figure: the orange point at **x ≈ 0.36, y ≈ 0.33** means "in the group
+where the model averaged 36%, the team actually won 33%".
 
 ## Why both axes run 0 → 1
 
@@ -48,30 +48,30 @@ not rise means the probabilities are close to random.
 | line | model | shape |
 |---|---|---|
 | **Logistic** (blue) | logistic regression on Elo + form/rest/h2h/roster | tracks the diagonal closely |
-| **GBM** (orange) | gradient boosting | the closest tracker (ECE 0.0106 — e.g. x ≈ 0.26 → y ≈ 0.26, x ≈ 0.65 → y ≈ 0.65) |
-| **GBM + isotonic** (green) | the same GBM with a post-hoc isotonic recalibration | close in the middle, thin at the extremes (top bin empty; low bins pool few matches) |
+| **GBM** (orange) | gradient boosting | close, with visible misses at both ends (x ≈ 0.16 → y ≈ 0.20, n=40; x ≈ 0.84 → y ≈ 0.79) |
+| **GBM + isotonic** (green) | the same GBM with a post-hoc isotonic recalibration | close in the middle, thin at the extremes (bottom bin 5 matches at x ≈ 0.17 → y ≈ 0.00; top bin empty) |
 | **perfect** | the diagonal itself | a reference, not a model |
 | **constant 0.5** | predicting 0.5 for everything | the baseline — a single point at x = 0.5, y = the base win rate |
 
 ## The thin extremes, and what they prove
 
-The green line's top bin is **empty** and its bottom bins hold 1–2 matches each
-(x ≈ 0.15 → y ≈ 0.00). That is not a plotting bug — it is what isotonic regression
+The green line's top bin is **empty** and its bottom bin holds 5 matches
+(x ≈ 0.17 → y ≈ 0.00). That is not a plotting bug — it is what isotonic regression
 does with 2,943 test points: to stay monotonic it pools the rare, extreme-probability
 matches into blocks too small to trust, which is exactly why the per-tier isotonic
 refits in the README lose on both metrics and stay rejected.
 
 Re-measured on the refreshed split:
 
-    GBM logloss 0.6349 -> isotonic 0.6403     worse  (lower is better)
-    GBM ECE     0.0106 -> isotonic 0.0205     worse
+    GBM logloss 0.6491 -> isotonic 0.6529     worse  (lower is better)
+    GBM ECE     0.0214 -> isotonic 0.0280     worse
 
 * **logloss** grades the predictions themselves — how good they are.
 * **ECE** (Expected Calibration Error) grades their honesty — the average gap from the diagonal.
 
 So on this data isotonic buys neither honesty nor sharpness — a cleaner rejection
-than the old snapshot's tradeoff story. An ECE of ≈0.01 (the plain GBM row) means the
-stated probability is off by about **1 percentage point** on average,
+than the old snapshot's tradeoff story. An ECE of ≈0.016 (the shipped lr+roster row)
+means the stated probability is off by under **2 percentage points** on average,
 which is why calibrated uncertainty can be claimed as a real result rather than a hope.
 
 ## How to regenerate it
