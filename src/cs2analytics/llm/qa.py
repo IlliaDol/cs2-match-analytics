@@ -37,9 +37,9 @@ team1 VARCHAR, team2 VARCHAR, winner VARCHAR, score1_match BIGINT, score2_match 
 t1_series_score BIGINT, t2_series_score BIGINT, games_played BIGINT, bestOf DOUBLE, \
 tier VARCHAR, total_maps BIGINT, margin BIGINT, is_bo1 BOOLEAN, swept BOOLEAN, \
 bo5_sweep BOOLEAN)
-  One row per series (9,920 series). `winner` is ALREADY derived (the team that won
+  One row per series (11,052 series). `winner` is ALREADY derived (the team that won
   more maps) — there is NO team1_win column, so never re-derive it from a flag.
-- teams(team_id BIGINT, team_name VARCHAR)  — 19,846 roster rows; join on team_name.
+- teams(team_id BIGINT, team_name VARCHAR)  — 22,112 roster rows; join on team_name.
 - team_stats(team VARCHAR, n_series BIGINT, n_wins HUGEINT, win_share DOUBLE)
 
 Columns that are ALREADY computed for you (prefer them; they cost nothing to use):
@@ -56,8 +56,8 @@ Quirks that matter:
 2. Series scores are per-team maps won: t1_series_score / t2_series_score; a sweep is
    `swept` (or either score being 0 in a multi-map series).
 3. `datetime` is TIMESTAMP WITH TIME ZONE in Europe/Berlin; compare with TIMESTAMP
-   literals (e.g. TIMESTAMP '2025-01-01') or date_trunc. Data spans 2023-01-10 ..
-   2026-06-28. Use strftime(datetime, '%Y') or EXTRACT(YEAR FROM datetime) for years.
+  literals (e.g. TIMESTAMP '2025-01-01') or date_trunc. Data spans 2023-01-10 ..
+  2026-10-03. Use strftime(datetime, '%Y') or EXTRACT(YEAR FROM datetime) for years.
 4. tier values are exactly 'tier1' | 'tier2' | 'tier3'.
 5. A team can appear in team1 or team2 — to count ALL of a team's series, unpivot
    with UNION ALL (or GREATEST/LEAST for unordered pairs), never just one side.

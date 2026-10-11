@@ -1,7 +1,7 @@
 """Bet or pass: compare our probabilities against a real bookmaker price.
 
-The CS2 model has been calibrated and validated (README: logloss 0.6377 vs 0.6936 baseline,
-ECE 0.0185 on 1,811 held-out series). The one question it could never answer was *"is that
+The CS2 model has been calibrated and validated (README: logloss 0.6342 vs 0.6931 baseline,
+ECE 0.0159 on 2,943 held-out series). The one question it could never answer was *"is that
 worth betting on?"* — because the v1 odds subset is too small to chart, and because nobody had
 wired prices into the pipeline. This script does the arithmetic; it does not pretend to have
 data it lacks.

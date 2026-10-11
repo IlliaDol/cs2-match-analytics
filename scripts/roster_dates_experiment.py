@@ -203,7 +203,7 @@ def main() -> int:
     print(f"\n  delta acc {after['acc'] - before['acc']:+.4f} | "
           f"logloss {after['logloss'] - before['logloss']:+.4f} (negative is better) | "
           f"ece {after['ece'] - before['ece']:+.4f}")
-    print("\n  Reference: the shipped model measures acc 0.6367 / logloss 0.6377 / ece 0.0185")
+    print("\n  Reference: the shipped model measures acc 0.6306 / logloss 0.6342 / ece 0.0159")
     return 0
 
 
