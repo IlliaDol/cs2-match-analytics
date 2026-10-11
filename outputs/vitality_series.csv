@@ -10,7 +10,7 @@ match_id,datetime,event,tier,bo,opponent,won,score_for,score_against,maps_played
 3978324,2025-09-07 17:30,BLAST Open London 2025,tier1,5,G2 Esports,False,2,3,5,2028.2,1789.0,0.7985,False,True,1
 4669941,2025-10-04 17:30,ESL Pro League Season 22,tier1,3,Gentle Mates,False,0,2,2,2002.6,1574.3,0.9217,False,False,2
 4695087,2025-10-05 17:15,ESL Pro League Season 22,tier1,3,GamerLegion,True,2,0,2,1973.1,1682.4,0.8421,True,False,-2
-4723689,2025-10-06 11:30,ESL Pro League Season 22,tier1,3,HOTU,True,2,0,2,1978.2,1704.0,0.8289,True,False,-2
+4723689,2025-10-06 11:30,ESL Pro League Season 22,tier1,3,HOTU,True,2,0,2,1978.2,1704.1,0.8289,True,False,-2
 4758190,2025-10-07 19:45,ESL Pro League Season 22,tier1,3,G2 Esports,True,2,0,2,1983.7,1801.5,0.7405,True,False,-2
 4810793,2025-10-10 20:35,ESL Pro League Season 22,tier1,3,FURIA Esports,True,2,1,3,1992.0,1815.0,0.7348,False,True,-1
 4860065,2025-10-11 20:00,ESL Pro League Season 22,tier1,3,FaZe Clan,True,2,1,3,2000.5,1752.2,0.8067,False,True,-1
@@ -31,17 +31,17 @@ match_id,datetime,event,tier,bo,opponent,won,score_for,score_against,maps_played
 10087973,2025-12-05 17:00,StarLadder Budapest Major 2025,tier1,1,B8 Esports,True,1,0,1,1957.7,1730.1,0.7876,True,True,-1
 5751088,2025-12-06 17:00,StarLadder Budapest Major 2025,tier1,3,Natus Vincere,True,2,0,2,1964.5,1814.5,0.7035,True,False,-2
 5763120,2025-12-11 22:05,StarLadder Budapest Major 2025,tier1,3,The Mongolz,True,2,0,2,1974.0,1810.8,0.719,True,False,-2
-5783570,2025-12-13 19:00,StarLadder Budapest Major 2025,tier1,3,Team Spirit,True,2,0,2,1983.0,1941.7,0.5591,True,False,-2
+5783570,2025-12-13 19:00,StarLadder Budapest Major 2025,tier1,3,Team Spirit,True,2,0,2,1983.0,1941.7,0.5592,True,False,-2
 5796473,2025-12-14 20:00,StarLadder Budapest Major 2025,tier1,5,FaZe Clan,True,3,1,4,1997.1,1782.3,0.775,False,False,-2
 5925549,2026-01-14 22:15,BLAST Bounty Winter 2026. Closed Qualifiers,tier1,3,Virtus.pro,True,2,0,2,2004.3,1616.7,0.903,True,False,-2
 6019783,2026-01-18 18:35,BLAST Bounty Winter 2026. Closed Qualifiers,tier1,3,EYEBALLERS,True,2,0,2,2007.4,1753.9,0.8114,True,False,-2
 6089301,2026-01-23 18:00,BLAST Bounty Winter 2026,tier1,3,GamerLegion,True,2,0,2,2013.5,1627.5,0.9022,True,False,-2
 6102910,2026-01-24 18:00,BLAST Bounty Winter 2026,tier1,3,Team Falcons,False,1,2,3,2016.6,1907.0,0.6527,False,True,1
-6176382,2026-01-31 22:15,IEM Krakow 2026,tier1,3,BCGame,True,2,0,2,1995.7,1527.1,0.9369,True,False,-2
+6176382,2026-01-31 22:15,IEM Krakow 2026,tier1,3,BCGame,True,2,0,2,1995.7,1527.3,0.9368,True,False,-2
 6186574,2026-02-02 16:00,IEM Krakow 2026,tier1,3,Team 3DMAX,True,2,0,2,1997.7,1675.4,0.8648,True,False,-2
 6204833,2026-02-03 21:40,IEM Krakow 2026,tier1,3,Aurora Gaming,True,2,0,2,2002.0,1755.0,0.8057,True,False,-2
 6248502,2026-02-07 22:10,IEM Krakow 2026,tier1,3,MOUZ,True,2,0,2,2008.3,1916.2,0.6295,True,False,-2
-6258175,2026-02-08 19:00,IEM Krakow 2026,tier1,5,FURIA Esports,True,3,1,4,2020.1,1975.4,0.5639,False,False,-2
+6258175,2026-02-08 19:00,IEM Krakow 2026,tier1,5,FURIA Esports,True,3,1,4,2020.1,1975.4,0.564,False,False,-2
 6242505,2026-02-14 17:40,PGL Cluj-Napoca 2026,tier1,3,G2 Esports,True,2,1,3,2034.1,1786.1,0.8065,False,True,-1
 6349670,2026-02-15 20:40,PGL Cluj-Napoca 2026,tier1,3,The Mongolz,True,2,1,3,2040.3,1785.0,0.8129,False,True,-1
 6363777,2026-02-16 18:10,PGL Cluj-Napoca 2026,tier1,3,MOUZ,True,2,0,2,2046.2,1913.0,0.6828,True,False,-2
@@ -54,12 +54,12 @@ match_id,datetime,event,tier,bo,opponent,won,score_for,score_against,maps_played
 7227693,2026-03-28 17:00,BLAST Open Spring 2026,tier1,3,Aurora Gaming,True,2,0,2,2089.1,1820.1,0.8247,True,False,-2
 7255854,2026-03-29 13:30,BLAST Open Spring 2026,tier1,5,Natus Vincere,True,3,0,3,2094.7,1887.8,0.7669,True,False,-3
 7299086,2026-04-13 16:00,IEM Rio 2026,tier1,3,RED Canids,True,2,0,2,2102.2,1453.7,0.9766,True,False,-2
-7299710,2026-04-14 16:00,IEM Rio 2026,tier1,3,G2 Esports,True,2,1,3,2102.9,1821.0,0.8352,False,True,-1
-7299748,2026-04-15 21:00,IEM Rio 2026,tier1,3,Team Falcons,False,1,2,3,2108.2,1904.0,0.7641,False,True,1
-7299794,2026-04-17 21:15,IEM Rio 2026,tier1,3,Natus Vincere,True,2,0,2,2083.8,1888.6,0.7547,True,False,-2
-7299894,2026-04-18 21:15,IEM Rio 2026,tier1,3,FURIA Esports,True,2,0,2,2091.6,1888.4,0.7631,True,False,-2
-7299911,2026-04-19 20:00,IEM Rio 2026,tier1,5,Team Spirit,True,3,0,3,2099.2,1933.9,0.7214,True,False,-3
-7299579,2026-04-29 18:00,BLAST Rivals Spring 2026,tier1,3,FUT Esports,True,2,1,3,2108.1,1815.1,0.8438,False,True,-1
-7300568,2026-04-30 19:55,BLAST Rivals Spring 2026,tier1,3,G2 Esports,True,2,1,3,2113.1,1827.8,0.8378,False,True,-1
-7300789,2026-05-02 23:05,BLAST Rivals Spring 2026,tier1,3,GamerLegion,True,2,0,2,2118.3,1726.7,0.905,True,False,-2
-7300825,2026-05-03 20:30,BLAST Rivals Spring 2026,tier1,5,Natus Vincere,True,3,0,3,2121.3,1901.3,0.7802,True,False,-3
+7299710,2026-04-14 16:00,IEM Rio 2026,tier1,3,G2 Esports,True,2,1,3,2102.9,1808.4,0.845,False,True,-1
+7299748,2026-04-15 21:00,IEM Rio 2026,tier1,3,Team Falcons,False,1,2,3,2107.9,1904.0,0.7638,False,True,1
+7299794,2026-04-17 21:15,IEM Rio 2026,tier1,3,Natus Vincere,True,2,0,2,2083.5,1888.5,0.7544,True,False,-2
+7299894,2026-04-18 21:15,IEM Rio 2026,tier1,3,FURIA Esports,True,2,0,2,2091.3,1888.6,0.7626,True,False,-2
+7299911,2026-04-19 20:00,IEM Rio 2026,tier1,5,Team Spirit,True,3,0,3,2098.9,1933.7,0.7213,True,False,-3
+7299579,2026-04-29 18:00,BLAST Rivals Spring 2026,tier1,3,FUT Esports,True,2,1,3,2107.8,1815.1,0.8436,False,True,-1
+7300568,2026-04-30 19:55,BLAST Rivals Spring 2026,tier1,3,G2 Esports,True,2,1,3,2112.8,1817.1,0.8459,False,True,-1
+7300789,2026-05-02 23:05,BLAST Rivals Spring 2026,tier1,3,GamerLegion,True,2,0,2,2117.8,1720.0,0.908,True,False,-2
+7300825,2026-05-03 20:30,BLAST Rivals Spring 2026,tier1,5,Natus Vincere,True,3,0,3,2120.7,1901.2,0.7797,True,False,-3

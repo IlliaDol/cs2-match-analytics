@@ -8,15 +8,15 @@ unlocks, and what the machine can actually hold.
 
 | File | Rows | Note |
 |---|---|---|
-| `data/raw/cs2_all_tiers_games.csv` | 20,676 map rows (9,923 series) | the main table — one row per map |
-| `data/raw/cs2_tier1_games.csv` | 11,151 | tier split |
-| `data/raw/cs2_tier2_games.csv` | 8,305 | tier split |
-| `data/raw/cs2_tier3_games.csv` | 1,220 | tier split |
+| `data/raw/cs2_all_tiers_games.csv` | 22,948 map rows (11,052 series) | the main table — one row per map |
+| `data/raw/cs2_tier1_games.csv` | 12,535 | tier split |
+| `data/raw/cs2_tier2_games.csv` | 9,044 | tier split |
+| `data/raw/cs2_tier3_games.csv` | 1,369 | tier split |
 | `data/raw/cs2_2025_top50_matches.csv` | 4,600 | top-50 event slice |
-| `data/raw/teams.csv` | 19,846 | team lookup |
-| `data/raw/players.csv` | 1,398 | player lookup |
-| `data/raw/tournaments.csv` | 344 | tournament lookup |
-| **Total distinct maps** | **10,675** | 2023-10-25 → 2026-06-28, 1,189 players |
+| `data/raw/teams.csv` | 22,112 | team lookup |
+| `data/raw/players.csv` | 1,525 | player lookup |
+| `data/raw/tournaments.csv` | 386 | tournament names |
+| **Total distinct maps** | **11,888** | 2023-01-10 → 2026-10-03, 964 teams |
 
 Source: Kaggle **`ektarr/counter-strike-pro-matches`** (the tier/tier1/tier2 file names match
 it exactly). 98 columns per map row: 10 players × (kills, deaths, assists, ADR, KAST, K/D diff)
@@ -34,18 +34,21 @@ git-ignored `data/interim/`:
 | Kaggle `mateusdmachado/csgo-professional-matches` | 43,944 | 2015-11-03 → 2020-02-27 | `scripts/adapt_csgo_history.py` |
 | Kaggle `fernandopy/csgo-data-set` | 20,004 | 2021–2023 (43% of rows dated) | `scripts/adapt_csgo_dataset.py` |
 
-That brings the corpus to **74,300 map rows** (63,948 CS:GO + 10,675 CS2, 2015–2026), and
+That brings the corpus to **75,836 map rows** (63,948 CS:GO + 11,888 CS2, 2015–2026), and
 `compare_players.py --game csgo|cs2` selects an era. `docs/DATA-COVERAGE.md` is the living
 audit of what is still missing (pre-2015, the 2020-03→2021 hole, assists in the 2021–2023
 file, CS:GO tier labels).
 
 ## Tier A — refresh + finish the source we already use (cheap, minutes)
 
-- **Refresh `ektarr/counter-strike-pro-matches`.** It is a living dataset (19,000+ games
+- **Refresh `ektarr/counter-strike-pro-matches`.** ~~It is a living dataset (19,000+ games
   advertised; our copy ends 2026-06-28). A newer snapshot adds months of matches at the same
-  98-column schema — zero code changes, the ingest path already reads it.
-- **Use the lookups we already ship but never join.** `players.csv` (1,398) and
-  `teams.csv` (19,846) are sitting unused. Joining them unlocks: true player IDs (so the same
+  98-column schema — zero code changes, the ingest path already reads it.~~ **Done 2026-10-11:**
+  force-refetched via `scripts/fetch_datasets.py` (identical 98-column schema verified),
+  coverage now 2023-01-10 → 2026-10-03 (22,948 rows, 11,056 matches). The refresh exposed
+  4 doubled series rows (see `DATA.md` Quirk 9) and stale exact-count guards — both fixed.
+- **Use the lookups we already ship but never join.** `players.csv` (1,525) and
+  `teams.csv` (22,112) are sitting unused. Joining them unlocks: true player IDs (so the same
   person across name changes), team rosters over time, nationality splits.
 - Size: ~25 MB. Disk risk: none.
 - ~~Blocked by: no Kaggle API token on this machine~~ **Token present and working** (verified
@@ -131,7 +134,7 @@ belong outside OneDrive (e.g. `D:\cs2-demos`) with only derived parquet in the r
    signal from data already on disk, no downloads, no disk cost. **Do now.**
 2. **Add Tier B**: fetch the BLAST Rivals 2026 set and use its Rating 3.0 to sanity-check our
    K/D/ADR/KAST/KPR on overlapping matches. Small, high value.
-3. **Refresh Tier A** when a Kaggle token exists (or a manual download).
+3. ~~**Refresh Tier A** when a Kaggle token exists (or a manual download).~~ **Done 2026-10-11.**
 4. **Then decide Tier C**: curated 100–200 demos here, or demo processing in Colab. This is
    the only step that needs a decision about disk/storage.
 

@@ -1,26 +1,26 @@
 {
   "did": {
-    "treated_pre": 0.42274247491638794,
-    "treated_post": 0.5390189520624303,
-    "control_pre": 0.5678929765886288,
-    "control_post": 0.5546265328874025,
-    "treated_change": 0.11627647714604239,
-    "control_change": -0.013266443701226316,
-    "estimate": 0.1295429208472687,
-    "n_treated": 3289,
-    "n_control": 3289
+    "treated_pre": 0.4201729106628242,
+    "treated_post": 0.547550432276657,
+    "control_pre": 0.577521613832853,
+    "control_post": 0.5504322766570605,
+    "treated_change": 0.1273775216138328,
+    "control_change": -0.02708933717579254,
+    "estimate": 0.15446685878962535,
+    "n_treated": 3817,
+    "n_control": 3817
   },
   "bootstrap": {
-    "estimate": 0.1295429208472687,
-    "ci_low": 0.08673355629877372,
-    "ci_high": 0.17358138238573023,
+    "estimate": 0.15446685878962535,
+    "ci_low": 0.11383285302593654,
+    "ci_high": 0.19548511047070122,
     "n_boot": 2000,
-    "n_clusters": 299,
+    "n_clusters": 347,
     "seed": 20260921
   },
   "pretrend": {
-    "lead_minus_one": -0.45484949832775917,
-    "max_abs_lead_difference": 0.45484949832775917,
+    "lead_minus_one": -0.4553314121037464,
+    "max_abs_lead_difference": 0.4553314121037464,
     "passes_screen": false
   }
 }

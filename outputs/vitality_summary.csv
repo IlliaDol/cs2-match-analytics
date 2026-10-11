@@ -24,10 +24,10 @@ closeness,sweeps_for,34,
 closeness,sweeps_against,3,
 closeness,series_lost_by_one_map,8,
 elo,elo_window_start,2049.2,
-elo,elo_window_end,2121.3,
-elo,elo_peak,2121.3,2026-05-03
+elo,elo_window_end,2120.7,
+elo,elo_peak,2120.7,2026-05-03
 elo,elo_window_low,1953.1,
-elo,avg_opponent_elo,1778.0,
+elo,avg_opponent_elo,1777.6,
 elo,hardest_opponent,FURIA Esports,1975.4
 elo,expected_series_wins_by_elo,50.5,
 elo,actual_series_wins,53,
@@ -54,8 +54,8 @@ month,2025-12,6-1,"maps 12, map wr 83%, avg elo 1972.7"
 month,2026-01,4-1,"maps 11, map wr 82%, avg elo 2007.5"
 month,2026-02,10-0,"maps 23, map wr 91%, avg elo 2033.4"
 month,2026-03,5-0,"maps 10, map wr 100%, avg elo 2083.9"
-month,2026-04,7-1,"maps 19, map wr 84%, avg elo 2101.1"
-month,2026-05,2-0,"maps 5, map wr 100%, avg elo 2119.8"
+month,2026-04,7-1,"maps 19, map wr 84%, avg elo 2100.9"
+month,2026-05,2-0,"maps 5, map wr 100%, avg elo 2119.2"
 map,Inferno,24-7,"77% over 31, avg round diff +2.90, OT 6"
 map,Dust2,25-3,"89% over 28, avg round diff +5.89, OT 1"
 map,Mirage,19-7,"73% over 26, avg round diff +2.27, OT 8"
@@ -64,16 +64,16 @@ map,Overpass,18-3,"86% over 21, avg round diff +3.67, OT 3"
 map,Train,4-5,"44% over 9, avg round diff -1.33, OT 0"
 map,Anubis,4-0,"100% over 4, avg round diff +4.25, OT 1"
 map,Ancient,2-1,"67% over 3, avg round diff +1.33, OT 1"
-opponent,G2 Esports,5-1,"83%, maps 12-3, avg opp elo 1801.4"
+opponent,G2 Esports,5-1,"83%, maps 12-3, avg opp elo 1797.5"
 opponent,MOUZ,4-1,"80%, maps 9-3, avg opp elo 1908.1"
 opponent,The Mongolz,4-1,"80%, maps 9-2, avg opp elo 1827.6"
 opponent,FURIA Esports,3-2,"60%, maps 8-7, avg opp elo 1899.3"
 opponent,Team Falcons,1-4,"20%, maps 5-9, avg opp elo 1876.9"
-opponent,GamerLegion,4-0,"100%, maps 7-1, avg opp elo 1684.8"
+opponent,GamerLegion,4-0,"100%, maps 7-1, avg opp elo 1683.2"
 opponent,Natus Vincere,4-0,"100%, maps 9-0, avg opp elo 1873.0"
 opponent,FaZe Clan,3-1,"75%, maps 7-4, avg opp elo 1749.9"
 opponent,Aurora Gaming,3-0,"100%, maps 6-0, avg opp elo 1774.8"
-opponent,Team Spirit,3-0,"100%, maps 7-1, avg opp elo 1926.8"
+opponent,Team Spirit,3-0,"100%, maps 7-1, avg opp elo 1926.7"
 opponent,PARIVISION,2-0,"100%, maps 5-0, avg opp elo 1842.7"
 opponent,TYLOO,2-0,"100%, maps 4-1, avg opp elo 1651.6"
 opponent,Team 3DMAX,2-0,"100%, maps 3-0, avg opp elo 1660.0"
@@ -81,10 +81,10 @@ opponent,Virtus.pro,2-0,"100%, maps 2-0, avg opp elo 1612.5"
 opponent,9z Team,1-0,"100%, maps 2-0, avg opp elo 1572.2"
 opponent,Astralis,1-0,"100%, maps 2-1, avg opp elo 1679.1"
 opponent,B8 Esports,1-0,"100%, maps 0-0, avg opp elo 1730.1"
-opponent,BCGame,1-0,"100%, maps 2-0, avg opp elo 1527.1"
+opponent,BCGame,1-0,"100%, maps 2-0, avg opp elo 1527.3"
 opponent,EYEBALLERS,1-0,"100%, maps 2-0, avg opp elo 1753.9"
 opponent,FUT Esports,1-0,"100%, maps 2-0, avg opp elo 1815.1"
-opponent,HOTU,1-0,"100%, maps 2-0, avg opp elo 1704.0"
+opponent,HOTU,1-0,"100%, maps 2-0, avg opp elo 1704.1"
 opponent,Lynn Vision Gaming,1-0,"100%, maps 2-0, avg opp elo 1585.5"
 opponent,M80,1-0,"100%, maps 2-1, avg opp elo 1520.4"
 opponent,RED Canids,1-0,"100%, maps 2-0, avg opp elo 1453.7"

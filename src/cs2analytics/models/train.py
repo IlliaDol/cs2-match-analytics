@@ -27,7 +27,7 @@ FEATURES_PATH = REPO / "outputs" / "features_v1.parquet"
 SERIES_PATH = REPO / "outputs" / "series_clean.csv"
 
 #: the extra pre-match features that make lr beat Elo — must match the README
-#: headline (lr+roster, logloss 0.6377), otherwise the deployed model lags the
+#: headline (lr+roster, logloss 0.6342), otherwise the deployed model lags the
 #: documented best result by a whole feature family.
 ROSTER_FEATURES = ["roster_stability_diff", "standin_diff"]
 

@@ -18,12 +18,12 @@ say so explicitly. For every source you propose I need: the exact name, a workin
 it contains at what granularity, how many rows/matches it realistically has, the date range,
 its licence, and whether it is downloadable without a paid account.
 
-## My situation right now (verified numbers, 2026-09-15)
+## My situation right now (verified numbers, 2026-10-11)
 
 **The model.** A calibrated probabilistic model of match outcome: output = P(team1 wins), a
 binary label at the *series* level (`team1_win`). Time-split evaluation: train on matches
-before **2026-01-01** (8,109 series), test on matches after (1,811 series). Measured:
-accuracy **0.6367**, logloss **0.6377**, Brier 0.2237, ECE 0.0185. The "always say 50%"
+before **2026-01-01** (8,109 series), test on matches after (2,943 series). Measured:
+accuracy **0.6306**, logloss **0.6342**, Brier 0.2219, ECE 0.0159. The "always say 50%"
 baseline is logloss 0.6931, so the model beats it but not by a landslide.
 
 **The 9 features it uses:** `elo_diff`, `form5_diff`, `rest_days_diff`, `is_bo1`,
@@ -33,7 +33,7 @@ series format, tournament tier, and **lineup/roster information (stand-ins, rost
 
 **The training data I have.** One Kaggle dataset (`ektarr/counter-strike-pro-matches`,
 98 columns, one row per map with all ten players' kills/deaths/assists/ADR/KAST):
-**10,753 maps across 5,173 series, 2023-10-25 → 2026-06-28**. It is CS2-era only. All ten
+**11,888 maps across 11,052 series in the modeling table (2023-01-10 → 2026-10-03)**. It is CS2-era only. All ten
 players' per-map stats are present, which is what lets me build the roster features.
 
 **Other data I have downloaded but am NOT training on yet** (map-level, player-level stats):
@@ -43,8 +43,8 @@ players' per-map stats are present, which is what lets me build the roster featu
 Both are usable for a *separate* CS:GO model but are **per-map**, while my label is **per-series**,
 so they need aggregation before they can train anything.
 
-**Hard constraints.** My laptop's C: drive has **12 GB free** (98% full), so multi-gigabyte
-downloads are a problem unless the data can be streamed/aggregated. I am a student — paid
+**Hard constraints.** My laptop's C: drive has **166 GB free**, so multi-gigabyte
+downloads are fine unless they reach demo-archive scale. I am a student — paid
 data providers are out unless there is a free tier. I have a working Kaggle API token.
 
 ## What I want you to search for, in this order

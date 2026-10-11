@@ -11,15 +11,15 @@ Team Vitality played **64 series (53-11, 83%)** and **148 maps (113-35, 76%)** i
 | Series | 53-11 | 82.8% win rate |
 | Maps | 113-35 | 76.4% win rate |
 | Longest win / loss streak | 18 / 2 | chronological series order |
-| Elo | 2049.2 → 2121.3 | peak 2121.3 on 2026-05-03, low 1953.1 |
-| Opponent strength | 1778.0 avg Elo | hardest: FURIA Esports (1975.4) |
+| Elo | 2049.2 → 2120.7 | peak 2120.7 on 2026-05-03, low 1953.1 |
+| Opponent strength | 1777.6 avg Elo | hardest: FURIA Esports (1975.4) |
 | Elo expectation | 50.5 wins | actual 53 (+2.5) |
 | Deciders | 25 series | 68% won when it went the distance |
 
 ## What the window says
 
 - **53-11 in series (83%), 113-35 in maps (76%)** across 14 events and 26 opponents.
-- Elo went 2049.2 → 2121.3 (peak 2121.3 on 2026-05-03); opponents averaged 1778.0, the hardest being FURIA Esports at 1975.4.
+- Elo went 2049.2 → 2120.7 (peak 2120.7 on 2026-05-03); opponents averaged 1777.6, the hardest being FURIA Esports at 1975.4.
 - Against its own schedule Elo expected **50.5 series wins**; Vitality took **53** (+2.5).
 - Deciders were the window's edge: 25 series went the distance and Vitality won 68% of them, while going 54% in maps decided by ≤2 rounds.
 - Map pool: strongest Dust2 (89% in 28 maps), weakest Train (44% in 9) — the pool is only as good as its floor.
@@ -58,8 +58,8 @@ Team Vitality played **64 series (53-11, 83%)** and **148 maps (113-35, 76%)** i
 | 2026-01 | 5 | 4-1 | 80.0% | 11 | 81.8% | 2007.500 |
 | 2026-02 | 10 | 10-0 | 100.0% | 23 | 91.3% | 2033.400 |
 | 2026-03 | 5 | 5-0 | 100.0% | 10 | 100.0% | 2083.900 |
-| 2026-04 | 8 | 7-1 | 87.5% | 19 | 84.2% | 2101.100 |
-| 2026-05 | 2 | 2-0 | 100.0% | 5 | 100.0% | 2119.800 |
+| 2026-04 | 8 | 7-1 | 87.5% | 19 | 84.2% | 2100.900 |
+| 2026-05 | 2 | 2-0 | 100.0% | 5 | 100.0% | 2119.200 |
 
 ## Map pool
 
@@ -78,16 +78,16 @@ Team Vitality played **64 series (53-11, 83%)** and **148 maps (113-35, 76%)** i
 
 | Opponent | Series | W-L | Win rate | Maps W-L | Avg opp Elo |
 |---|---|---|---|---|---|
-| G2 Esports | 6 | 5-1 | 83.3% | 12-3 | 1801.400 |
+| G2 Esports | 6 | 5-1 | 83.3% | 12-3 | 1797.500 |
 | MOUZ | 5 | 4-1 | 80.0% | 9-3 | 1908.100 |
 | The Mongolz | 5 | 4-1 | 80.0% | 9-2 | 1827.600 |
 | FURIA Esports | 5 | 3-2 | 60.0% | 8-7 | 1899.300 |
 | Team Falcons | 5 | 1-4 | 20.0% | 5-9 | 1876.900 |
-| GamerLegion | 4 | 4-0 | 100.0% | 7-1 | 1684.800 |
+| GamerLegion | 4 | 4-0 | 100.0% | 7-1 | 1683.200 |
 | Natus Vincere | 4 | 4-0 | 100.0% | 9-0 | 1873 |
 | FaZe Clan | 4 | 3-1 | 75.0% | 7-4 | 1749.900 |
 | Aurora Gaming | 3 | 3-0 | 100.0% | 6-0 | 1774.800 |
-| Team Spirit | 3 | 3-0 | 100.0% | 7-1 | 1926.800 |
+| Team Spirit | 3 | 3-0 | 100.0% | 7-1 | 1926.700 |
 | PARIVISION | 2 | 2-0 | 100.0% | 5-0 | 1842.700 |
 | TYLOO | 2 | 2-0 | 100.0% | 4-1 | 1651.600 |
 | Team 3DMAX | 2 | 2-0 | 100.0% | 3-0 | 1660 |
@@ -95,10 +95,10 @@ Team Vitality played **64 series (53-11, 83%)** and **148 maps (113-35, 76%)** i
 | 9z Team | 1 | 1-0 | 100.0% | 2-0 | 1572.200 |
 | Astralis | 1 | 1-0 | 100.0% | 2-1 | 1679.100 |
 | B8 Esports | 1 | 1-0 | 100.0% | 0-0 | 1730.100 |
-| BCGame | 1 | 1-0 | 100.0% | 2-0 | 1527.100 |
+| BCGame | 1 | 1-0 | 100.0% | 2-0 | 1527.300 |
 | EYEBALLERS | 1 | 1-0 | 100.0% | 2-0 | 1753.900 |
 | FUT Esports | 1 | 1-0 | 100.0% | 2-0 | 1815.100 |
-| HOTU | 1 | 1-0 | 100.0% | 2-0 | 1704 |
+| HOTU | 1 | 1-0 | 100.0% | 2-0 | 1704.100 |
 | Lynn Vision Gaming | 1 | 1-0 | 100.0% | 2-0 | 1585.500 |
 | M80 | 1 | 1-0 | 100.0% | 2-1 | 1520.400 |
 | RED Canids | 1 | 1-0 | 100.0% | 2-0 | 1453.700 |
@@ -142,7 +142,7 @@ Team Vitality played **64 series (53-11, 83%)** and **148 maps (113-35, 76%)** i
 |---|---|---|---|---|
 | 2026-02-08 | IEM Krakow 2026 | FURIA Esports | 3-1 | 1975.400 |
 | 2025-12-13 | StarLadder Budapest Major 2025 | Team Spirit | 2-0 | 1941.700 |
-| 2026-04-19 | IEM Rio 2026 | Team Spirit | 3-0 | 1933.900 |
+| 2026-04-19 | IEM Rio 2026 | Team Spirit | 3-0 | 1933.700 |
 | 2025-11-08 | IEM Chengdu 2025 | MOUZ | 2-1 | 1930.800 |
 | 2026-02-07 | IEM Krakow 2026 | MOUZ | 2-0 | 1916.200 |
 

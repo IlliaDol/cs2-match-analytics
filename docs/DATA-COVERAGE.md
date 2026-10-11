@@ -1,17 +1,18 @@
 # CS:GO / CS2 data coverage — audit and source notes
 
-Status 2026-09-15. Companion to `docs/DATA-EXPANSION.md`. Keeps the state of the data
+Status 2026-10-11 (Tier A refresh applied; CS:GO sections unchanged since 2026-09-15).
+Companion to `docs/DATA-EXPANSION.md`. Keeps the state of the data
 explicit: what we have, how good it is, and what is still missing.
 
 ## What the tool reads
 
 | era | source | maps | window | per-player metrics | dates |
 |---|---|---|---|---|---|
-| cs2 | `data/raw/cs2_all_tiers_games.csv` — Kaggle `ektarr/counter-strike-pro-matches` | 10,675 | 2023-10-25 → 2026-06-28 | kills, deaths, assists, ADR, KAST | exact |
+| cs2 | `data/raw/cs2_all_tiers_games.csv` — Kaggle `ektarr/counter-strike-pro-matches` | 11,888 | 2023-01-10 → 2026-10-03 | kills, deaths, assists, ADR, KAST | exact |
 | csgo 2015–2020 | `data/interim/csgo_history_games.csv` — Kaggle `mateusdmachado/csgo-professional-matches` | 43,944 | 2015-11-03 → 2020-02-27 | kills, deaths, assists, ADR, KAST | exact |
 | csgo 2021–2023 | `data/interim/csgo_adapter_games.csv` — Kaggle `fernandopy/csgo-data-set` | 20,004 | 43% carry a year, all 2021–2023 | kills, deaths, ADR, KAST (**no assists**) | event slug, approximate |
 
-**74,300 map rows** in total, **63,948 of them CS:GO**, across ten years.
+**75,836 map rows** in total, **63,948 of them CS:GO**, across ten years.
 
 Rebuild the CS:GO files (both are git-ignored, regenerable, and skip themselves when their
 raw source is absent):
@@ -37,8 +38,8 @@ omitting it keeps everything.
 * **2021–2023** — 20,004 maps with complete line-ups, but **assists are absent**, 57% of
   rows carry no year (a `--from/--to` window silently drops them), and dates are
   season-derived rather than match dates. `TeamRank` is the only quality proxy.
-* **CS2** — 10,675 maps with everything including assists and exact dates, but it is a
-  snapshot: upstream is alive and now holds more games. Tiers 1/2/3 available.
+* **CS2** — 11,888 maps with everything including assists and exact dates, refreshed
+  2026-10-11 (was a stale snapshot; see gap 5, now closed). Tiers 1/2/3 available.
 
 ## Roster / transfer dates — the gap worth closing (2026-09-15)
 
@@ -81,8 +82,9 @@ match day". That is where the feature improvement actually lands.
 3. **57% of 2021–2023 rows are undated** — only fixable with a source that carries dates.
 4. **No tier label for either CS:GO source.** `rank_1`/`rank_2` (2015–2020) and `TeamRank`
    (2021–2023) could be mapped onto the tier scheme.
-5. **CS2 snapshot is stale** — refresh `ektarr/counter-strike-pro-matches` for the months
-   after 2026-06-28; upstream is alive.
+5. ~~**CS2 snapshot is stale** — refresh `ektarr/counter-strike-pro-matches` for the months
+   after 2026-06-28; upstream is alive.~~ **Closed 2026-10-11:** refreshed to 2026-10-03
+   (22,948 rows, 11,056 matches); models retrained, docs re-measured.
 6. **Rating 3.0 / Swing have no open reimplementation**, so our ingredient metrics cannot be
    checked against HLTV's published rating. `awpy` computes ADR/KAST independently but only
    from individual demo files, which will not scale on this disk.

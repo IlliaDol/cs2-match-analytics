@@ -129,12 +129,12 @@ modeling layer too). CI installs `.[dev,ml]`.
   "rust" story is **not** supported, selection into breaks dominates.
   Results: [`outputs/m13_did_results.csv`](outputs/m13_did_results.csv).
 - [`docs/CAUSAL-ROSTER-STUDY.md`](docs/CAUSAL-ROSTER-STUDY.md) — a separate roster-change
-  cohort pipeline with deterministic controls, event-study leads/lags, DiD, and an
-  event-cluster bootstrap. The current run shows a strong pre-treatment lead difference,
-  so its +0.1295 DiD is a diagnostic and **not a publishable causal claim** until the
-  identification strategy is redesigned.
+   cohort pipeline with deterministic controls, event-study leads/lags, DiD, and an
+   event-cluster bootstrap. The current run shows a strong pre-treatment lead difference,
+   so its +0.1545 DiD is a diagnostic and **not a publishable causal claim** until the
+   identification strategy is redesigned.
 - [`r/04_rating_forecast.R`](r/04_rating_forecast.R) — Holt's linear trend vs a naive
-  random walk on monthly Elo: the random walk wins for all 10 teams (ratings are
+  random walk on monthly Elo: the random walk wins for 9 of 10 teams (ratings are
   near-martingale). Results: [`outputs/rating_forecast_metrics.csv`](outputs/rating_forecast_metrics.csv).
 - [`docs/DECISIONS.md`](docs/DECISIONS.md) — every design decision a reviewer would
   question, one line each.

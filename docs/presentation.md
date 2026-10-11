@@ -16,7 +16,7 @@ you do it wrong.
 The data part is where the fun starts. The public dataset looks simple — one row per
 series, a winner column, two score columns. But the score columns are sorted by team
 column position, not by winner, and the winner flag on those rows is broken — it says
-one thing 94% of the time and the opposite the rest. If you derive winners the intuitive
+one thing 88% of the time and the opposite the rest. If you derive winners the intuitive
 way, you get half the outcomes silently wrong. I caught it because the baseline
 accuracy came out at 13% — statistically impossible — and proved the correct reading
 three independent ways, including checking two real Major finals against the data. That
@@ -35,8 +35,8 @@ against gradient boosting against a small neural net with learned team embedding
 Here's the money chart — the reliability diagram. Predictions on the x-axis, observed
 win rates on the y. The diagonal is perfect. All three models hug it, which is the
 actual deliverable: the probabilities are calibrated, not just ranked. The headline
-number: 0.646 log loss versus 0.693 for the do-nothing baseline. And the honest part:
-the neural net lost to plain logistic regression. At ten thousand series, the signal is
+number: 0.634 log loss versus 0.693 for the do-nothing baseline. And the honest part:
+the neural net lost to plain logistic regression (0.668). At eleven thousand series, the signal is
 basically linear in rating difference, and the embeddings just added variance. That's a
 finding, not a failure.
 
@@ -49,20 +49,20 @@ reviewer would spot:
 
 One — the roster signal. The dataset ships full five-player lineups per map, and my
 first version ignored them. Adding roster-stability and stand-in flags to the logistic
-model took log loss from 0.6464 to 0.6377 — the single biggest feature win in the repo,
+model took log loss from 0.6496 to 0.6342 — the single biggest feature win in the repo,
 and it was sitting in the data the whole time unused. That's the honest version of
 "the model got better because I fed it information I already had."
 
 Two — calibration wasn't as clean as the aggregate chart claimed. Splitting the
 reliability diagram by format and tier shows the aggregate number was hiding a tier-3
-problem: expected calibration error of 0.126 in tier 3 versus 0.02 to 0.03 everywhere
+problem: expected calibration error of 0.047 in tier 3 versus 0.02 to 0.03 everywhere
 else. The model is over-confident exactly where the data is noisiest, and saying that
 out loud is the point.
 
 Three — one test split is one anecdote. So there's now a rolling-origin backtest across
-six monthly cutoffs: mean log loss 0.6476 with a 95% confidence band from 0.628 to
-0.667. The headline 0.6377 was real but it sat near the optimistic edge; the June
-window alone, with only 200 series, degrades to 0.683. Small test sets are fragile,
+nine cutoffs: mean log loss 0.6396 with a 95% confidence band from 0.634 to
+0.645. The headline 0.6342 sits near the optimistic edge of its own band; the June
+window alone (1,305 series) comes in at 0.641. Small test sets are fragile,
 and the backtest proves it instead of hiding it.
 
 Plus a map-level model underneath the series-level one — per-map win probability from

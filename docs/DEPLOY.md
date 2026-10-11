@@ -50,7 +50,7 @@ must contain `model.pkl`, `features.json`, `elo_ratings.json` at its root
 
 ## What runs where after A.1–A.6
 
-- `python -m cs2analytics.models.train` → artifacts for **lr+roster** (0.6377).
+- `python -m cs2analytics.models.train` → artifacts for **lr+roster** (0.6342).
 - `serve/app.py` and `serve/dashboard.py` share one prediction path
   (`serve/inference.py`) and both report `model_version` from
   `features.json` — the live demo is the paper's model, verifiably.
